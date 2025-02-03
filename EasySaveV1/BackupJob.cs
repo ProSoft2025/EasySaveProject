@@ -20,6 +20,7 @@ namespace EasySave
 
         public void Execute()
         {
+            BackupStrategy.ExecuteBackup(sourceDirectory, targetDirectory);            
         }
     }
 }

@@ -25,11 +25,12 @@ namespace EasySave
 
         }
 
-        public void DisplayLogFileContent(string logFilePath="./Logs.json")
+        public void DisplayLogFileContent()
         {
-            if (File.Exists(logFilePath))
+            if (File.Exists(LogFilePath))
             {
-                var logContent = File.ReadAllText(logFilePath);
+                var logContent = File.ReadAllText(LogFilePath);
+                Console.WriteLine(LogFilePath);
                 Console.WriteLine(logContent);
             }
             else

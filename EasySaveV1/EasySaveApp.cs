@@ -9,14 +9,18 @@ namespace EasySave
 
         public void AddBackup(BackupJob job)
         {
-            BackupJobs.Add(job);
+            if (BackupJobs.Count < 5) {
+                BackupJobs.Add(job);
+            }
+            else
+            {
+                Console.Error.WriteLine("Il y a déjà 5 sauvegardes, veuillez en supprimez une");
+            }
         }
-        
         public void RemoveBackup(BackupJob job)
         {
             BackupJobs.Remove(job);
         }
-
         public void ExecuteBackupJob (string[] names)
         {
             foreach (var name in names)
@@ -25,7 +29,6 @@ namespace EasySave
                 job?.Execute();
             }
         }
-
         public void ExecuteAllBackupJobs()
         {
             foreach (var job in BackupJobs)

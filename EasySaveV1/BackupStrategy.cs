@@ -2,9 +2,6 @@
 {
     public interface BackupStrategy
     {
-        public void ExecuteBackup(string source, string target)
-        {
-
-        }
+        public void ExecuteBackup(string source, string target) { }
     }
 }

@@ -5,10 +5,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        var backupJobs1 = new BackupJobs("Save1", "/Source/Path", "/destination/path", BackupJob.BackupType.Complete);
-        backupJobs1.AfficherAttributs();
+        BackupStrategy complete = new CompleteBackup();
+        var backupJobs1 = new BackupJob("Save1", "/Source/Path", "/destination/path", complete);
 
-        var Manager1 = new EasySaveApp([backupJobs1]);
+        var Manager1 = new EasySaveApp();
+        Manager1.AddBackup(backupJobs1);
 
         var options = new JsonSerializerOptions
         {
@@ -17,9 +18,13 @@ class Program
 
         string json_test = JsonSerializer.Serialize(backupJobs1, options);
 
-        File.AppendAllText("Logs.json", json_test + Environment.NewLine);
+        string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+        string logFilePath = Path.Combine(projectDirectory,"Logs.json");
 
-        var Logger_test = new Logger("Test", DateTime.Now);
+
+        File.AppendAllText(logFilePath, json_test + Environment.NewLine);
+
+        var Logger_test = new Logger(logFilePath);
 
         // MENU
         static void AfficherMenu()
@@ -43,9 +48,38 @@ class Program
             switch (choix.KeyChar)
             {
                 case '1':
-                    Manager1.AfficherSauvegardes();
+                    foreach (var Jobs in Manager1.BackupJobs)
+                    {
+                        Console.WriteLine(Jobs);
+                    }
                     break;
                 case '2':
+                    BackupJobFactory backupJobFactory = new BackupJobFactory();
+
+                    Console.Write("Entrez le nom du job : ");
+                    string name = Console.ReadLine();
+
+                    Console.Write("Entrez le répertoire source : ");
+                    string sourceDirectory = Console.ReadLine();
+
+                    Console.Write("Entrez le répertoire cible : ");
+                    string targetDirectory = Console.ReadLine();
+
+                    Console.Write("Choisissez le type de sauvegarde (1=Complète, 2=Différentielle) (default=1) : ");
+                    string strategyChoice = Console.ReadLine();
+
+                    BackupStrategy strategy;
+
+                    if (strategyChoice == "2")
+                    {
+                        strategy = new DifferentialBackup();
+                    }
+                    else
+                    {
+                        strategy = new CompleteBackup();
+                    }
+
+                    Manager1.AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy));
                     break;
                 case '3':
                     break;

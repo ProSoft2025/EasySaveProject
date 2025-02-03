@@ -1,10 +1,10 @@
 ﻿namespace EasySave
 {
-    public class CompleteBackup : BackupStrategy
+    public class DifferentialBackup : BackupStrategy
     {
         public void ExecuteBackup(string source, string target)
         {
-
+            
         }
     }
 }
