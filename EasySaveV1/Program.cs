@@ -5,7 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var backupJobs1 = new BackupJobs("Save1", "/Source/Path", "/destination/path", BackupJobs.BackupType.Complete);
+        var backupJobs1 = new BackupJobs("Save1", "/Source/Path", "/destination/path", BackupJob.BackupType.Complete);
         backupJobs1.AfficherAttributs();
 
         var Manager1 = new EasySaveApp([backupJobs1]);

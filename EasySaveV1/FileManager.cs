@@ -21,7 +21,5 @@
                 Console.WriteLine($"Erreur lors de la lecture de {source}: {e.Message}");
             }
         }
-
-        // ListDirectories("C:\\Users\\Tom\\Documents\\CESI\\A3\\PROJET TEST");
     }
 }

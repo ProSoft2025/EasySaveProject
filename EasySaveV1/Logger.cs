@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Text.Json;
 using EasySave;
 
 namespace EasySave
@@ -6,31 +7,25 @@ namespace EasySave
     public class Logger
     {
         // Déclaration des variables
-        public string nom;
-        public DateTime timestamp { get; set; } = DateTime.Now;
-
+        public string LogFilePath { get; set; }
 
         // Déclaration du Constructeur
-        public Logger (string nom, DateTime timestamp)
+        public Logger (string LogFilePath)
         {
-            this.nom = nom;
-            this.timestamp = timestamp;
+            this.LogFilePath = LogFilePath;
         }
 
-        public void writeLog(string name, string file_src, string file_dst, double fileSize, double FileTransferTime, TimeSpan time)
+        public void LogAction(LogEntry entry)
         {
 
-            string json = "{" + "name" + "" + "" + "" + "}";
-
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
-
-            // string jsonString = JsonSerializer.Serialize(backupInfo, options);
-            // Console.WriteLine(jsonString);
         }
-        public void DisplayLogFileContent(string logFilePath="C:\\Users\\Tom\\Documents\\CESI\\A3\\PROJET TEST\\Beta-Projet 3\\Logs.json")
+
+        public void OpenLogFile()
+        {
+
+        }
+
+        public void DisplayLogFileContent(string logFilePath="./Logs.json")
         {
             if (File.Exists(logFilePath))
             {

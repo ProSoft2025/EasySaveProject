@@ -5,46 +5,33 @@ namespace EasySave
     public class EasySaveApp
     {
         // Déclaration des variables
-        BackupJobs[] TabBackups { get; set; } = new BackupJobs[5];
+        public List<BackupJob> BackupJobs { get; set; } = new List<BackupJob>();
 
-        // Déclaration builder
-
-        public EasySaveApp(BackupJobs[] TabBackups)
+        public void AddBackup(BackupJob job)
         {
-            this.TabBackups = TabBackups;
-        }
-
-        public int FirstEmpty()
-        {
-            for (int i = 0; i < TabBackups.Length; i++)
-            {
-                if (TabBackups[i] == null)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
-        public void AddBackup(BackupJobs BackupJob)
-        {
-            if (FirstEmpty() == -1)
-            {
-                Console.WriteLine("Le tableau est plein !");
-            }
-            else
-            {
-                TabBackups[FirstEmpty()] = BackupJob;
-            }
+            BackupJobs.Add(job);
         }
         
-        public void AfficherSauvegardes ()
+        public void RemoveBackup(BackupJob job)
         {
-            for (int i = 0;i < TabBackups.Length;i++)
+            BackupJobs.Remove(job);
+        }
+
+        public void ExecuteBackupJob (string[] names)
+        {
+            foreach (var name in names)
             {
-                // Console.WriteLine(TabBackups[i].AfficherAttributs());
+                var job = BackupJobs.Find(j => j.name == name);
+                job?.Execute();
             }
         }
 
+        public void ExecuteAllBackupJobs()
+        {
+            foreach (var job in BackupJobs)
+            {
+                job.Execute();
+            }
+        }
     }
 }
