@@ -1,0 +1,12 @@
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\bin\Debug\net8.0\BackupLogger.deps.json
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\bin\Debug\net8.0\BackupLogger.dll
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\bin\Debug\net8.0\BackupLogger.pdb
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\obj\Debug\net8.0\BackupLogger.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\obj\Debug\net8.0\BackupLogger.AssemblyInfoInputs.cache
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\obj\Debug\net8.0\BackupLogger.AssemblyInfo.cs
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\obj\Debug\net8.0\BackupLogger.csproj.CoreCompileInputs.cache
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\obj\Debug\net8.0\BackupLogger.sourcelink.json
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\obj\Debug\net8.0\BackupLogger.dll
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\obj\Debug\net8.0\refint\BackupLogger.dll
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\obj\Debug\net8.0\BackupLogger.pdb
+C:\Users\dupre\Documents\CESI\Génie Logiciel\EasySaveProject\BackupLogger\obj\Debug\net8.0\ref\BackupLogger.dll
