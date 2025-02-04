@@ -5,7 +5,7 @@ namespace EasySave
     public class EasySaveApp
     {
         // Déclaration des variables
-        private static EasySaveApp _instance;
+        private static EasySaveApp? _instance;
 
         private static readonly object _lock = new object();
         public List<BackupJob> BackupJobs { get; set; } = new List<BackupJob>();
@@ -37,9 +37,18 @@ namespace EasySave
                 Console.Error.WriteLine("Il y a déjà 5 sauvegardes, veuillez en supprimez une");
             }
         }
-        public void RemoveBackup(BackupJob job)
+        public void RemoveBackup(string name)
         {
-            BackupJobs.Remove(job);
+            var job = BackupJobs.FirstOrDefault(j => j.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            if (job != null)
+            {
+                BackupJobs.Remove(job);
+                Console.WriteLine($"Sauvegarde '{name}' supprimée avec succès.");
+            }
+            else
+            {
+                Console.WriteLine($"Aucune sauvegarde trouvée avec le nom '{name}'.");
+            }
         }
         public void ExecuteBackupJob (string[] names)
         {
