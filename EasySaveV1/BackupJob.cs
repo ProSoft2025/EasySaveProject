@@ -8,9 +8,9 @@ namespace EasySave
         public string name { get; set; }
         public string sourceDirectory { get; set; }
         public string targetDirectory { get; set; }
-        public BackupStrategy BackupStrategy { get; set; }
+        public IBackupStrategy BackupStrategy { get; set; }
 
-        public BackupJob(string name, string sourceDirectory, string targetDirectory, BackupStrategy backupStrategy)
+        public BackupJob(string name, string sourceDirectory, string targetDirectory, IBackupStrategy backupStrategy)
         {
             this.name = name;
             this.sourceDirectory = sourceDirectory;

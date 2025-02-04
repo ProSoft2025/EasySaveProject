@@ -21,5 +21,28 @@
                 Console.WriteLine($"Erreur lors de la lecture de {source}: {e.Message}");
             }
         }
+
+        static void CopyDirectory(string sourceDir, string destinationDir)
+        {
+            // Créer le dossier de destination si nécessaire
+            if (!Directory.Exists(destinationDir))
+            {
+                Directory.CreateDirectory(destinationDir);
+            }
+
+            // Copier les fichiers du dossier source vers le dossier de destination
+            foreach (var file in Directory.GetFiles(sourceDir))
+            {
+                string destFile = Path.Combine(destinationDir, Path.GetFileName(file));
+                File.Copy(file, destFile);
+            }
+
+            // Copier les sous-dossiers de manière récursive
+            foreach (var directory in Directory.GetDirectories(sourceDir))
+            {
+                string destDir = Path.Combine(destinationDir, Path.GetFileName(directory));
+                CopyDirectory(directory, destDir);
+            }
+        }
     }
 }

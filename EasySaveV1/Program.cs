@@ -5,7 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        BackupStrategy complete = new CompleteBackup();
+        IBackupStrategy complete = new CompleteBackup();
         var backupJobs1 = new BackupJob("Save1", "/Source/Path", "/destination/path", complete);
 
         var Manager1 = new EasySaveApp();
@@ -68,7 +68,7 @@ class Program
                     Console.Write("Choisissez le type de sauvegarde (1=Complète, 2=Différentielle) (default=1) : ");
                     string strategyChoice = Console.ReadLine();
 
-                    BackupStrategy strategy;
+                    IBackupStrategy strategy;
 
                     if (strategyChoice == "2")
                     {
