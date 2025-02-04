@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasySave
-{
+namespace EasySave { 
     public class UserInterface
     {
         public void DisplayMenu()
