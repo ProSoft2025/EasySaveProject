@@ -5,8 +5,28 @@ namespace EasySave
     public class EasySaveApp
     {
         // Déclaration des variables
+        private static EasySaveApp _instance;
+
+        private static readonly object _lock = new object();
         public List<BackupJob> BackupJobs { get; set; } = new List<BackupJob>();
 
+        private EasySaveApp() { }
+
+
+        public static EasySaveApp GetInstance()
+        {
+            if (_instance == null)
+            {
+                lock (_lock)
+                {
+                    if (_instance == null)
+                    {
+                        _instance = new EasySaveApp();
+                    }
+                }
+            }
+            return _instance;
+        }
         public void AddBackup(BackupJob job)
         {
             if (BackupJobs.Count < 5) {
