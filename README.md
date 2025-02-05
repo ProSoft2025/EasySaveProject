@@ -1,6 +1,6 @@
 # EasySaveProject
 # Introduction 
-Easysave is a back up folder software. It's a school project created by a team of 4 students. 
+Easysave is a back up folder software. It's a school project created by a team of 5 students. 
 
 ### Context
 Our team has just integrated the software publisher ProSoft.   Under the responsibility of the CIO, we are in charge of managing the "EasySave" project which consists in developing a backup software.  As any software of the ProSoft Suite, the software will be integrated into the pricing policy.
