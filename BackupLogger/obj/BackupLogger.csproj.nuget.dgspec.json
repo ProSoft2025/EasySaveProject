@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dupre\\Documents\\CESI\\Génie Logiciel\\EasySaveProject\\BackupLogger\\BackupLogger.csproj": {}
+    "C:\\Users\\MATHEO\\Documents\\PERSO\\ECOLE\\CESI\\L3\\GENIE LOGICIEL\\BackupLogger\\BackupLogger.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dupre\\Documents\\CESI\\Génie Logiciel\\EasySaveProject\\BackupLogger\\BackupLogger.csproj": {
+    "C:\\Users\\MATHEO\\Documents\\PERSO\\ECOLE\\CESI\\L3\\GENIE LOGICIEL\\BackupLogger\\BackupLogger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dupre\\Documents\\CESI\\Génie Logiciel\\EasySaveProject\\BackupLogger\\BackupLogger.csproj",
+        "projectUniqueName": "C:\\Users\\MATHEO\\Documents\\PERSO\\ECOLE\\CESI\\L3\\GENIE LOGICIEL\\BackupLogger\\BackupLogger.csproj",
         "projectName": "BackupLogger",
-        "projectPath": "C:\\Users\\dupre\\Documents\\CESI\\Génie Logiciel\\EasySaveProject\\BackupLogger\\BackupLogger.csproj",
-        "packagesPath": "C:\\Users\\dupre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dupre\\Documents\\CESI\\Génie Logiciel\\EasySaveProject\\BackupLogger\\obj\\",
+        "projectPath": "C:\\Users\\MATHEO\\Documents\\PERSO\\ECOLE\\CESI\\L3\\GENIE LOGICIEL\\BackupLogger\\BackupLogger.csproj",
+        "packagesPath": "C:\\Users\\MATHEO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MATHEO\\Documents\\PERSO\\ECOLE\\CESI\\L3\\GENIE LOGICIEL\\BackupLogger\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\dupre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MATHEO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
