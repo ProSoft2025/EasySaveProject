@@ -16,19 +16,19 @@ namespace EasySave
         public string LogFilePath { get; set; }
         public DateTime timestamp { get; set; } = DateTime.Now;
         // Déclaration du Constructeur
-        public Logger (string LogFilePath)
-        public Logger (string nom, DateTime timestamp)
+       
+        public Logger (string nom) { 
             this.LogFilePath = LogFilePath;
-            this.timestamp = timestamp;
+           
         }
-        public void LogAction(LogEntry entry)
-        public void writeLog(string name, string file_src, string file_dst, double fileSize, double FileTransferTime, TimeSpan time)
+       
+        public void writeLog(string name, string file_src, string file_dst, double fileSize, double FileTransferTime, TimeSpan time) { 
 
         }
 
         public void OpenLogFile()
-        {
-            this.LogFilePath = logFilePath;
+        { 
+            
         }      
         public void LogAction(LogEntry entry)
         { 
@@ -43,14 +43,13 @@ namespace EasySave
                 File.WriteAllText(LogFilePath, JsonSerializer.Serialize(logEntries, options));
             
         }
-        public void writeLog(string name, string file_src, string file_dst, double fileSize, double FileTransferTime, TimeSpan time) { }
+        
+     
 
-        public void OpenLogFile() { }
-
-        public void DisplayLogFileContent()
+        
         public void DisplayLogFileContent(string logFilePath="C:\\Users\\Tom\\Documents\\CESI\\A3\\PROJET TEST\\Beta-Projet 3\\Logs.json")
         {
-            if (File.Exists(LogFilePath))
+            if (File.Exists(LogFilePath)) { 
                 var logContent = File.ReadAllText(LogFilePath);
                 Console.WriteLine(LogFilePath);
                 Console.WriteLine(logContent);
@@ -60,6 +59,8 @@ namespace EasySave
             {
                 Console.WriteLine("Log file not found.");
             }
+
+         }
         
     }
 }
