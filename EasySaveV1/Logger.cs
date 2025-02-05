@@ -4,6 +4,7 @@ using EasySave;
 using System;
 using System.IO;
 using Newtonsoft.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
 /*"The Logger class records the save actions of the LogEntry class
@@ -29,8 +30,24 @@ namespace EasySave
 
         public void OpenLogFile()
         {
-            };
+            this.LogFilePath = logFilePath;
+        }      
+        public void LogAction(LogEntry entry)
+        { 
+                var logEntries = new List<LogEntry>();
+                if (File.Exists(LogFilePath))
+                {
+                    var json = File.ReadAllText(LogFilePath);
+                    logEntries = JsonSerializer.Deserialize<List<LogEntry>>(json);
+                }
+                logEntries.Add(entry);
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                File.WriteAllText(LogFilePath, JsonSerializer.Serialize(logEntries, options));
+            
         }
+        public void writeLog(string name, string file_src, string file_dst, double fileSize, double FileTransferTime, TimeSpan time) { }
+
+        public void OpenLogFile() { }
 
         public void DisplayLogFileContent()
         public void DisplayLogFileContent(string logFilePath="C:\\Users\\Tom\\Documents\\CESI\\A3\\PROJET TEST\\Beta-Projet 3\\Logs.json")
