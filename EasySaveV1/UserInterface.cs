@@ -100,7 +100,8 @@ namespace EasySave {
                 Console.WriteLine("Liste des sauvegardes :");
                 foreach (var job in manager.BackupJobs)
                 {
-                    Console.WriteLine(job);
+                    job.displayAttributs();
+                    Console.Write("\n");
                 }
             }
 
@@ -118,7 +119,19 @@ namespace EasySave {
                 Console.Write("Choisissez le type de sauvegarde (1=Complète, 2=Différentielle) : ");
                 string strategyChoice = ui.GetUserInput();
 
-                IBackupStrategy strategy = strategyChoice == "2" ? new DifferentialBackup() : new CompleteBackup();
+                IBackupStrategy strategy;
+                switch (strategyChoice)
+                {
+                    case "1":
+                        strategy = new CompleteBackup();
+                        break;
+                    case "2":
+                        strategy = new DifferentialBackup();
+                        break;
+                    default:
+                        Console.WriteLine("Choix Incorrect, veuillez recommencer");
+                        return;
+                }
 
                 manager.AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy));
                 Console.WriteLine("Sauvegarde ajoutée avec succès !");
@@ -137,12 +150,63 @@ namespace EasySave {
                 Console.WriteLine("Fonction de restauration non implémentée.");
             }
 
+            public List<string> ReadBackupExecute(List<BackupJob> backupJobs)
+            {
+                Console.WriteLine("Saisir le numéro de Backup à éxécuter : \n" +
+                "Exemple : '1-3' -> Exécuter les sauvegardes 1,2,3" +
+                "\nExemple2 : '1;3;4' -> Exécute les sauvegardes 1 3 et 4");
+                string userChoice = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(userChoice))
+                {
+                    Console.WriteLine("L'entrée est vide ou non valide.");
+                    return new List<string>();
+                }
+
+                var backupsToRun = new List<int>();
+
+                var segments = userChoice.Split(';');
+                foreach (var segment in segments)
+                {
+                    var rangeParts = segment.Split('-');
+                    if (rangeParts.Length == 2)
+                    {
+                        int start = int.Parse(rangeParts[0]);
+                        int end = int.Parse(rangeParts[1]);
+                        backupsToRun.AddRange(Enumerable.Range(start, end - start + 1));
+                    }
+                    else
+                    {
+                        backupsToRun.Add(int.Parse(segment));
+                    }
+                }
+
+                var backupNamesToRun = new List<string>();
+                foreach (var number in backupsToRun)
+                {
+                    if (number > 0 && number <= backupJobs.Count)
+                    {
+                        backupNamesToRun.Add(backupJobs[number - 1].name);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Le numéro de sauvegarde {number} est en dehors des limites.");
+                    }
+                }
+
+                return backupNamesToRun;
+            }
+        
+
             private void BackupExecute()
             {
+                List<string> backupToRun = ReadBackupExecute(manager.BackupJobs);
+                for (int i = 0; i < backupToRun.Count(); i++)
+                {
+                    manager.BackupJobs[i].displayAttributs();
+                }
                 Console.WriteLine("Exécution de toutes les sauvegardes...");
-                manager.ExecuteAllBackupJobs();
             }
         }
-
     }
 }
