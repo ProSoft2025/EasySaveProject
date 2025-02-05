@@ -7,8 +7,6 @@ using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
-/*"The Logger class records the save actions of the LogEntry class
- * in a JSON file with line breaks for easy reading */
 
 namespace EasySave
 {
