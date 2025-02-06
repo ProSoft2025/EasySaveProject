@@ -74,7 +74,7 @@ Or by opening it with Github Desktop or downloading the ZIP.
 Then refer to the usage section and you will be ready to go !
 
 ## Start the application
-* Version 1 : [Documentation User]
+* Version 1 : [Documentation User] named UserDoc V1.md
 
 # Authors
 - BUTEZ Clément
