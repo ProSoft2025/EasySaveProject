@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BackupLogger;
 
-namespace EasySave
-{
+namespace EasySave { 
     public class UserInterface
     {
         public void DisplayMenu()

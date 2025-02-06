@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading;
+
+/* Summary */
 
 namespace EasySave
 {
@@ -10,15 +13,37 @@ namespace EasySave
     {
         public string StateFilePath { get; set; }
 
-        public void UpdateState(StateEntry entry)
+        public StateManager(string stateFilePath)
         {
-            // Implémentation pour mettre à jour l'état dans un fichier
+            StateFilePath = stateFilePath;
         }
 
-        public string GetState()
+        public void UpdateState(StateEntry entry)
         {
-            // Implémentation pour récupérer l'état actuel
-            return "";
+            try
+            {
+                string json = JsonSerializer.Serialize(entry, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(StateFilePath, json);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Erreur mise à jour état: {ex.Message}");
+            }
+        }
+
+        public StateEntry GetState()
+        {
+            try
+            {
+                if (!File.Exists(StateFilePath)) return null;
+                string json = File.ReadAllText(StateFilePath);
+                return JsonSerializer.Deserialize<StateEntry>(json);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Erreur récupération état: {ex.Message}");
+                return null;
+            }
         }
     }
 }

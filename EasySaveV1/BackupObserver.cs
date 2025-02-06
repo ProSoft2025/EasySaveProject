@@ -2,6 +2,8 @@
 {
     public class BackupObserver
     {
-        public void Update(string message) { }
+        public void Update(string message) { 
+        
+        }
     }
 }

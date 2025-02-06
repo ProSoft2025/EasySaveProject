@@ -5,7 +5,7 @@ namespace EasySave
     public class EasySaveApp
     {
         // Déclaration des variables
-        private static EasySaveApp _instance;
+        private static EasySaveApp? _instance;
 
         private static readonly object _lock = new object();
         public List<BackupJob> BackupJobs { get; set; } = new List<BackupJob>();
