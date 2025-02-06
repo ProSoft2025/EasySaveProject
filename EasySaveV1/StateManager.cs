@@ -8,7 +8,8 @@ namespace EasySave
 {
     public class StateManager
     {
-        public string StateFilePath { get; set; }
+        public string StateFilePath { get; set; } = string.Empty;
+
 
         public void UpdateState(StateEntry entry)
         {
