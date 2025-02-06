@@ -22,7 +22,7 @@
             }
         }
 
-        static void CopyDirectory(string sourceDir, string destinationDir)
+        public static void CopyDirectory(string sourceDir, string destinationDir)
         {
             // Créer le dossier de destination si nécessaire
             if (!Directory.Exists(destinationDir))
@@ -34,7 +34,7 @@
             foreach (var file in Directory.GetFiles(sourceDir))
             {
                 string destFile = Path.Combine(destinationDir, Path.GetFileName(file));
-                File.Copy(file, destFile);
+                File.Copy(file, destFile, true);
             }
 
             // Copier les sous-dossiers de manière récursive
