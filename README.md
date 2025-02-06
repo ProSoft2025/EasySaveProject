@@ -11,6 +11,7 @@ During this project, we will have to ensure the development, the management of m
 ### Tools used
 - [Visual Studio 2022](https://visualstudio.microsoft.com/fr/vs/) (enterprise version)
 - [Lucidchart](https://www.lucidchart.com/pages/fr) (for diagram)
+- [Mermaid Live editor](https://mermaid.live/edit) (for diagram)
 
 ### Version 1
 The specifications for the first version of the software are as follows:
