@@ -5,6 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
+<<<<<<< Updated upstream
         var backupJobs1 = new BackupJobs("Save1", "/Source/Path", "/destination/path", BackupJobs.BackupType.Complete);
         backupJobs1.AfficherAttributs();
 
@@ -69,5 +70,19 @@ class Program
             Console.ReadKey();
             Console.Clear();
         }
+=======
+        var manager = EasySaveApp.GetInstance();
+        var logger = new Logger("Logs.json");
+
+        // Initialisation du gestionnaire de langues
+        LanguageManager languageManager = new LanguageManager();
+
+        // Initialisation de l'interface utilisateur avec gestion de la langue
+        var ui = new UserInterface(languageManager);
+
+        // Démarrer le menu
+        var menu = new MenuManager(ui, manager, logger);
+        menu.Run();
+>>>>>>> Stashed changes
     }
 }
