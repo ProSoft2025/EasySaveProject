@@ -13,7 +13,6 @@ partial class Program
 
         // Initialisation de l'interface utilisateur avec gestion de la langue
         var ui = new UserInterface(languageManager);
-        ui.DisplayMenu();
 
         IBackupStrategy complete = new CompleteBackup();
         IBackupStrategy differentielle = new DifferentialBackup();
