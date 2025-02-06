@@ -32,20 +32,22 @@ namespace EasySave {
             private readonly EasySaveApp manager;
             private readonly Logger logger;
             private readonly BackupJobFactory backupJobFactory;
+            private readonly StateManager stateManager;
 
-            public MenuManager(UserInterface ui, EasySaveApp manager, Logger logger)
+            public MenuManager(UserInterface ui, EasySaveApp manager, Logger logger, StateManager stateManager)
             {
                 this.ui = ui;
                 this.manager = manager;
                 this.logger = logger;
                 this.backupJobFactory = new BackupJobFactory();
+                this.stateManager = stateManager;
             }
 
             public void Run()
             {
-                bool quitter = false;
+                bool exit = false;
 
-                while (!quitter)
+                while (!exit)
                 {
                     ui.DisplayMenu();
                     ConsoleKeyInfo choix = Console.ReadKey();
@@ -69,23 +71,56 @@ namespace EasySave {
                             BackupExecute();
                             break;
                         case '6':
-                            logger.DisplayLogFileContent();
+                            LogSubMenu();
                             break;
                         case '7':
-                            quitter = true;
+                            exit = true;
                             Console.WriteLine("Fermeture de EasySave.");
                             break;
                         default:
-                            Console.WriteLine("Choix non valide, veuillez réessayer.");
+                            Console.WriteLine("Invalid choice, please try again.");
                             break;
                     }
 
-                    if (!quitter)
+                    if (!exit)
                     {
                         Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
                         Console.ReadKey();
                         Console.Clear();
                     }
+                }
+            }
+
+            private void LogSubMenu()
+            {
+                Console.WriteLine("===== Menu Logs =====");
+                Console.WriteLine("1. Voir les logs journaliers");
+                Console.WriteLine("2. Voir l'état en temps réel");
+                Console.WriteLine("3. Retour au menu principal");
+                Console.WriteLine("============================");
+                Console.Write("Votre choix : ");
+
+                ConsoleKeyInfo choixLog = Console.ReadKey();
+                Console.Clear();
+
+                switch (choixLog.KeyChar)
+                {
+                    case '1':
+                        // Implémentation pour afficher les logs journaliers
+                        Console.WriteLine("Affichage des logs journaliers");
+                        logger.DisplayLogFileContent();
+                        break;
+                    case '2':
+                        // Implémentation pour afficher l'état en temps réel
+                        Console.WriteLine("Affichage de l'état en temps réel");
+                        DisplayBackupState();
+                        break;
+                    case '3':
+                        // Retour au menu principal
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
                 }
             }
 
@@ -120,7 +155,7 @@ namespace EasySave {
 
                 IBackupStrategy strategy = strategyChoice == "2" ? new DifferentialBackup() : new CompleteBackup();
 
-                manager.AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy));
+                manager.AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
                 Console.WriteLine("Sauvegarde ajoutée avec succès !");
             }
 
@@ -141,6 +176,27 @@ namespace EasySave {
             {
                 Console.WriteLine("Exécution de toutes les sauvegardes...");
                 manager.ExecuteAllBackupJobs();
+            }
+
+            private void DisplayBackupState()
+            {
+                StateEntry state = stateManager.GetState();
+                if (state == null)
+                {
+                    Console.WriteLine("No backup state available.");
+                    return;
+                }
+
+                Console.WriteLine($"Backup Task: {state.TaskName}");
+                Console.WriteLine($"Timestamp: {state.Timestamp}");
+                Console.WriteLine($"Status: {state.Status}");
+                Console.WriteLine($"Progress: {state.Progress}%");
+                Console.WriteLine($"Total Files: {state.TotalFiles}");
+                Console.WriteLine($"Remaining Files: {state.RemainingFiles}");
+                Console.WriteLine($"Total Size: {state.TotalSize} bytes");
+                Console.WriteLine($"Remaining Size: {state.RemainingSize} bytes");
+                Console.WriteLine($"Current Source: {state.CurrentSource}");
+                Console.WriteLine($"Current Target: {state.CurrentTarget}");
             }
         }
 
