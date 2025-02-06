@@ -63,7 +63,7 @@ namespace EasySave {
                             RemoveBackupMenu();
                             break;
                         case '4':
-                            RestoreBackup();
+                            RestoreBackup(manager);
                             break;
                         case '5':
                             BackupExecute();
