@@ -61,6 +61,21 @@ The locations of both files (daily log and real-time status) will have to be stu
 
 The files (daily log and status) and any configuration files will be in JSON format. To allow quick reading via Notepad, it is necessary to put line breaks between JSON elements. Pagination would be a plus.
 
+Once you will have set up your computer You will have to clone this project.
+
+You can do it in HTTPS with this link: 
+
+```
+https://github.com/ProSoft2025/EasySaveProject.git
+```
+
+Or by opening it with Github Desktop or downloading the ZIP.
+
+Then refer to the usage section and you will be ready to go !
+
+## Start the application
+* Version 1 : [Documentation User]
+
 # Authors
 - BUTEZ Clément
 - DUPRE Jérémy
