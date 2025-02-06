@@ -1,6 +1,6 @@
 ﻿using EasySave;
 using System.Text.Json;
-using static EasySave.UserInterface;
+using BackupLogger;
 
 class Program
 {
