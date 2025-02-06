@@ -150,17 +150,17 @@ namespace EasySave {
                 Console.WriteLine("Fonction de restauration non implémentée.");
             }
 
-            public List<string> ReadBackupExecute(List<BackupJob> backupJobs)
+            public List<int> ReadBackupExecute(List<BackupJob> backupJobs)
             {
-                Console.WriteLine("Saisir le numéro de Backup à éxécuter : \n" +
+                Console.WriteLine("Saisir le numéro de Backup à exécuter : \n" +
                 "Exemple : '1-3' -> Exécuter les sauvegardes 1,2,3" +
-                "\nExemple2 : '1;3;4' -> Exécute les sauvegardes 1 3 et 4");
+                "\nExemple2 : '1;3;4' -> Exécute les sauvegardes 1, 3 et 4");
                 string userChoice = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(userChoice))
                 {
                     Console.WriteLine("L'entrée est vide ou non valide.");
-                    return new List<string>();
+                    return new List<int>();
                 }
 
                 var backupsToRun = new List<int>();
@@ -171,42 +171,52 @@ namespace EasySave {
                     var rangeParts = segment.Split('-');
                     if (rangeParts.Length == 2)
                     {
-                        int start = int.Parse(rangeParts[0]);
-                        int end = int.Parse(rangeParts[1]);
-                        backupsToRun.AddRange(Enumerable.Range(start, end - start + 1));
+                        if (int.TryParse(rangeParts[0], out int start) && int.TryParse(rangeParts[1], out int end))
+                        {
+                            if (start <= end && start > 0 && end <= backupJobs.Count)
+                            {
+                                backupsToRun.AddRange(Enumerable.Range(start, end - start + 1).Select(i => i - 1));
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Intervalle invalide : {segment}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Format d'intervalle incorrect : {segment}");
+                        }
                     }
                     else
                     {
-                        backupsToRun.Add(int.Parse(segment));
+                        if (int.TryParse(segment, out int singleBackup) && singleBackup > 0 && singleBackup <= backupJobs.Count)
+                        {
+                            backupsToRun.Add(singleBackup - 1);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Numéro de sauvegarde invalide : {segment}");
+                        }
                     }
                 }
 
-                var backupNamesToRun = new List<string>();
-                foreach (var number in backupsToRun)
-                {
-                    if (number > 0 && number <= backupJobs.Count)
-                    {
-                        backupNamesToRun.Add(backupJobs[number - 1].name);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Le numéro de sauvegarde {number} est en dehors des limites.");
-                    }
-                }
-
-                return backupNamesToRun;
+                return backupsToRun;
             }
-        
 
             private void BackupExecute()
             {
-                List<string> backupToRun = ReadBackupExecute(manager.BackupJobs);
-                for (int i = 0; i < backupToRun.Count(); i++)
+                List<int> backupsToRun = ReadBackupExecute(manager.BackupJobs);
+                foreach (int backupIndex in backupsToRun)
                 {
-                    manager.BackupJobs[i].displayAttributs();
+                    if (backupIndex >= 0 && backupIndex < manager.BackupJobs.Count)
+                    {
+                        Console.WriteLine($"Exécution de la sauvegarde {backupIndex + 1}: {manager.BackupJobs[backupIndex].name}");
+                        manager.BackupJobs[backupIndex].Execute();
+                    }
                 }
-                Console.WriteLine("Exécution de toutes les sauvegardes...");
+                Console.WriteLine("Exécution de toutes les sauvegardes terminée.");
             }
+
         }
     }
 }

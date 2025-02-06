@@ -2,9 +2,14 @@
 {
     public class DifferentialBackup : IBackupStrategy
     {
-        public void ExecuteBackup(string source, string target, string lastFullBackupDir)
+        public void ExecuteBackup(string source, string target)
         {
             Console.WriteLine("Début de la sauvegarde différentielle.");
+            Console.WriteLine("Saisir le chemin de la dernière sauvegarde totale :");
+            string lastFullBackupDir = Console.ReadLine();
+
+            Console.WriteLine("Saisir le chemin de la sauvegarde différentielle :");
+            string differentialPath = Console.ReadLine();
 
             try
             {
@@ -19,7 +24,7 @@
                 foreach (var file in currentFiles)
                 {
                     var sourceFilePath = Path.Combine(source, file);
-                    var differentialBackupFilePath = Path.Combine(target, file);
+                    var differentialBackupFilePath = Path.Combine(differentialPath, file);
                     var lastFullBackupFilePath = Path.Combine(lastFullBackupDir, file);
 
                     if (!File.Exists(lastFullBackupFilePath) || File.GetLastWriteTime(sourceFilePath) > File.GetLastWriteTime(lastFullBackupFilePath))
