@@ -145,9 +145,36 @@ namespace EasySave {
                 Console.WriteLine($"Sauvegarde '{name}' supprimée.");
             }
 
-            private void RestoreBackup()
+            private void RestoreBackup(EasySaveApp manager)
             {
-                Console.WriteLine("Fonction de restauration non implémentée.");
+                Console.WriteLine("Entrez le nom de la sauvegarde à restaurer : ");
+                string userChoice = ui.GetUserInput();
+
+                if (string.IsNullOrWhiteSpace(userChoice))
+                {
+                    Console.WriteLine("L'entrée est vide ou non valide.");
+                    return;
+                }
+
+                bool found = false;
+                for (int i = 0; i < manager.BackupJobs.Count; i++)
+                {
+                    if (manager.BackupJobs[i].name.Equals(userChoice, StringComparison.OrdinalIgnoreCase))
+                    {
+                        string backupDirectory = manager.BackupJobs[i].targetDirectory;
+                        string restoreDirectory = manager.BackupJobs[i].sourceDirectory;
+
+                        // Appel de la méthode de restauration via l'interface
+                        manager.BackupJobs[i].BackupStrategy.Restore(backupDirectory, restoreDirectory);
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Console.WriteLine("Nom de sauvegarde invalide.");
+                }
             }
 
             public List<int> ReadBackupExecute(List<BackupJob> backupJobs)
@@ -155,7 +182,7 @@ namespace EasySave {
                 Console.WriteLine("Saisir le numéro de Backup à exécuter : \n" +
                 "Exemple : '1-3' -> Exécuter les sauvegardes 1,2,3" +
                 "\nExemple2 : '1;3;4' -> Exécute les sauvegardes 1, 3 et 4");
-                string userChoice = Console.ReadLine();
+                string userChoice = ui.GetUserInput();
 
                 if (string.IsNullOrWhiteSpace(userChoice))
                 {

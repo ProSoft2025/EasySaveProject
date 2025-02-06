@@ -43,12 +43,19 @@
             }
         }
 
-        public void Restore(string backupDirectory, string restoreDirectory, string lastFullBackupDir)
+        public void Restore(string backupDirectory, string restoreDirectory)
         {
+            Console.WriteLine("Début de la restauration de la sauvegarde :");
+            Console.WriteLine("Saisir le chemin de la dernière sauvegarde totale :");
+            string lastFullBackupDir = Console.ReadLine();
+
+
+
             try
             {
+                var completeBackup = new CompleteBackup();
                 // Restaurer d'abord la dernière sauvegarde totale en utilisant la stratégie complète
-                CompleteBackup.Restore(lastFullBackupDir, restoreDirectory);
+                completeBackup.Restore(lastFullBackupDir, restoreDirectory);
 
                 // Utiliser la méthode utilitaire pour copier les fichiers et sous-répertoires de la sauvegarde différentielle
                 FileManager.CopyDirectory(backupDirectory, restoreDirectory);

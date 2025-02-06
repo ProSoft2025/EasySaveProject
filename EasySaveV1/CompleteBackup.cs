@@ -6,7 +6,7 @@
         {
 
         }
-        public static void Restore(string backupDirectory, string restoreDirectory)
+        public void Restore(string backupDirectory, string restoreDirectory)
         {
             try
             {
