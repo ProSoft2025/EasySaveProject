@@ -1,6 +1,5 @@
 ﻿using EasySave;
 using System.Text.Json;
-using EasySave;
 
 partial class Program
 {
@@ -8,7 +7,13 @@ partial class Program
     {
         var manager = EasySaveApp.GetInstance();
         var logger = new Logger("Logs.json");
-        var ui = new UserInterface();
+
+        // Initialisation du gestionnaire de langues
+        LanguageManager languageManager = new LanguageManager();
+
+        // Initialisation de l'interface utilisateur avec gestion de la langue
+        var ui = new UserInterface(languageManager);
+        ui.DisplayMenu();
 
         IBackupStrategy complete = new CompleteBackup();
         var backupJob = new BackupJob("Save1", "/Source/Path", "/destination/path", complete);
@@ -20,7 +25,7 @@ partial class Program
         File.AppendAllText("Logs.json", json + Environment.NewLine);
 
         // Démarrer le menu
-        var menu = new UserInterface.MenuManager(ui, manager, logger);
+        var menu = new UserInterface.MenuManager(ui, manager, logger, languageManager); // Passer languageManager
         menu.Run();
     }
 }
