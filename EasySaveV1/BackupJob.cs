@@ -2,9 +2,9 @@
 
 namespace EasySave
 {
-    public class BackupJob
+    public class BackupJob      //
     {
-        // Déclaration des variables (Attributs)
+        
         public string name { get; set; }
         public string sourceDirectory { get; set; }
         public string targetDirectory { get; set; }
