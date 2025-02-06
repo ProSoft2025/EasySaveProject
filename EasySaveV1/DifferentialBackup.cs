@@ -37,8 +37,24 @@
                 Console.WriteLine($"Erreur lors de la sauvegarde différentielle : {ex.Message}");
             }
         }
+
+        public void Restore(string backupDirectory, string restoreDirectory, string lastFullBackupDir)
+        {
+            try
+            {
+                // Restaurer d'abord la dernière sauvegarde totale en utilisant la stratégie complète
+                CompleteBackup.Restore(lastFullBackupDir, restoreDirectory);
+
+                // Utiliser la méthode utilitaire pour copier les fichiers et sous-répertoires de la sauvegarde différentielle
+                FileManager.CopyDirectory(backupDirectory, restoreDirectory);
+
+                Console.WriteLine("Restauration des fichiers effectuée avec succès.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Une erreur s'est produite lors de la restauration des fichiers : {ex.Message}");
+            }
+        }
     }
-
 }
-
 
