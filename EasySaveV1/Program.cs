@@ -20,7 +20,7 @@ partial class Program
         loggerService.LogBackupCreation(backupJob);
 
         // Démarrer le menu
-        var menu = new UserInterface.MenuManager(ui, manager, loggerService.GetBackupLogger());
-        menu.Run();
+        var menu = new UserInterface.MenuManager(ui, manager, loggerService.GetBackupLogger(), stateManager);
+        menu.Run(); // Changed from menu.DisplayMenu() to menu.Run()
     }
 }

@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using BackupLogger;
 
-namespace EasySave { 
-public class UserInterface
+namespace EasySave {
+    public class UserInterface
     {
         public void DisplayMenu()
         {
@@ -33,6 +33,7 @@ public class UserInterface
             private readonly EasySaveApp manager;
             private readonly Logger logger;
             private readonly BackupJobFactory backupJobFactory;
+            private readonly StateManager stateManager; // Add this line
 
             public MenuManager(UserInterface ui, EasySaveApp manager, Logger logger, StateManager stateManager)
             {
@@ -40,9 +41,8 @@ public class UserInterface
                 this.manager = manager;
                 this.logger = logger;
                 this.backupJobFactory = new BackupJobFactory();
-                this.stateManager = stateManager;
+                this.stateManager = stateManager; // Initialize stateManager
             }
-
             public void Run()
             {
                 bool exit = false;
@@ -199,6 +199,8 @@ public class UserInterface
                 Console.WriteLine($"Current Target: {state.CurrentTarget}");
             }
         }
-
     }
-}
+
+   }
+
+
