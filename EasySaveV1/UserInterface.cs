@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BackupLogger;
 
 namespace EasySave { 
-    public class UserInterface
+public class UserInterface
     {
         public void DisplayMenu()
         {
@@ -33,13 +33,15 @@ namespace EasySave {
             private readonly EasySaveApp manager;
             private readonly Logger logger;
             private readonly BackupJobFactory backupJobFactory;
+            private readonly StateManager stateManager; // Add this line
 
-            public MenuManager(UserInterface ui, EasySaveApp manager, Logger logger)
+            public MenuManager(UserInterface ui, EasySaveApp manager, Logger logger) // Modify constructor
             {
                 this.ui = ui;
                 this.manager = manager;
                 this.logger = logger;
-                this.backupJobFactory = new BackupJobFactory();
+                this.backupJobFactory = new BackupJobFactory();            
+
             }
 
             public void Run()
@@ -121,7 +123,7 @@ namespace EasySave {
 
                 IBackupStrategy strategy = strategyChoice == "2" ? new DifferentialBackup() : new CompleteBackup();
 
-                manager.AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy));
+                manager.AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
                 Console.WriteLine("Sauvegarde ajoutée avec succès !");
             }
 

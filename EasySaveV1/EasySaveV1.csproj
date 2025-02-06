@@ -9,7 +9,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-	<ProjectReference Include="..\BackupLogger\BackupLogger.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BackupLogger\BackupLogger.csproj" />
   </ItemGroup>
 
 </Project>

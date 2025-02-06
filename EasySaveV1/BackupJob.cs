@@ -1,9 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
-/* Summary :
- * Represents a backup job and its execution logic*/
-
 namespace EasySave
 {
 
