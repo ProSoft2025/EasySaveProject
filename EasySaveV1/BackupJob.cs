@@ -14,17 +14,24 @@ namespace EasySave
 
             public BackupJob(string name, string sourceDirectory, string targetDirectory, IBackupStrategy backupStrategy, StateManager stateManager)
             {
-                this.Name = name;
-                this.SourceDirectory = sourceDirectory;
-                this.TargetDirectory = targetDirectory;
-                this.BackupStrategy = backupStrategy;
-                this.StateManager = stateManager;
+                Name = name;
+                SourceDirectory = sourceDirectory;
+                TargetDirectory = targetDirectory;
+                StateManager = stateManager;
+                BackupStrategy = backupStrategy;
             }
 
-        // Executes the backup process and updates state in real-time
+        // Executes the backup job and updates state after each file copy
         public void Execute()
             {
+
                 BackupStrategy.ExecuteBackup(SourceDirectory, TargetDirectory);
+
+                if (!Directory.Exists(SourceDirectory) || !Directory.Exists(TargetDirectory))
+                {
+                    Console.WriteLine("Error: Source or Target directory does not exist.");
+                    return;
+                }
 
 
                 string[] files = Directory.GetFiles(SourceDirectory);
@@ -60,7 +67,7 @@ namespace EasySave
                     StateManager.UpdateState(state);
                 }
 
-                StateManager.UpdateState(new StateEntry { TaskName = Name, Timestamp = DateTime.Now, Status = "Done" });
+                StateManager.UpdateState(new StateEntry { TaskName = Name, Timestamp = DateTime.Now, Status = "Completed" });
             }
         }
     }

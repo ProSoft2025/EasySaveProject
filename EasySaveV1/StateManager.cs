@@ -40,7 +40,7 @@ namespace EasySave
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine($"Erreur mise à jour état: {ex.Message}");
+                Console.Error.WriteLine($"Error updating state : {ex.Message}");
             }
         }
 
@@ -55,7 +55,7 @@ namespace EasySave
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine($"Erreur récupération état: {ex.Message}");
+                Console.Error.WriteLine($"Error retrieving state: {ex.Message}");
                 return null;
             }
         }
