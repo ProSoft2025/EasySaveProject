@@ -39,7 +39,7 @@ namespace EasySave
         }
         public void RemoveBackup(string name)
         {
-            var job = BackupJobs.FirstOrDefault(j => j.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            var job = BackupJobs.FirstOrDefault(j => j.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
             if (job != null)
             {
                 BackupJobs.Remove(job);
@@ -54,7 +54,7 @@ namespace EasySave
         {
             foreach (var name in names)
             {
-                var job = BackupJobs.Find(j => j.name == name);
+                var job = BackupJobs.Find(j => j.Name == name);
                 job?.Execute();
             }
         }

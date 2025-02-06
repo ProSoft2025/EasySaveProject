@@ -1,7 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
-/* Summary */
+/* Summary :
+ * Represents a backup job and its execution logic*/
 
 namespace EasySave
 {
@@ -23,6 +24,7 @@ namespace EasySave
                 this.StateManager = stateManager;
             }
 
+        // Executes the backup process and updates state in real-time
         public void Execute()
             {
                 BackupStrategy.ExecuteBackup(SourceDirectory, TargetDirectory);
@@ -44,11 +46,12 @@ namespace EasySave
                     filesProcessed++;
                     sizeProcessed += new FileInfo(file).Length;
 
+                    // Update the state after each file transfer
                     StateEntry state = new StateEntry
                     {
                         TaskName = Name,
                         Timestamp = DateTime.Now,
-                        Status = "Actif",
+                        Status = "Active",
                         TotalFiles = totalFiles,
                         TotalSize = totalSize,
                         Progress = (int)((double)filesProcessed / totalFiles * 100),
@@ -60,7 +63,7 @@ namespace EasySave
                     StateManager.UpdateState(state);
                 }
 
-                StateManager.UpdateState(new StateEntry { TaskName = Name, Timestamp = DateTime.Now, Status = "Terminé" });
+                StateManager.UpdateState(new StateEntry { TaskName = Name, Timestamp = DateTime.Now, Status = "Done" });
             }
         }
     }

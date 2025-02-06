@@ -9,6 +9,7 @@ using System.Threading;
 
 namespace EasySave
 {
+    // Manages the state file and updates backup progress
     public class StateManager
     {
         public string StateFilePath { get; set; }
@@ -16,8 +17,20 @@ namespace EasySave
         public StateManager(string stateFilePath)
         {
             StateFilePath = stateFilePath;
+            EnsureFileExists();
         }
 
+        // Ensures the state file exists before writing
+        private void EnsureFileExists()
+        {
+            if (!File.Exists(StateFilePath))
+            {
+                File.WriteAllText(StateFilePath, "{}");
+            }
+        }
+
+
+        // Updates the state file with the current progress
         public void UpdateState(StateEntry entry)
         {
             try
@@ -31,6 +44,7 @@ namespace EasySave
             }
         }
 
+        // Retrieves the latest state from the file
         public StateEntry GetState()
         {
             try

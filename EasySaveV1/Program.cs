@@ -2,7 +2,7 @@
 using System.Text.Json;
 using BackupLogger;
 
-class Program
+partial class Program
 {
     public static void Main(string[] args)
     {
@@ -20,7 +20,7 @@ class Program
         File.AppendAllText("Logs.json", json + Environment.NewLine);
 
         // Démarrer le menu
-        var menu = new MenuManager(ui, manager, logger);
+        var menu = new UserInterface.MenuManager(ui, manager, logger);
         menu.Run();
     }
 }

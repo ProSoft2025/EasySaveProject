@@ -1,5 +1,6 @@
 ﻿
-/* Summary */
+/* Summary :
+ * Represents the real-time state of a backup job */
 
 namespace EasySave
 {
