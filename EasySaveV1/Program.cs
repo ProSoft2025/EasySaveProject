@@ -1,38 +1,31 @@
 ﻿using EasySave;
 using System.Text.Json;
+using BackupLogger;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 partial class Program
 {
     public static void Main(string[] args)
     {
+        // Initialisation des menus 
+        string date = DateTime.Now.ToString("yyyy-MM-dd");
+        string filelog = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName, $"{date}.json");
         var manager = EasySaveApp.GetInstance();
-        var logger = new Logger("Logs.json");
+        var loggerService = new LoggerService(filelog);
+        var langageManager = new LanguageManager();
+        var ui = new UserInterface(langageManager);
 
-        // Initialisation du gestionnaire de langues
-        LanguageManager languageManager = new LanguageManager();
-
-        // Initialisation de l'interface utilisateur avec gestion de la langue
-        var ui = new UserInterface(languageManager);
+        // Create a StateManager instance
+        var stateManager = new StateManager("state.json");
 
         IBackupStrategy complete = new CompleteBackup();
-        IBackupStrategy differentielle = new DifferentialBackup();
-        var backupJob = new BackupJob("Save1", "/path/source", "/path/destBKP", differentielle);
-        var backupJob1 = new BackupJob("Save2", "/path/source", "/path/destBKP", differentielle);
-        var backupJob2 = new BackupJob("Save3", "/path/source", "/path/destBKP", complete);
-        var backupJob3 = new BackupJob("Save4", "/path/source", "/path/destBKP", differentielle);
-
+        var backupJob = new BackupJob("Save1", "/Source/Path", "/destination/path", complete, stateManager);
         manager.AddBackup(backupJob);
-        manager.AddBackup(backupJob1);
-        manager.AddBackup(backupJob2);
-        manager.AddBackup(backupJob3);
 
-        // Sérialisation JSON (peut être déplacée dans une méthode séparée si besoin)
-        var options = new JsonSerializerOptions { WriteIndented = true };
-        string json = JsonSerializer.Serialize(backupJob, options);
-        File.AppendAllText("Logs.json", json + Environment.NewLine);
+        loggerService.LogBackupCreation(filelog);
 
         // Démarrer le menu
-        var menu = new UserInterface.MenuManager(ui, manager, logger, languageManager); // Passer languageManager
-        menu.Run();
+        var menu = new UserInterface.MenuManager(ui, manager, loggerService.GetBackupLogger(), langageManager,stateManager);
+        menu.Run(); // Changed from menu.DisplayMenu() to menu.Run()
     }
 }

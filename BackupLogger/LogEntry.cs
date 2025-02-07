@@ -1,7 +1,8 @@
-﻿//The LogEntry class contains the details of the backup actions
+﻿using System;
 
 
-namespace EasySave
+
+namespace BackupLogger
 {
     public class LogEntry
     {

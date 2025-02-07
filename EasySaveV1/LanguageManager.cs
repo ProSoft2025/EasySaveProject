@@ -35,7 +35,8 @@ public class LanguageManager
                 { "enter_job_name", "Enter the job name:" },
                 { "enter_source_directory", "Enter the source directory:" },
                 { "enter_target_directory", "Enter the target directory:" },
-                { "choose_backup_type", "Choose backup type (1=Complete, 2=Differential):" }
+                { "choose_backup_type", "Choose backup type (1=Complete, 2=Differential):" },
+                { "enter_backup_name_to_remove", "Enter the backup name to remove :"}
             }
         },
         { "fr", new Dictionary<string, string>
@@ -66,7 +67,8 @@ public class LanguageManager
                 { "enter_job_name", "Entrez le nom du job :" },
                 { "enter_source_directory", "Entrez le répertoire source :" },
                 { "enter_target_directory", "Entrez le répertoire de destination :" },
-                { "choose_backup_type", "Choisissez le type de sauvegarde (1=Complète, 2=Differentielles) :" }
+                { "choose_backup_type", "Choisissez le type de sauvegarde (1=Complète, 2=Differentielles) :" },
+                { "enter_backup_name_to_remove", "Entrez le nom de la sauvegarde à supprimer :"}
             }
         }
     };

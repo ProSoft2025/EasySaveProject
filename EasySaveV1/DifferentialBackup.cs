@@ -8,8 +8,10 @@
             Console.WriteLine("Saisir le chemin de la dernière sauvegarde totale :");
             string lastFullBackupDir = Console.ReadLine();
 
-            Console.WriteLine("Saisir le chemin de la sauvegarde différentielle :");
-            string differentialPath = Console.ReadLine();
+            if (!Directory.Exists(target))
+            {
+                Directory.CreateDirectory(target);
+            }
 
             try
             {
@@ -24,7 +26,7 @@
                 foreach (var file in currentFiles)
                 {
                     var sourceFilePath = Path.Combine(source, file);
-                    var differentialBackupFilePath = Path.Combine(differentialPath, file);
+                    var differentialBackupFilePath = Path.Combine(target, file);
                     var lastFullBackupFilePath = Path.Combine(lastFullBackupDir, file);
 
                     if (!File.Exists(lastFullBackupFilePath) || File.GetLastWriteTime(sourceFilePath) > File.GetLastWriteTime(lastFullBackupFilePath))
@@ -36,8 +38,8 @@
                     }
                 }
                 Console.WriteLine("La sauvegarde différentielle est terminée");
-        }
-        catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine($"Erreur lors de la sauvegarde différentielle : {ex.Message}");
             }
@@ -48,8 +50,6 @@
             Console.WriteLine("Début de la restauration de la sauvegarde :");
             Console.WriteLine("Saisir le chemin de la dernière sauvegarde totale :");
             string lastFullBackupDir = Console.ReadLine();
-
-
 
             try
             {
