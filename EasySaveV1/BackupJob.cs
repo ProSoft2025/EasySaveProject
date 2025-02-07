@@ -22,5 +22,12 @@ namespace EasySave
         {
             BackupStrategy.ExecuteBackup(sourceDirectory, targetDirectory);            
         }
+
+        public void displayAttributs()
+        {
+            string strategyType = BackupStrategy is CompleteBackup ? "Complete" :
+                              BackupStrategy is DifferentialBackup ? "Differentielle" : "N/A";
+            Console.WriteLine("Name:" + name + "\nSource:" + sourceDirectory + "\nDestination:" + targetDirectory + "\nStrategy:" + strategyType);
+        }
     }
 }
