@@ -144,7 +144,7 @@ namespace EasySave {
                     return;
                 }
 
-                Console.WriteLine(languageManager.GetTranslation("backup_list"));
+                Console.WriteLine(languageManager.GetTranslation("list_of_backups"));
                 foreach (var job in manager.BackupJobs)
                 {
                     job.displayAttributs();

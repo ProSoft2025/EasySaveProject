@@ -23,26 +23,13 @@ namespace EasySave
         {
             return _backupLogger;
         }
-        public void LogBackupCreation(BackupJob backupJob)
+        public void LogBackupCreation(string filelog)
         {
-            if (!Directory.Exists(backupJob.SourceDirectory))
+            if (!File.Exists(filelog))
             {
-                Console.WriteLine($"Erreur : Le dossier source '{backupJob.SourceDirectory}' n'existe pas.");
-                return; // Sortie pour éviter l'erreur
+                // Créer un fichier vide
+                File.WriteAllText(filelog, "[]");
             }
-            string[] files = Directory.GetFiles(backupJob.SourceDirectory);
-            long totalSize = files.Sum(file => new FileInfo(file).Length);
-            int totalFiles = files.Length;
-
-            var logEntry = new LogEntry(
-                backupJob.Name,
-                backupJob.SourceDirectory,
-                backupJob.TargetDirectory,
-                (int)totalSize,
-                0 // Temps fictif
-            );
-
-            _backupLogger.LogAction(logEntry);
         }
     }
 }
