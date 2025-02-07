@@ -8,7 +8,8 @@ partial class Program
     {
         var manager = EasySaveApp.GetInstance();
         var loggerService = new LoggerService("Logs.json");
-        var ui = new UserInterface();
+        var langageManager = new LanguageManager();
+        var ui = new UserInterface(langageManager);
 
         // Create a StateManager instance
         var stateManager = new StateManager("state.json");
@@ -20,7 +21,7 @@ partial class Program
         loggerService.LogBackupCreation(backupJob);
 
         // Démarrer le menu
-        var menu = new UserInterface.MenuManager(ui, manager, loggerService.GetBackupLogger(), stateManager);
+        var menu = new UserInterface.MenuManager(ui, manager, loggerService.GetBackupLogger(), langageManager,stateManager);
         menu.Run(); // Changed from menu.DisplayMenu() to menu.Run()
     }
 }

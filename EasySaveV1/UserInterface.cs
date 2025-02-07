@@ -86,7 +86,7 @@ namespace EasySave {
                             ChangeLanguageMenu();
                             break;
                         case '8':
-                            quitter = true;
+                            exit = true;
                             Console.WriteLine(languageManager.GetTranslation("exit_message"));
                             break;
                         default:
@@ -222,10 +222,10 @@ namespace EasySave {
                 bool found = false;
                 for (int i = 0; i < manager.BackupJobs.Count; i++)
                 {
-                    if (manager.BackupJobs[i].name.Equals(userChoice, StringComparison.OrdinalIgnoreCase))
+                    if (manager.BackupJobs[i].Name.Equals(userChoice, StringComparison.OrdinalIgnoreCase))
                     {
-                        string backupDirectory = manager.BackupJobs[i].targetDirectory;
-                        string restoreDirectory = manager.BackupJobs[i].sourceDirectory;
+                        string backupDirectory = manager.BackupJobs[i].TargetDirectory;
+                        string restoreDirectory = manager.BackupJobs[i].SourceDirectory;
 
                         // Appel de la méthode de restauration via l'interface
                         manager.BackupJobs[i].BackupStrategy.Restore(backupDirectory, restoreDirectory);
@@ -300,7 +300,7 @@ namespace EasySave {
                 {
                     if (backupIndex >= 0 && backupIndex < manager.BackupJobs.Count)
                     {
-                        Console.WriteLine($"Exécution de la sauvegarde {backupIndex + 1}: {manager.BackupJobs[backupIndex].name}");
+                        Console.WriteLine($"Exécution de la sauvegarde {backupIndex + 1}: {manager.BackupJobs[backupIndex].Name}");
                         manager.BackupJobs[backupIndex].Execute();
                     }
                 }
