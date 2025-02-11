@@ -25,7 +25,7 @@ partial class Program
         loggerService.LogBackupCreation(filelog);
 
         // Démarrer le menu
-        var menu = new UserInterface.MenuManager(ui, manager, loggerService.GetBackupLogger(), langageManager,stateManager);
+        var menu = new UserInterface.MenuManager(ui, manager, loggerService, langageManager,stateManager);
         menu.Run(); // Changed from menu.DisplayMenu() to menu.Run()
     }
 }

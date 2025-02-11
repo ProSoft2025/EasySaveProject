@@ -12,7 +12,7 @@ namespace BackupLogger
 {
     public class LoggerService
     {
-        private Logger _backupLogger;
+        public Logger _backupLogger;
 
         public LoggerService(string logFilePath)
         {

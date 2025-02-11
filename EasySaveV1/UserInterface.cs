@@ -36,17 +36,17 @@ namespace EasySave {
         {
             private readonly UserInterface ui;
             private readonly EasySaveApp manager;
-            private readonly Logger logger;
+            private readonly LoggerService loggerService;
             private readonly BackupJobFactory backupJobFactory;
             private readonly LanguageManager languageManager;
 
             private readonly StateManager stateManager; // Add this line
 
-            public MenuManager(UserInterface ui, EasySaveApp manager, Logger logger, LanguageManager languageManager,  StateManager stateManager)
+            public MenuManager(UserInterface ui, EasySaveApp manager, LoggerService loggerService, LanguageManager languageManager,  StateManager stateManager)
             {
                 this.ui = ui;
                 this.manager = manager;
-                this.logger = logger;
+                this.loggerService = loggerService;
                 this.backupJobFactory = new BackupJobFactory();
                 this.languageManager = languageManager; // Passer languageManager
                 this.stateManager = stateManager; // Initialize stateManager
@@ -120,7 +120,7 @@ namespace EasySave {
                     case '1':
                         // Implémentation pour afficher les logs journaliers
                         Console.WriteLine("Affichage des logs journaliers");
-                        logger.DisplayLogFileContent();
+                        loggerService.GetBackupLogger().DisplayLogFileContent();
                         break;
                     case '2':
                         // Implémentation pour afficher l'état en temps réel
@@ -228,7 +228,7 @@ namespace EasySave {
                         string restoreDirectory = manager.BackupJobs[i].SourceDirectory;
 
                         // Appel de la méthode de restauration via l'interface
-                        manager.BackupJobs[i].BackupStrategy.Restore(backupDirectory, restoreDirectory);
+                        manager.BackupJobs[i].Restore(loggerService);
                         found = true;
                         break;
                     }
@@ -301,7 +301,7 @@ namespace EasySave {
                     if (backupIndex >= 0 && backupIndex < manager.BackupJobs.Count)
                     {
                         Console.WriteLine($"Exécution de la sauvegarde {backupIndex + 1}: {manager.BackupJobs[backupIndex].Name}");
-                        manager.BackupJobs[backupIndex].Execute();
+                        manager.BackupJobs[backupIndex].Execute(loggerService);
                     }
                 }
                 Console.WriteLine("Exécution de toutes les sauvegardes terminée.");

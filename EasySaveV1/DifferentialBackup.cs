@@ -1,16 +1,18 @@
-﻿namespace EasySave
+﻿using BackupLogger;
+
+namespace EasySave
 {
     public class DifferentialBackup : IBackupStrategy
     {
-        public void ExecuteBackup(string source, string target)
+        public void ExecuteBackup(BackupJob jobBackup, LoggerService serviceLogger)
         {
             Console.WriteLine("Début de la sauvegarde différentielle.");
             Console.WriteLine("Saisir le chemin de la dernière sauvegarde totale :");
             string lastFullBackupDir = Console.ReadLine();
 
-            if (!Directory.Exists(target))
+            if (!Directory.Exists(jobBackup.TargetDirectory))
             {
-                Directory.CreateDirectory(target);
+                Directory.CreateDirectory(jobBackup.TargetDirectory);
             }
 
             try
@@ -19,20 +21,23 @@
                                                     .Select(f => f.Substring(lastFullBackupDir.Length + 1))
                                                     .ToList();
 
-                var currentFiles = Directory.GetFiles(source, "*", SearchOption.AllDirectories)
-                                            .Select(f => f.Substring(source.Length + 1))
+                var currentFiles = Directory.GetFiles(jobBackup.SourceDirectory, "*", SearchOption.AllDirectories)
+                                            .Select(f => f.Substring(jobBackup.SourceDirectory.Length + 1))
                                             .ToList();
 
                 foreach (var file in currentFiles)
                 {
-                    var sourceFilePath = Path.Combine(source, file);
-                    var differentialBackupFilePath = Path.Combine(target, file);
+                    var sourceFilePath = Path.Combine(jobBackup.SourceDirectory, file);
+                    var differentialBackupFilePath = Path.Combine(jobBackup.TargetDirectory, file);
                     var lastFullBackupFilePath = Path.Combine(lastFullBackupDir, file);
 
                     if (!File.Exists(lastFullBackupFilePath) || File.GetLastWriteTime(sourceFilePath) > File.GetLastWriteTime(lastFullBackupFilePath))
                     {
                         Directory.CreateDirectory(Path.GetDirectoryName(differentialBackupFilePath));
                         File.Copy(sourceFilePath, differentialBackupFilePath, true);
+
+                        LogEntry EntreeLog = new LogEntry(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, 10);
+                        serviceLogger.GetBackupLogger().LogAction(EntreeLog);
 
                         Console.WriteLine($"Copié : {sourceFilePath} vers {differentialBackupFilePath}");
                     }
@@ -45,20 +50,25 @@
             }
         }
 
-        public void Restore(string backupDirectory, string restoreDirectory)
+        public void Restore(BackupJob jobBackup, LoggerService serviceLogger)
         {
             Console.WriteLine("Début de la restauration de la sauvegarde :");
             Console.WriteLine("Saisir le chemin de la dernière sauvegarde totale :");
             string lastFullBackupDir = Console.ReadLine();
 
+            var tempBackupJob = new BackupJob(jobBackup.Name, lastFullBackupDir, jobBackup.SourceDirectory, jobBackup.BackupStrategy, jobBackup.StateManager);
+
             try
             {
                 var completeBackup = new CompleteBackup();
                 // Restaurer d'abord la dernière sauvegarde totale en utilisant la stratégie complète
-                completeBackup.Restore(lastFullBackupDir, restoreDirectory);
+                completeBackup.Restore(tempBackupJob, serviceLogger);
 
                 // Utiliser la méthode utilitaire pour copier les fichiers et sous-répertoires de la sauvegarde différentielle
-                FileManager.CopyDirectory(backupDirectory, restoreDirectory);
+                FileManager.CopyDirectory(jobBackup.TargetDirectory, jobBackup.SourceDirectory);
+
+                LogEntry EntreeLog = new LogEntry(jobBackup.Name, jobBackup.TargetDirectory, jobBackup.SourceDirectory, new FileInfo(jobBackup.TargetDirectory).Length, 10);
+                serviceLogger.GetBackupLogger().LogAction(EntreeLog);
 
                 Console.WriteLine("Restauration des fichiers effectuée avec succès.");
             }

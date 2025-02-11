@@ -1,8 +1,10 @@
-﻿namespace EasySave
+﻿using BackupLogger;
+
+namespace EasySave
 {
     public interface IBackupStrategy
     {
-        public void ExecuteBackup(string source, string target) { }
-        public void Restore(string backupDirectory, string restoreDirectory) { }
+        public void ExecuteBackup(BackupJob jobBackup, LoggerService serviceLogger) { }
+        public void Restore(BackupJob jobBackup, LoggerService serviceLogger) { }
     }
 }

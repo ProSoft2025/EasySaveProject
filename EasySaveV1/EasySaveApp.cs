@@ -50,20 +50,5 @@ namespace EasySave
                 Console.WriteLine($"Aucune sauvegarde trouvée avec le nom '{name}'.");
             }
         }
-        public void ExecuteBackupJob (string[] names)
-        {
-            foreach (var name in names)
-            {
-                var job = BackupJobs.Find(j => j.Name == name);
-                job?.Execute();
-            }
-        }
-        public void ExecuteAllBackupJobs()
-        {
-            foreach (var job in BackupJobs)
-            {
-                job.Execute();
-            }
-        }
     }
 }
