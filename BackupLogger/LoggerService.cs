@@ -5,13 +5,13 @@ namespace BackupLogger
 {
     public class LoggerService
     {
-        public Logger _backupLogger;
+        private readonly ILogger _backupLogger;
 
-        public LoggerService(string logFilePath)
+        public LoggerService(string logFilePath, ILogger logFormat)
         {
-            _backupLogger = new Logger(logFilePath);
+            _backupLogger = new ILogger(logFilePath, logFormat);
         }
-        public Logger GetBackupLogger()
+        public ILogger GetBackupLogger()
         {
             return _backupLogger;
         }
