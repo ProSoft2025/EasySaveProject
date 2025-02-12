@@ -1,8 +1,4 @@
-﻿using System;
-
-
-
-namespace BackupLogger
+﻿namespace BackupLogger
 {
     public class LogEntry
     {

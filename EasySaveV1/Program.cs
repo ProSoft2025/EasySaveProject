@@ -1,7 +1,5 @@
 ﻿using EasySave;
-using System.Text.Json;
 using BackupLogger;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 partial class Program
 {
@@ -19,8 +17,6 @@ partial class Program
         var stateManager = new StateManager("state.json");
 
         IBackupStrategy complete = new CompleteBackup();
-        var backupJob = new BackupJob("Save1", "/Source/Path", "/destination/path", complete, stateManager);
-        manager.AddBackup(backupJob);
 
         loggerService.LogBackupCreation(filelog);
 

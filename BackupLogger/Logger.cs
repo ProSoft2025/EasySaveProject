@@ -20,7 +20,9 @@ namespace BackupLogger
                 logEntries = JsonSerializer.Deserialize<List<LogEntry>>(existingLogs) ?? new List<LogEntry>();
             }
             logEntries.Add(entry);
-            File.WriteAllText(LogFilePath, JsonSerializer.Serialize(logEntries));
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            File.WriteAllText(LogFilePath, JsonSerializer.Serialize(logEntries, options));
         }
 
         public void DisplayLogFileContent()

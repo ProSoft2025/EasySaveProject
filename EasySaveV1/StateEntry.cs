@@ -1,5 +1,4 @@
-﻿
-/* Summary :
+﻿/* Summary :
  * Represents the real-time state of a backup job
  * Represents a snapshot of a backup job's state */
 

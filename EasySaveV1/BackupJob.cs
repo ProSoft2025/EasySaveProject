@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Xml.Linq;
-using BackupLogger;
+﻿using BackupLogger;
 
 namespace EasySave
 {
@@ -25,7 +23,6 @@ namespace EasySave
         // Executes the backup job and updates state after each file copy
         public void Execute(LoggerService logger)
         {
-
             BackupStrategy.ExecuteBackup(this, logger);
 
             if (!Directory.Exists(SourceDirectory) || !Directory.Exists(TargetDirectory))
@@ -71,7 +68,7 @@ namespace EasySave
             StateManager.UpdateState(new StateEntry { TaskName = Name, Timestamp = DateTime.Now, Status = "Completed" });
         }
         
-        public void Restore(LoggerService logger) 
+        public void Restore(LoggerService logger)
         { 
             BackupStrategy.Restore(this, logger);
         }
