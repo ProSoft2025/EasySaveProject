@@ -4,12 +4,19 @@ namespace EasySave
 {
     public class CompleteBackup : IBackupStrategy
     {
+        private LanguageManager languageManager;
+
+        public CompleteBackup(LanguageManager languageManager)
+        {
+            this.languageManager = languageManager;
+        }
+
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
-            Console.WriteLine("Début de la sauvegarde totale.");
+            Console.WriteLine((languageManager.GetTranslation("start_complete_backup")));
 
             try
-            {   
+            {
                 var sourceFiles = Directory.GetFiles(jobBackup.SourceDirectory, "*", SearchOption.AllDirectories)
                                             .Select(f => f.Substring(jobBackup.SourceDirectory.Length + 1))
                                             .ToList();
@@ -25,13 +32,13 @@ namespace EasySave
                     loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, 10);
                     loggerStrategy.DisplayLogFileContent();
 
-                    Console.WriteLine($"Copié : {sourceFilePath} vers {targetFilePath}");
+                    Console.WriteLine(languageManager.GetTranslation(("copied")) + $" {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{targetFilePath}");
                 }
-                Console.WriteLine("La sauvegarde totale est terminée.");
+                Console.WriteLine(languageManager.GetTranslation(("complete_backup_finished")));
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erreur lors de la sauvegarde totale : {ex.Message}");
+                Console.WriteLine(languageManager.GetTranslation(("complete_backup_error")) + $"{ex.Message}");
             }
         }
 
@@ -48,11 +55,11 @@ namespace EasySave
                 // Utiliser la méthode utilitaire pour copier les fichiers et sous-répertoires
                 FileManager.CopyDirectory(jobBackup.TargetDirectory, jobBackup.SourceDirectory);
 
-                Console.WriteLine("Restauration des fichiers effectuée avec succès.");
+                Console.WriteLine(languageManager.GetTranslation(("restore_success")));
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Une erreur s'est produite lors de la restauration des fichiers : {ex.Message}");
+                Console.WriteLine(languageManager.GetTranslation(("restore_error")) + $"{ex.Message}");
             }
         }
     }

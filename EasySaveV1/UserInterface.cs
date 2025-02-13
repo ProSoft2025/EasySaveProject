@@ -194,13 +194,13 @@ namespace EasySave {
                 switch (strategyChoice)
                 {
                     case "1":
-                        strategy = new CompleteBackup();
+                        strategy = new CompleteBackup(languageManager);
                         break;
                     case "2":
-                        strategy = new DifferentialBackup();
+                        strategy = new DifferentialBackup(languageManager);
                         break;
                     default:
-                        Console.WriteLine("Choix Incorrect, veuillez recommencer");
+                        Console.WriteLine(languageManager.GetTranslation(("incorrect_choice_try_again")));
                         return;
                 }
 
@@ -218,12 +218,12 @@ namespace EasySave {
 
             private void RestoreBackup(EasySaveApp manager)
             {
-                Console.WriteLine("Entrez le nom de la sauvegarde à restaurer : ");
+                Console.WriteLine(languageManager.GetTranslation(("backup_name_restore")));
                 string userChoice = ui.GetUserInput();
 
                 if (string.IsNullOrWhiteSpace(userChoice))
                 {
-                    Console.WriteLine("L'entrée est vide ou non valide.");
+                    Console.WriteLine(languageManager.GetTranslation(("invalid_input")));
                     return;
                 }
 
@@ -244,20 +244,20 @@ namespace EasySave {
 
                 if (!found)
                 {
-                    Console.WriteLine("Nom de sauvegarde invalide.");
+                    Console.WriteLine(languageManager.GetTranslation(("backup_name_incorrect")));
                 }
             }
 
             public List<int> ReadBackupExecute(List<BackupJob> backupJobs)
             {
-                Console.WriteLine("Saisir le numéro de Backup à exécuter : \n" +
-                "Exemple : '1-3' -> Exécuter les sauvegardes 1,2,3" +
-                "\nExemple2 : '1;3;4' -> Exécute les sauvegardes 1, 3 et 4");
+                Console.WriteLine(languageManager.GetTranslation(("backup_number_execute")));
+                Console.WriteLine(languageManager.GetTranslation(("1-3")));
+                Console.WriteLine(languageManager.GetTranslation(("1, 2 and 3")));
                 string userChoice = ui.GetUserInput();
 
                 if (string.IsNullOrWhiteSpace(userChoice))
                 {
-                    Console.WriteLine("L'entrée est vide ou non valide.");
+                    Console.WriteLine(languageManager.GetTranslation(("invalid_input")));
                     return new List<int>();
                 }
 
@@ -277,12 +277,12 @@ namespace EasySave {
                             }
                             else
                             {
-                                Console.WriteLine($"Intervalle invalide : {segment}");
+                                Console.WriteLine(languageManager.GetTranslation(("incorrect_interval")) + $"{segment}");
                             }
                         }
                         else
                         {
-                            Console.WriteLine($"Format d'intervalle incorrect : {segment}");
+                            Console.WriteLine(languageManager.GetTranslation((("intervals_format_incorrect")) + $" {segment}");
                         }
                     }
                     else
@@ -293,7 +293,7 @@ namespace EasySave {
                         }
                         else
                         {
-                            Console.WriteLine($"Numéro de sauvegarde invalide : {segment}");
+                            Console.WriteLine(languageManager.GetTranslation(("backup_number_incorrect")) +$" {segment}");
                         }
                     }
                 }
@@ -308,11 +308,11 @@ namespace EasySave {
                 {
                     if (backupIndex >= 0 && backupIndex < manager.BackupJobs.Count)
                     {
-                        Console.WriteLine($"Exécution de la sauvegarde {backupIndex + 1}: {manager.BackupJobs[backupIndex].Name}");
+                        Console.WriteLine((languageManager.GetTranslation("execute_backup")) + $"{backupIndex + 1}: {manager.BackupJobs[backupIndex].Name}");
                         manager.BackupJobs[backupIndex].Execute(loggerStrategy);
                     }
                 }
-                Console.WriteLine("Exécution de toutes les sauvegardes terminée.");
+                Console.WriteLine((languageManager.GetTranslation("execute_backup")));
             }
 
             private void DisplayBackupState()
