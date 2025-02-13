@@ -7,7 +7,7 @@ partial class Program
     {
         // Initialisation des menus 
         string date = DateTime.Now.ToString("yyyy-MM-dd");
-        string filelog = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName, $"{date}.json");
+        string filelog = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).FullName, $"{date}.json");
         var manager = EasySaveApp.GetInstance();
         var loggerService = new LoggerService(filelog);
         var langageManager = new LanguageManager();

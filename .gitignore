@@ -399,3 +399,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /BackupLogger/obj
+/EasySaveV1/2025-02-11.json
