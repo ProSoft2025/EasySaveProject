@@ -107,13 +107,13 @@ namespace EasySave {
 
             private void LogSubMenu()
             {
-                Console.WriteLine("===== Menu Logs =====");
-                Console.WriteLine("1. Voir les logs journaliers");
-                Console.WriteLine("2. Voir l'état en temps réel");
-                Console.WriteLine("3. Retour au menu principal");
-                Console.WriteLine("4. Changer le format des logs");
+                Console.WriteLine(languageManager.GetTranslation(("menu_log")));
+                Console.WriteLine("1. " + languageManager.GetTranslation(("daily_logs")));
+                Console.WriteLine("2. " + languageManager.GetTranslation(("real_time")));
+                Console.WriteLine("3. " + languageManager.GetTranslation(("logs_format")));
+                Console.WriteLine("4. " + languageManager.GetTranslation(("press_any_key")));
                 Console.WriteLine("============================");
-                Console.Write("Votre choix : ");
+                Console.Write(languageManager.GetTranslation(("your_choice")));
 
                 ConsoleKeyInfo choixLog = Console.ReadKey();
                 Console.Clear();
@@ -122,23 +122,24 @@ namespace EasySave {
                 {
                     case '1':
                         // Implémentation pour afficher les logs journaliers
-                        Console.WriteLine("Affichage des logs journaliers");
+                        Console.WriteLine(languageManager.GetTranslation(("daily_logs2")));
                         loggerStrategy.DisplayLogFileContent();
                         break;
                     case '2':
                         // Implémentation pour afficher l'état en temps réel
-                        Console.WriteLine("Affichage de l'état en temps réel");
+                        Console.WriteLine(languageManager.GetTranslation(("real_time2")));
                         DisplayBackupState();
                         break;
                     case '3':
-                        // Retour au menu principal
-                        break;
-                    case '4':
                         Console.Clear();
                         SetLogFormat();
                         break;
+                    case '4':
+                        // Retour au menu principal
+                        break;
+                    
                     default:
-                        Console.WriteLine("Invalid choice, please try again.");
+                        Console.WriteLine(languageManager.GetTranslation(("invalid_choice")));
                         break;
                 }
             }
@@ -319,40 +320,40 @@ namespace EasySave {
                 StateEntry state = stateManager.GetState();
                 if (state == null)
                 {
-                    Console.WriteLine("No backup state available.");
+                    Console.WriteLine(languageManager.GetTranslation(("backup_state_availability")));
                     return;
                 }
 
-                Console.WriteLine($"Backup Task: {state.TaskName}");
-                Console.WriteLine($"Timestamp: {state.Timestamp}");
-                Console.WriteLine($"Status: {state.Status}");
-                Console.WriteLine($"Progress: {state.Progress}%");
-                Console.WriteLine($"Total Files: {state.TotalFiles}");
-                Console.WriteLine($"Remaining Files: {state.RemainingFiles}");
-                Console.WriteLine($"Total Size: {state.TotalSize} bytes");
-                Console.WriteLine($"Remaining Size: {state.RemainingSize} bytes");
-                Console.WriteLine($"Current Source: {state.CurrentSource}");
-                Console.WriteLine($"Current Target: {state.CurrentTarget}");
+                Console.WriteLine((languageManager.GetTranslation("backup_task")) + $"{state.TaskName}");
+                Console.WriteLine((languageManager.GetTranslation("time_stamp")) + $"{state.Timestamp}");
+                Console.WriteLine((languageManager.GetTranslation("status")) + $" {state.Status}");
+                Console.WriteLine((languageManager.GetTranslation("progress")) + $" {state.Progress}%");
+                Console.WriteLine((languageManager.GetTranslation("total_files")) + $" {state.TotalFiles}");
+                Console.WriteLine((languageManager.GetTranslation("remaining_files")) + $" {state.RemainingFiles}");
+                Console.WriteLine((languageManager.GetTranslation("total_size")) + $" {state.TotalSize} " + (languageManager.GetTranslation("bytes")));
+                Console.WriteLine((languageManager.GetTranslation("remaining_size")) + $" {state.RemainingSize} " + (languageManager.GetTranslation("bytes")));
+                Console.WriteLine((languageManager.GetTranslation("current_source")) + $" {state.CurrentSource}");
+                Console.WriteLine((languageManager.GetTranslation("current_target")) + $"{state.CurrentTarget}");
             }
 
             private void SetLogFormat()
             {
                 // Afficher le format actuel des logs
-                Console.WriteLine("===== Menu Format des logs =====");
-                Console.WriteLine("Le format actuel des logs est : " + configManager.LogFormat);
+                Console.WriteLine(languageManager.GetTranslation(("menu_logs_format")));
+                Console.WriteLine(languageManager.GetTranslation(("current_logs_format")) + configManager.LogFormat);
 
                 // Demander à l'utilisateur s'il veut modifier le format
-                Console.WriteLine("Voulez-vous modifier le format des logs ? (O/N)");
+                Console.WriteLine(languageManager.GetTranslation(("change_logs_format")));
                 string choice = Console.ReadLine()?.ToUpper();
 
-                if (choice == "O")
+                if (choice == "O" || choice =="Y")
                 {
                     string newFormat = "";
                     bool validFormat = false;
 
                     while (!validFormat)
                     {
-                        Console.WriteLine("Veuillez entrer le nouveau format des logs (XML ou JSON) : ");
+                        Console.WriteLine(languageManager.GetTranslation(("format_xml_json")));
                         newFormat = Console.ReadLine()?.ToUpper();
 
                         if (newFormat == "XML" || newFormat == "JSON")
@@ -361,18 +362,18 @@ namespace EasySave {
                         }
                         else
                         {
-                            Console.WriteLine("Format invalide. Veuillez entrer 'XML' ou 'JSON'.");
+                            Console.WriteLine(languageManager.GetTranslation(("incorrect_xml_json")));
                         }
                     }
 
                     // Mettre à jour le format des logs dans le ConfigManager
                     configManager.SetLogFormat(newFormat);
-                    Console.WriteLine("Le format des logs a été mis à jour en : " + newFormat);
+                    Console.WriteLine(languageManager.GetTranslation(("update_format")) + newFormat);
                 }
                 else
                 {
                     // Si l'utilisateur ne veut pas modifier, retourner au menu principal
-                    Console.WriteLine("Retour au menu principal...");
+                    Console.WriteLine(languageManager.GetTranslation(("press_any_key")));
                 }
             }
 
