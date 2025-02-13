@@ -1,6 +1,7 @@
 ﻿using EasySave;
 
 namespace EasySave
+namespace EasySaveV1
 {
     public class EasySaveApp
     {
