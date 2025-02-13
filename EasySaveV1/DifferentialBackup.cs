@@ -4,7 +4,7 @@ namespace EasySave
 {
     public class DifferentialBackup : IBackupStrategy
     {
-        public void ExecuteBackup(BackupJob jobBackup, LoggerService serviceLogger)
+        public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             Console.WriteLine("Début de la sauvegarde différentielle.");
             Console.WriteLine("Saisir le chemin de la dernière sauvegarde totale :");
@@ -36,8 +36,8 @@ namespace EasySave
                         Directory.CreateDirectory(Path.GetDirectoryName(differentialBackupFilePath));
                         File.Copy(sourceFilePath, differentialBackupFilePath, true);
 
-                        LogEntry EntreeLog = new LogEntry(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, 10);
-                        serviceLogger.GetBackupLogger().LogAction(EntreeLog);
+                        loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, 10);
+                        loggerStrategy.DisplayLogFileContent();
 
                         Console.WriteLine($"Copié : {sourceFilePath} vers {differentialBackupFilePath}");
                     }
@@ -50,7 +50,7 @@ namespace EasySave
             }
         }
 
-        public void Restore(BackupJob jobBackup, LoggerService serviceLogger)
+        public void Restore(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             Console.WriteLine("Début de la restauration de la sauvegarde :");
             Console.WriteLine("Saisir le chemin de la dernière sauvegarde totale :");
@@ -62,13 +62,12 @@ namespace EasySave
             {
                 var completeBackup = new CompleteBackup();
                 // Restaurer d'abord la dernière sauvegarde totale en utilisant la stratégie complète
-                completeBackup.Restore(tempBackupJob, serviceLogger);
+                completeBackup.Restore(tempBackupJob, loggerStrategy);
 
                 // Utiliser la méthode utilitaire pour copier les fichiers et sous-répertoires de la sauvegarde différentielle
                 FileManager.CopyDirectory(jobBackup.TargetDirectory, jobBackup.SourceDirectory);
 
-                LogEntry EntreeLog = new LogEntry(jobBackup.Name, jobBackup.TargetDirectory, jobBackup.SourceDirectory, new FileInfo(jobBackup.TargetDirectory).Length, 10);
-                serviceLogger.GetBackupLogger().LogAction(EntreeLog);
+                loggerStrategy.Update(jobBackup.Name, jobBackup.TargetDirectory, jobBackup.SourceDirectory, new FileInfo(jobBackup.TargetDirectory).Length, 10);
 
                 Console.WriteLine("Restauration des fichiers effectuée avec succès.");
             }
