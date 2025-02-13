@@ -196,8 +196,17 @@ namespace EasySaveV1 {
                         return;
                 }
 
-                manager.AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
-                Console.WriteLine(languageManager.GetTranslation("backup_added"));
+                var isErreur = manager.AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
+                if (isErreur == 0)
+                {
+                    Console.WriteLine(languageManager.GetTranslation("backup_added"));
+                }
+                else if (isErreur == 1)
+                {
+                    Console.WriteLine(languageManager.GetTranslation("Error_BackupAdd"));
+
+                }
+
             }
 
             private void RemoveBackupMenu()

@@ -27,15 +27,16 @@ namespace EasySaveV1
             }
             return _instance;
         }
-        public void AddBackup(BackupJob job)
+        public int AddBackup(BackupJob job)
         {
-            if (BackupJobs.Count < 5) {
-                BackupJobs.Add(job);
+            // Vérification nom unique
+            foreach (var backup in BackupJobs) {
+                if (backup.Name == job.Name) {
+                    return 1;
+                }
             }
-            else
-            {
-                Console.Error.WriteLine("Il y a déjà 5 sauvegardes, veuillez en supprimez une");
-            }
+            BackupJobs.Add(job);
+            return 0;
         }
         public void RemoveBackup(string name)
         {
