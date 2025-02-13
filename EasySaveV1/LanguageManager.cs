@@ -36,7 +36,10 @@ public class LanguageManager
                 { "enter_source_directory", "Enter the source directory:" },
                 { "enter_target_directory", "Enter the target directory:" },
                 { "choose_backup_type", "Choose backup type (1=Complete, 2=Differential):" },
-                { "enter_backup_name_to_remove", "Enter the backup name to remove :"}
+                { "enter_backup_name_to_remove", "Enter the backup name to remove :"},
+                { "Error_BackupAdd", "Error : The Backup Name already exists."}
+
+            
             }
         },
         { "fr", new Dictionary<string, string>
@@ -68,7 +71,9 @@ public class LanguageManager
                 { "enter_source_directory", "Entrez le répertoire source :" },
                 { "enter_target_directory", "Entrez le répertoire de destination :" },
                 { "choose_backup_type", "Choisissez le type de sauvegarde (1=Complète, 2=Differentielles) :" },
-                { "enter_backup_name_to_remove", "Entrez le nom de la sauvegarde à supprimer :"}
+                { "enter_backup_name_to_remove", "Entrez le nom de la sauvegarde à supprimer :"},
+                { "Error_BackupAdd", "Erreur : Ce nom de sauvegarde existe déjà."}
+
             }
         }
     };
