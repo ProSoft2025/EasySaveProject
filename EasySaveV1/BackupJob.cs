@@ -23,7 +23,7 @@ namespace EasySave
         }
 
         // Executes the backup job and updates state after each file copy
-        public void Execute(LoggerService logger)
+        public void Execute(ILoggerStrategy logger)
         {
 
             BackupStrategy.ExecuteBackup(this, logger);
@@ -71,7 +71,7 @@ namespace EasySave
             StateManager.UpdateState(new StateEntry { TaskName = Name, Timestamp = DateTime.Now, Status = "Completed" });
         }
         
-        public void Restore(LoggerService logger) 
+        public void Restore(ILoggerStrategy logger) 
         { 
             BackupStrategy.Restore(this, logger);
         }

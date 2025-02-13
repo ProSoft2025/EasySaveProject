@@ -36,17 +36,19 @@ namespace EasySave {
         {
             private readonly UserInterface ui;
             private readonly EasySaveApp manager;
-            private readonly LoggerService loggerService;
+            private readonly IConfigManager configManager;
+            private readonly ILoggerStrategy loggerStrategy;
             private readonly BackupJobFactory backupJobFactory;
             private readonly LanguageManager languageManager;
 
             private readonly StateManager stateManager; // Add this line
 
-            public MenuManager(UserInterface ui, EasySaveApp manager, LoggerService loggerService, LanguageManager languageManager,  StateManager stateManager)
+            public MenuManager(UserInterface ui, EasySaveApp manager, IConfigManager configManager, ILoggerStrategy loggerStrategy , LanguageManager languageManager,  StateManager stateManager)
             {
                 this.ui = ui;
                 this.manager = manager;
-                this.loggerService = loggerService;
+                this.configManager = configManager;
+                this.loggerStrategy = loggerStrategy;
                 this.backupJobFactory = new BackupJobFactory();
                 this.languageManager = languageManager; // Passer languageManager
                 this.stateManager = stateManager; // Initialize stateManager
@@ -109,6 +111,7 @@ namespace EasySave {
                 Console.WriteLine("1. Voir les logs journaliers");
                 Console.WriteLine("2. Voir l'état en temps réel");
                 Console.WriteLine("3. Retour au menu principal");
+                Console.WriteLine("4. Changer le format des logs");
                 Console.WriteLine("============================");
                 Console.Write("Votre choix : ");
 
@@ -120,7 +123,7 @@ namespace EasySave {
                     case '1':
                         // Implémentation pour afficher les logs journaliers
                         Console.WriteLine("Affichage des logs journaliers");
-                        loggerService.GetBackupLogger().DisplayLogFileContent();
+                        loggerStrategy.DisplayLogFileContent();
                         break;
                     case '2':
                         // Implémentation pour afficher l'état en temps réel
@@ -129,6 +132,10 @@ namespace EasySave {
                         break;
                     case '3':
                         // Retour au menu principal
+                        break;
+                    case '4':
+                        Console.Clear();
+                        SetLogFormat();
                         break;
                     default:
                         Console.WriteLine("Invalid choice, please try again.");
@@ -228,7 +235,7 @@ namespace EasySave {
                         string restoreDirectory = manager.BackupJobs[i].SourceDirectory;
 
                         // Appel de la méthode de restauration via l'interface
-                        manager.BackupJobs[i].Restore(loggerService);
+                        manager.BackupJobs[i].Restore(loggerStrategy);
                         found = true;
                         break;
                     }
@@ -301,7 +308,7 @@ namespace EasySave {
                     if (backupIndex >= 0 && backupIndex < manager.BackupJobs.Count)
                     {
                         Console.WriteLine($"Exécution de la sauvegarde {backupIndex + 1}: {manager.BackupJobs[backupIndex].Name}");
-                        manager.BackupJobs[backupIndex].Execute(loggerService);
+                        manager.BackupJobs[backupIndex].Execute(loggerStrategy);
                     }
                 }
                 Console.WriteLine("Exécution de toutes les sauvegardes terminée.");
@@ -327,6 +334,48 @@ namespace EasySave {
                 Console.WriteLine($"Current Source: {state.CurrentSource}");
                 Console.WriteLine($"Current Target: {state.CurrentTarget}");
             }
+
+            private void SetLogFormat()
+            {
+                // Afficher le format actuel des logs
+                Console.WriteLine("===== Menu Format des logs =====");
+                Console.WriteLine("Le format actuel des logs est : " + configManager.LogFormat);
+
+                // Demander à l'utilisateur s'il veut modifier le format
+                Console.WriteLine("Voulez-vous modifier le format des logs ? (O/N)");
+                string choice = Console.ReadLine()?.ToUpper();
+
+                if (choice == "O")
+                {
+                    string newFormat = "";
+                    bool validFormat = false;
+
+                    while (!validFormat)
+                    {
+                        Console.WriteLine("Veuillez entrer le nouveau format des logs (XML ou JSON) : ");
+                        newFormat = Console.ReadLine()?.ToUpper();
+
+                        if (newFormat == "XML" || newFormat == "JSON")
+                        {
+                            validFormat = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Format invalide. Veuillez entrer 'XML' ou 'JSON'.");
+                        }
+                    }
+
+                    // Mettre à jour le format des logs dans le ConfigManager
+                    configManager.SetLogFormat(newFormat);
+                    Console.WriteLine("Le format des logs a été mis à jour en : " + newFormat);
+                }
+                else
+                {
+                    // Si l'utilisateur ne veut pas modifier, retourner au menu principal
+                    Console.WriteLine("Retour au menu principal...");
+                }
+            }
+
         }
     }
 

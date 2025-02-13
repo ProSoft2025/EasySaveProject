@@ -4,12 +4,12 @@ namespace EasySave
 {
     public class CompleteBackup : IBackupStrategy
     {
-        public void ExecuteBackup(BackupJob jobBackup, LoggerService serviceLogger)
+        public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             Console.WriteLine("Début de la sauvegarde totale.");
 
             try
-            {
+            {   
                 var sourceFiles = Directory.GetFiles(jobBackup.SourceDirectory, "*", SearchOption.AllDirectories)
                                             .Select(f => f.Substring(jobBackup.SourceDirectory.Length + 1))
                                             .ToList();
@@ -22,8 +22,8 @@ namespace EasySave
                     Directory.CreateDirectory(Path.GetDirectoryName(targetFilePath));
                     File.Copy(sourceFilePath, targetFilePath, true);
 
-                    LogEntry EntreeLog = new LogEntry(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, 10);
-                    serviceLogger.GetBackupLogger().LogAction(EntreeLog);
+                    loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, 10);
+                    loggerStrategy.DisplayLogFileContent();
 
                     Console.WriteLine($"Copié : {sourceFilePath} vers {targetFilePath}");
                 }
@@ -35,7 +35,7 @@ namespace EasySave
             }
         }
 
-        public void Restore(BackupJob jobBackup, LoggerService serviceLogger)
+        public void Restore(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             try
             {
