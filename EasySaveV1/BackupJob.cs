@@ -10,6 +10,7 @@ namespace EasySave
         public string TargetDirectory { get; set; }
         public StateManager StateManager { get; set; }
         public IBackupStrategy BackupStrategy { get; set; }
+        public List<string> extensionsToEncrypt { get; set; } = new List<string>();
 
         public BackupJob(string name, string sourceDirectory, string targetDirectory, IBackupStrategy backupStrategy, StateManager stateManager)
         {
@@ -78,6 +79,10 @@ namespace EasySave
             string strategyType = BackupStrategy is CompleteBackup ? "Complete" :
                               BackupStrategy is DifferentialBackup ? "Differentielle" : "N/A";
             Console.WriteLine("Name:" + Name + "\nSource:" + SourceDirectory + "\nDestination:" + TargetDirectory + "\nStrategy:" + strategyType);
+        }
+        public void updateExtensionsToEncrypt(List<string> extensions)
+        {
+            extensionsToEncrypt = extensions;
         }
     }
 }

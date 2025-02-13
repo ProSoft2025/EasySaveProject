@@ -12,7 +12,7 @@ namespace BackupLogger
         {
             this.configManager = configManager;
         }
-        public override void Update(string taskName, string sourcePath, string targetPath, long fileSize, int transferTime)
+        public override void Update(string taskName, string sourcePath, string targetPath, long fileSize, long transferTime, int EncryptionTime)
         {
             string logFileName = Path.Combine(configManager.LogDirectory, $"{DateTime.Now:yyyy-MM-dd}.json");
 
@@ -23,6 +23,7 @@ namespace BackupLogger
                       $"  \"TargetPath\": \"{targetPath}\",\n" +
                       $"  \"FileSize\": {fileSize},\n" +
                       $"  \"TransferTime\": {transferTime},\n" +
+                      $"  \"EncryptionTIme\": {EncryptionTime},\n" +
                       "}\n";
 
             using (StreamWriter writer = new StreamWriter(logFileName, append: true))

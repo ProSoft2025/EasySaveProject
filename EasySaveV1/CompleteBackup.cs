@@ -1,4 +1,6 @@
 ﻿using BackupLogger;
+using CryptoSoft;
+using System.Diagnostics;
 
 namespace EasySave
 {
@@ -9,7 +11,7 @@ namespace EasySave
             Console.WriteLine("Début de la sauvegarde totale.");
 
             try
-            {   
+            {
                 var sourceFiles = Directory.GetFiles(jobBackup.SourceDirectory, "*", SearchOption.AllDirectories)
                                             .Select(f => f.Substring(jobBackup.SourceDirectory.Length + 1))
                                             .ToList();
@@ -20,13 +22,26 @@ namespace EasySave
                     var targetFilePath = Path.Combine(jobBackup.TargetDirectory, file);
 
                     Directory.CreateDirectory(Path.GetDirectoryName(targetFilePath));
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
                     File.Copy(sourceFilePath, targetFilePath, true);
+                    stopwatch.Stop();
 
-                    loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, 10);
-                    loggerStrategy.DisplayLogFileContent();
-
-                    Console.WriteLine($"Copié : {sourceFilePath} vers {targetFilePath}");
+                    var fileExtension = Path.GetExtension(sourceFilePath);
+                    if (jobBackup.extensionsToEncrypt.Contains(fileExtension))
+                    {
+                        var fileManager = new CryptoSoft.FileManager(targetFilePath, "EasySaveCESICESICESICESI");
+                        int ElapsedTime = fileManager.TransformFile();
+                        loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
+                        Console.WriteLine($"{targetFilePath} a été chiffré");
+                    }
+                    else
+                    {
+                        loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, 0);
+                        Console.WriteLine($"Copié : {sourceFilePath} vers {targetFilePath}");
+                    }
                 }
+                loggerStrategy.DisplayLogFileContent();
                 Console.WriteLine("La sauvegarde totale est terminée.");
             }
             catch (Exception ex)

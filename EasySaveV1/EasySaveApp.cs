@@ -9,6 +9,7 @@ namespace EasySave
 
         private static readonly object _lock = new object();
         public List<BackupJob> BackupJobs { get; set; } = new List<BackupJob>();
+        public List<string> ExtensionToEncrypt { get; set; } = new List<string>();
 
         private EasySaveApp() { }
 
@@ -49,6 +50,16 @@ namespace EasySave
             {
                 Console.WriteLine($"Aucune sauvegarde trouvée avec le nom '{name}'.");
             }
+        }
+        public void AddExtension(string extension)
+        {
+            ExtensionToEncrypt.Add(extension);
+        }
+        public void RemoveExtension(string extension)
+        {
+            if (ExtensionToEncrypt.Contains(extension))
+                ExtensionToEncrypt.Remove(extension);
+            else throw new Exception("Extension not found");
         }
     }
 }

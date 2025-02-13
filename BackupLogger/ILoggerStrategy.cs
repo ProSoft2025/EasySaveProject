@@ -14,9 +14,10 @@ namespace BackupLogger
         public string SourcePath { get; set; } = String.Empty;
         public string TargetPath { get; set; } = String.Empty;
         public long FileSize { get; set; } = 0;
-        public int TransferTime { get; set; } = 0;
+        public long TransferTime { get; set; } = 0;
+        public int EncryptionTime { get; set; } = 0;
 
-        public abstract void Update(string taskName, string sourcePath, string targetPath, long fileSize, int transferTime);
+        public abstract void Update(string taskName, string sourcePath, string targetPath, long fileSize, long transferTime, int EncryptionTIme);
 
         public abstract void DisplayLogFileContent();
     }

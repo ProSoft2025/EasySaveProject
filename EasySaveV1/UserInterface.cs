@@ -23,7 +23,8 @@ namespace EasySave {
             Console.WriteLine("5. " + languageManager.GetTranslation("execute_backups"));
             Console.WriteLine("6. " + languageManager.GetTranslation("view_logs"));
             Console.WriteLine("7. " + languageManager.GetTranslation("change_language"));
-            Console.WriteLine("8. " + languageManager.GetTranslation("exit"));
+            Console.WriteLine("8. " + languageManager.GetTranslation("Chiffrement"));
+            Console.WriteLine("9. " + languageManager.GetTranslation("exit"));
             Console.Write(languageManager.GetTranslation("your_choice") + " : ");
         }
 
@@ -88,6 +89,9 @@ namespace EasySave {
                             ChangeLanguageMenu();
                             break;
                         case '8':
+                            ChiffrementMenu();
+                            break;
+                        case '9':
                             exit = true;
                             Console.WriteLine(languageManager.GetTranslation("exit_message"));
                             break;
@@ -375,7 +379,75 @@ namespace EasySave {
                     Console.WriteLine("Retour au menu principal...");
                 }
             }
+            private void ChiffrementMenu() {
 
+                Console.WriteLine("===== Menu Chiffrement =====");
+                Console.WriteLine("Liste des extensions actives :" +string.Join("; ", manager.ExtensionToEncrypt));
+                Console.WriteLine("1. Ajouter Extension");
+                Console.WriteLine("2. Supprimer Extension");
+                Console.WriteLine("3. Retour au menu principal");
+                Console.WriteLine("============================");
+                Console.Write("Votre choix : ");
+
+                ConsoleKeyInfo choixLog = Console.ReadKey();
+                Console.Clear();
+
+                switch (choixLog.KeyChar)
+                {
+                    case '1':
+                        // Implémentation pour afficher les logs journaliers
+                        Console.WriteLine("Saisir l'extension a ajouter (Ex: .txt) :");
+                        var  ChoixExtension = Console.ReadLine();
+                        if (string.IsNullOrEmpty(ChoixExtension))
+                        {
+                            Console.WriteLine("Extension invalide");
+                            break;
+                        }
+                        else if (ChoixExtension[0] != '.')
+                        {
+                            Console.WriteLine("L'extension doit commencer par un point");
+                            break;
+                        }
+                        else if (manager.ExtensionToEncrypt.Contains(ChoixExtension))
+                        {
+                            Console.WriteLine("Extension déjà présente");
+                            break;
+                        }
+                        else
+                        {
+                            manager.AddExtension(ChoixExtension);
+                            foreach (BackupJob job in manager.BackupJobs)
+                            {
+                                job.updateExtensionsToEncrypt(manager.ExtensionToEncrypt);
+                            }
+                            break;
+                        }
+                    case '2':
+                        // Implémentation pour afficher l'état en temps réel
+                        Console.WriteLine("Saisir l'extension a supprimer :");
+                        var choixExtension = Console.ReadLine();
+                        try
+                        {
+                            manager.RemoveExtension(choixExtension);
+                            foreach (BackupJob job in manager.BackupJobs)
+                            {
+                                job.updateExtensionsToEncrypt(manager.ExtensionToEncrypt);
+                            }
+                            break;
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Extension invalide");
+                            break;
+                        }
+                    case '3':
+                        // Retour au menu principal
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
+                }
+            }
         }
     }
 
