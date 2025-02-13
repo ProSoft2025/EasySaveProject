@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="EasySaveV2.PageMenu">
+
+	<DockPanel>
+		<!-- Sidebar -->
+		<ListBox DockPanel.Dock="Left" Width="200" Background="#333" Foreground="White" SelectionChanged="OnMenuSelectionChanged">
+			<ListBoxItem Tag="Home">🏠 Home</ListBoxItem>
+			<ListBoxItem Tag="ViewBackup">📁 View Backup</ListBoxItem>
+			<ListBoxItem Tag="AddBackup">⚙️  Add a backup</ListBoxItem>
+			<ListBoxItem Tag="RemoveBackup">⚙️ Delete a backup</ListBoxItem>
+			<ListBoxItem Tag="RestoreBackup">⚙️ Restore a backup</ListBoxItem>
+			<ListBoxItem Tag="ExecuteBackup">⚙️ Execute backups</ListBoxItem>
+			<ListBoxItem Tag="ViewLogs">⚙️ View logs</ListBoxItem>
+			
+		</ListBox>
+
+		<!-- Contenu principal -->
+		<ContentControl Name="ContentArea">
+			
+		</ContentControl>
+	</DockPanel>
+	
+	
+	
+	
+	
+	
+</UserControl>

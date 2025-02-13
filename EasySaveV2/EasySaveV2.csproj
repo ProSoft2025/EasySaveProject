@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
-    <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="Assets\**" />	  
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +24,13 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.1" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25103.5738" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EasySaveV1\EasySaveV1.csproj" />
+  </ItemGroup>
+	
 
 	
 </Project>

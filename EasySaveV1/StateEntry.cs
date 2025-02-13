@@ -2,7 +2,7 @@
  * Represents the real-time state of a backup job
  * Represents a snapshot of a backup job's state */
 
-namespace EasySave
+namespace EasySaveV1
 {
     public class StateEntry
     {

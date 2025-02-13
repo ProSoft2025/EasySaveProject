@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BackupLogger;
 
-namespace EasySave {
+namespace EasySaveV1 {
     public class UserInterface
     {
     private readonly LanguageManager languageManager;

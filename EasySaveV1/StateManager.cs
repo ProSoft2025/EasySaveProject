@@ -2,7 +2,7 @@
 
 /* Summary */
 
-namespace EasySave
+namespace EasySaveV1
 {
     // Manages the state file and updates backup progress
     public class StateManager

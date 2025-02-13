@@ -1,6 +1,6 @@
-﻿using EasySave;
+﻿using System;
 
-namespace EasySave
+namespace EasySaveV1
 {
     public class BackupJobFactory
     {

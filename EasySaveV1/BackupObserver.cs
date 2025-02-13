@@ -1,4 +1,4 @@
-﻿namespace EasySave
+﻿namespace EasySaveV1
 {
     public class BackupObserver
     {

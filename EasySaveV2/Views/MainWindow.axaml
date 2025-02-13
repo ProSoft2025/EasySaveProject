@@ -13,68 +13,91 @@
 		<vm:MainWindowViewModel/>
 	</Design.DataContext>
 
-	<Grid Background="#C0C0C0">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="75"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="75"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
+	<Grid>
+		<ContentControl x:Name="MainContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+			<!-- Contenu par défaut -->
+			<Grid Background="#333">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="75"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="75"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
 
-		<!-- Title EasySave -->
-		<TextBlock Text="EasySave" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                   FontSize="36" FontWeight="Bold" FontStyle="Italic"
-                   Margin="0,20,0,0">
-			<TextBlock.Foreground>
-				<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-					<GradientStop Offset="0" Color="#0077BE"/>
-					<GradientStop Offset="1" Color="#003366"/>
-				</LinearGradientBrush>
-			</TextBlock.Foreground>
-			<TextBlock.Styles>
-				<Style Selector="TextBlock">
-					<Setter Property="Effect">
-						<DropShadowEffect BlurRadius="8" Color="Black" Opacity="0.7" OffsetX="4" OffsetY="4"/>
-					</Setter>
-				</Style>
-			</TextBlock.Styles>
-		</TextBlock>
+				<!-- Title EasySave -->
+				<TextBlock Text="EasySave" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           FontSize="36" FontWeight="Bold" FontStyle="Italic"
+                           Margin="0,20,0,0">
+					<TextBlock.Foreground>
+						<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+							<GradientStop Offset="0" Color="#0077BE"/>
+							<GradientStop Offset="1" Color="white"/>
+						</LinearGradientBrush>
+					</TextBlock.Foreground>
+					<TextBlock.Styles>
+						<Style Selector="TextBlock">
+							<Setter Property="Effect">
+								<DropShadowEffect BlurRadius="8" Color="Black" Opacity="0.7" OffsetX="4" OffsetY="4"/>
+							</Setter>
+						</Style>
+					</TextBlock.Styles>
+				</TextBlock>
 
-		<!-- Logo -->
-		<Image Source="/Assets/logo.ico" Grid.Row="0" Width="100" Height="100"
-               HorizontalAlignment="Left" VerticalAlignment="Top"/>
+				<!-- Logo -->
+				<Image Source="/Assets/logo.ico" Grid.Row="0" Width="100" Height="100"
+                       HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-		<!-- Start Button (centered horizontally) -->
-		<Button Content="Start" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                HorizontalAlignment="Center" VerticalAlignment="Center"
-                Width="200" Height="50"
-                Background="#D3D3D3" Foreground="Black"
-                BorderThickness="2" BorderBrush="Black"
-                FontSize="18" FontWeight="Bold"
-                CornerRadius="10"/>
+				<!-- Start Button -->
+				<Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        CornerRadius="10" BorderBrush="White" BorderThickness="2">
+					<Border.Effect>
+						<DropShadowEffect BlurRadius="10" Color="Black" Opacity="0.5" OffsetX="3" OffsetY="3"/>
+					</Border.Effect>
+					<Button Width="200" Height="50"
+                            Background="#555" Foreground="White"
+                            FontSize="36" FontWeight="Bold" FontStyle="Italic"
+                            Click="OnStartButtonClick">
+						<TextBlock Text="Start" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</Button>
+				</Border>
 
-		<!-- Language Selection -->
-		<StackPanel Grid.Row="2" Grid.Column="0"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom"
-                    Margin="10">
-			<Button Width="75" Height="40" Background="Transparent" BorderThickness="0">
-				<Image Source="/Assets/english.png" Stretch="Uniform"/>
-			</Button>
+				<!-- Language Selection -->
+				<StackPanel Grid.Row="2" Grid.Column="0"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Margin="10">
+					<Button Width="75" Background="Transparent" BorderThickness="0">
+						<Image Source="/Assets/english.png" Stretch="Uniform"/>
+					</Button>
 
-			<!-- Separator -->
-			<Rectangle Width="2" Height="30" Fill="Black" Margin="5,0"/>
+					<!-- Separator -->
+					<Rectangle Width="2" Height="30" Fill="Black" Margin="5,0"/>
 
-			<Button Width="75" Height="40" Background="Transparent" BorderThickness="0">
-				<Image Source="/Assets/french.png" Stretch="Uniform"/>
-			</Button>
-		</StackPanel>
+					<Button Width="75" Background="Transparent" BorderThickness="0">
+						<Image Source="/Assets/franceflag.png" Stretch="Uniform"/>
+					</Button>
+				</StackPanel>
+				
+				<TextBlock Text="Version 2.0"
+                           Grid.Row="2" Grid.Column="2"
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                           FontSize="12"  FontStyle="Italic" Foreground="White"/>
 
+				
+				<TextBlock Text="EasySave 2025 ALL rights reserved"
+                           Grid.Row="2" Grid.Column="1"
+                           HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                           FontSize="12" Foreground="White"
+                           />
+				
+			</Grid>
+		</ContentControl>
 	</Grid>
 </Window>

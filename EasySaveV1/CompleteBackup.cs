@@ -1,6 +1,6 @@
 ﻿using BackupLogger;
 
-namespace EasySave
+namespace EasySaveV1
 {
     public class CompleteBackup : IBackupStrategy
     {

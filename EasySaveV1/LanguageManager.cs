@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class LanguageManager
+namespace EasySaveV1
 {
-    private string currentLanguage = "en"; // Langue par défaut
 
-    private Dictionary<string, Dictionary<string, string>> translations = new Dictionary<string, Dictionary<string, string>>
+    public class LanguageManager
+    {
+        private string currentLanguage = "en"; // Langue par défaut
+
+        private Dictionary<string, Dictionary<string, string>> translations = new Dictionary<string, Dictionary<string, string>>
     {
         { "en", new Dictionary<string, string>
             {
@@ -73,21 +76,22 @@ public class LanguageManager
         }
     };
 
-    public string GetTranslation(string key)
-    {
-        return translations[currentLanguage].GetValueOrDefault(key, key); // Retourne la traduction ou la clé si elle est absente
-    }
-
-    public void SetLanguage(string language)
-    {
-        if (translations.ContainsKey(language))
+        public string GetTranslation(string key)
         {
-            currentLanguage = language;
-            Console.WriteLine(GetTranslation("language_selected"));
+            return translations[currentLanguage].GetValueOrDefault(key, key); // Retourne la traduction ou la clé si elle est absente
         }
-        else
+
+        public void SetLanguage(string language)
         {
-            Console.WriteLine(GetTranslation("invalid_choice"));
+            if (translations.ContainsKey(language))
+            {
+                currentLanguage = language;
+                Console.WriteLine(GetTranslation("language_selected"));
+            }
+            else
+            {
+                Console.WriteLine(GetTranslation("invalid_choice"));
+            }
         }
     }
 }
