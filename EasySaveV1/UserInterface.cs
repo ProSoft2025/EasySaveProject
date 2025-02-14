@@ -282,7 +282,7 @@ namespace EasySave {
                         }
                         else
                         {
-                            Console.WriteLine(languageManager.GetTranslation((("intervals_format_incorrect")) + $" {segment}");
+                            Console.WriteLine(languageManager.GetTranslation((("intervals_format_incorrect")) + $" {segment}"));
                         }
                     }
                     else
@@ -312,7 +312,7 @@ namespace EasySave {
                         manager.BackupJobs[backupIndex].Execute(loggerStrategy);
                     }
                 }
-                Console.WriteLine((languageManager.GetTranslation("execute_backup")));
+                Console.WriteLine((languageManager.GetTranslation("execute_backup_finished")));
             }
 
             private void DisplayBackupState()
