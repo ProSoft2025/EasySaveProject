@@ -13,7 +13,7 @@ namespace EasySave
 
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
-            Console.WriteLine((languageManager.GetTranslation("start_complete_backup")));
+            Console.WriteLine(languageManager.GetTranslation("start_complete_backup"));
 
             try
             {
@@ -32,13 +32,12 @@ namespace EasySave
                     loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, 10);
                     loggerStrategy.DisplayLogFileContent();
 
-                    Console.WriteLine(languageManager.GetTranslation(("copied")) + $" {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{targetFilePath}");
-                }
+                    Console.WriteLine(languageManager.GetTranslation("copied") + $" {sourceFilePath}" + languageManager.GetTranslation("to") + $"{targetFilePath}");                }
                 Console.WriteLine(languageManager.GetTranslation(("complete_backup_finished")));
             }
             catch (Exception ex)
             {
-                Console.WriteLine(languageManager.GetTranslation(("complete_backup_error")) + $"{ex.Message}");
+                Console.WriteLine(languageManager.GetTranslation("complete_backup_error") + $"{ex.Message}");
             }
         }
 
@@ -55,11 +54,11 @@ namespace EasySave
                 // Utiliser la méthode utilitaire pour copier les fichiers et sous-répertoires
                 FileManager.CopyDirectory(jobBackup.TargetDirectory, jobBackup.SourceDirectory);
 
-                Console.WriteLine(languageManager.GetTranslation(("restore_success")));
+                Console.WriteLine(languageManager.GetTranslation("restore_success"));
             }
             catch (Exception ex)
             {
-                Console.WriteLine(languageManager.GetTranslation(("restore_error")) + $"{ex.Message}");
+                Console.WriteLine(languageManager.GetTranslation("restore_error") + $"{ex.Message}");
             }
         }
     }

@@ -4,6 +4,14 @@ namespace EasySave
 {
     public class EasySaveApp
     {
+
+        private LanguageManager languageManager;
+
+        public EasySaveApp(LanguageManager languageManager)
+        {
+            this.languageManager = languageManager;
+        }
+
         // Déclaration des variables
         private static EasySaveApp? _instance;
 
@@ -34,7 +42,7 @@ namespace EasySave
             }
             else
             {
-                Console.Error.WriteLine("Il y a déjà 5 sauvegardes, veuillez en supprimez une");
+                Console.Error.WriteLine(languageManager.GetTranslation(("5_backup_rule")));
             }
         }
         public void RemoveBackup(string name)
@@ -43,11 +51,11 @@ namespace EasySave
             if (job != null)
             {
                 BackupJobs.Remove(job);
-                Console.WriteLine($"Sauvegarde '{name}' supprimée avec succès.");
+                Console.WriteLine(languageManager.GetTranslation("save") + $"'{name}'" + languageManager.GetTranslation("successfull_delete"));
             }
             else
             {
-                Console.WriteLine($"Aucune sauvegarde trouvée avec le nom '{name}'.");
+                Console.WriteLine(languageManager.GetTranslation("no_backup_found_name") + $"'{name}'.");
             }
         }
     }

@@ -74,7 +74,7 @@ public class LanguageManager
                 { "invalid_input", "Input is empty or incorrect." },
                 { "backup_number_execute", "Enter the Backup number to execute :" },
                 { "1-3", "Exemple : '1-3' -> Execute the backups 1,2,3" },
-                { "1, 3 and 4", "Execute the backups 1, 3 and 4" },
+                { "1, 2 and 3", "Exemple : '1-3;5' -> Execute the backups 1, 2, 3 and 5" },
                 { "backup_name_incorrect", "Backup name incorrect." },
                 { "backup_name_restore", "Enter backup name to restore : " },
                 { "incorrect_choice_try_again", "Incorrect choice, please try again" },
@@ -84,7 +84,16 @@ public class LanguageManager
                 { "complete_backup_finished", "The complete backup is finished." },
                 { "complete_backup_error", "Error during the complete backup :" },
                 { "restore_success", "Restoration of the files successful." },
-                { "restore_error", "An error has occurrend during the restoration of the files :" }
+                { "restore_error", "An error has occurrend during the restoration of the files :" },
+                { "5_backup_rule", "There is already 5 backups, please delete at least one" },
+                { "no_backup_found_name", "No backup found with the name" },
+                { "save", " Backup" },
+                { "successfull_delete", "successfully deleted." },
+                { "start_diff_backup", "Start of the differential backup." },
+                { "input_complete_backup_path", "Input the path of the last complete backup :" },
+                { "diff_backup_finished", "The differential backup is finished" },
+                { "error_diff_backup", "An error has occured during the differential backup :" },
+                { "start_backup_restore", "Start the restore of the backup :" }
 
 
             }
@@ -153,7 +162,7 @@ public class LanguageManager
                 { "invalid_input", "L'entrée est vide ou non valide." },
                 { "backup_number_execute", "Saisir le numéro de Backup à exécuter :" },
                 { "1-3", "Exemple : '1-3' -> Exécuter les sauvegardes 1,2,3" },
-                { "1, 2 and 3", "Exécute les sauvegardes 1, 3 et 4" },
+                { "1, 2 and 3", "Exemple : '1-3;5' -> Exécute les sauvegardes 1, 2, 3 et 5" },
                 { "backup_name_incorrect", "Nom de sauvegarde invalide." },
                 { "backup_name_restore", "Entrez le nom de la sauvegarde à restaurer : " },
                 { "incorrect_choice_try_again", "Choix Incorrect, veuillez recommencer" },
@@ -163,7 +172,17 @@ public class LanguageManager
                 { "complete_backup_finished", "La sauvegarde totale est terminée." },
                 { "complete_backup_error", "Erreur lors de la sauvegarde totale :" },
                 { "restore_success", "Restauration des fichiers effectuée avec succès." },
-                { "restore_error", "Une erreur s'est produite lors de la restauration des fichiers :" }
+                { "restore_error", "Une erreur s'est produite lors de la restauration des fichiers :" },
+                { "5_backup_rule", "Il y a déjà 5 sauvegardes, veuillez en supprimez une" },
+                { "no_backup_found_name", "Aucune sauvegarde trouvée avec le nom" },
+                { "save", "Sauvegarde" },
+                { "successfull_delete", "supprimée avec succès." },
+                { "start_diff_backup", "Début de la sauvegarde différentielle." },
+                { "input_complete_backup_path", "Saisir le chemin de la dernière sauvegarde totale :" },
+                { "diff_backup_finished", "La sauvegarde différentielle est terminée" },
+                { "error_diff_backup", "Erreur lors de la sauvegarde différentielle :" },
+                { "start_backup_restore", "Début de la restauration de la sauvegarde :" }
+
 
 
 

@@ -76,7 +76,7 @@ namespace EasySave
         public void displayAttributs()
         {
             string strategyType = BackupStrategy is CompleteBackup ? "Complete" :
-                              BackupStrategy is DifferentialBackup ? "Differentielle" : "N/A";
+                              BackupStrategy is DifferentialBackup ? "Differential" : "N/A";
             Console.WriteLine("Name:" + Name + "\nSource:" + SourceDirectory + "\nDestination:" + TargetDirectory + "\nStrategy:" + strategyType);
         }
     }

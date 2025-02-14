@@ -12,8 +12,8 @@ namespace EasySave
         }
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
-            Console.WriteLine("Début de la sauvegarde différentielle.");
-            Console.WriteLine("Saisir le chemin de la dernière sauvegarde totale :");
+            Console.WriteLine(languageManager.GetTranslation("start_diff_backup"));
+            Console.WriteLine(languageManager.GetTranslation("input_complete_backup_path"));
             string lastFullBackupDir = Console.ReadLine();
 
             if (!Directory.Exists(jobBackup.TargetDirectory))
@@ -45,21 +45,21 @@ namespace EasySave
                         loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, 10);
                         loggerStrategy.DisplayLogFileContent();
 
-                        Console.WriteLine($"Copié : {sourceFilePath} vers {differentialBackupFilePath}");
+                        Console.WriteLine(languageManager.GetTranslation("copied") + $" : {sourceFilePath}" + languageManager.GetTranslation("to") + $"{differentialBackupFilePath}");
                     }
                 }
-                Console.WriteLine("La sauvegarde différentielle est terminée");
+                Console.WriteLine(languageManager.GetTranslation("diff_backup_finished"));
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erreur lors de la sauvegarde différentielle : {ex.Message}");
+                Console.WriteLine(languageManager.GetTranslation("error_diff_backup") + $"{ex.Message}");
             }
         }
 
         public void Restore(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
-            Console.WriteLine("Début de la restauration de la sauvegarde :");
-            Console.WriteLine("Saisir le chemin de la dernière sauvegarde totale :");
+            Console.WriteLine(languageManager.GetTranslation("start_backup_restore"));
+            Console.WriteLine(languageManager.GetTranslation("input_complete_backup_path"));
             string lastFullBackupDir = Console.ReadLine();
 
             var tempBackupJob = new BackupJob(jobBackup.Name, lastFullBackupDir, jobBackup.SourceDirectory, jobBackup.BackupStrategy, jobBackup.StateManager);
@@ -75,11 +75,11 @@ namespace EasySave
 
                 loggerStrategy.Update(jobBackup.Name, jobBackup.TargetDirectory, jobBackup.SourceDirectory, new FileInfo(jobBackup.TargetDirectory).Length, 10);
 
-                Console.WriteLine("Restauration des fichiers effectuée avec succès.");
+                Console.WriteLine(languageManager.GetTranslation("restore_success"));
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Une erreur s'est produite lors de la restauration des fichiers : {ex.Message}");
+                Console.WriteLine(languageManager.GetTranslation("restore_error") + $"{ex.Message}");
             }
         }
     }
