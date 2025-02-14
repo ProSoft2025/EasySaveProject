@@ -5,6 +5,17 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EasySaveV2.ExecuteBackupPage">
 
-
-  Welcome to Avalonia!
+	<StackPanel Margin="20">
+		<TextBlock Text="Execute Backup" FontSize="24" Margin="0 0 0 20"/>
+		<TextBlock Text="Enter Backup Numbers (e.g., 1-3 or 1;3;4)"/>
+		<TextBox Name="BackupNumbersTextBox"/>
+		<Button Content="Execute Backup" Click="OnExecuteBackupClick" Margin="0 20 0 0"/>
+		<TextBlock Name="ExecutionOutputTextBlock" Text="Output will be shown here" Margin="20 0 0 0"/>
+	</StackPanel>
+	
 </UserControl>
+
+
+
+
+

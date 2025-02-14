@@ -3,12 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EasySaveV2.RestoreBackupPage">
-	<StackPanel Margin="20">
-		<TextBlock Text="Remove Backup" FontSize="24" Margin="0 0 0 20"/>
-		<TextBlock Text="Job Name"/>
-		<TextBox Name="JobNameTextBox"/>
+             
+			 x:Class="EasySaveV2.ViewStatePage">
 
-		<Button Content="Restore Backup" Click="OnRestoreBackupClick"/>
-	</StackPanel>
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		
+	</Grid>
 </UserControl>
