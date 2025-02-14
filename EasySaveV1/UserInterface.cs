@@ -9,7 +9,7 @@ using BackupLogger;
  * Handle menu display and navigation, user input, and interactions with the application's core functionalities :
  * managing backups (creation, deletion, restoration, execution), viewing logs, and settings (language and log format).*/
 
-namespace EasySave {
+namespace EasySaveV1 {
     public class UserInterface
     {
     private readonly LanguageManager languageManager;
@@ -57,7 +57,11 @@ namespace EasySave {
                 this.backupJobFactory = new BackupJobFactory();
                 this.languageManager = languageManager; // Passer languageManager
                 this.stateManager = stateManager; // Initialize stateManager
-            }
+                 
+        }
+            public BackupJobFactory GetBackupJobFactory() => backupJobFactory;
+            public StateManager GetStateManager() => stateManager;
+            public EasySaveApp GetEasySaveApp() => manager;
             public void Run()
             {
                 bool exit = false;

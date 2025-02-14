@@ -1,0 +1,21 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="EasySaveV2.ExecuteBackupPage">
+
+	<StackPanel Margin="20">
+		<TextBlock Text="Execute Backup" FontSize="24" Margin="0 0 0 20"/>
+		<TextBlock Text="Enter the number of Backup you would like to execute (Use - for backup 1 to X and ; for backup individually)"/>
+		<TextBox Name="BackupNumbersTextBox"/>
+		<Button Content="Execute Backup" Click="OnExecuteBackupClick" Margin="0 20 0 0"/>
+		<TextBlock Name="ExecutionOutputTextBlock" Text="Output will be shown here" Margin="20 0 0 0"/>
+	</StackPanel>
+	
+</UserControl>
+
+
+
+
+

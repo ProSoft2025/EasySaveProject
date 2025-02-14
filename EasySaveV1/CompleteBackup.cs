@@ -2,7 +2,7 @@
 using CryptoSoft;
 using System.Diagnostics;
 
-namespace EasySave
+namespace EasySaveV1
 {
     public class CompleteBackup : IBackupStrategy
     {

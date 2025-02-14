@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="EasySaveV2.DailyLogsPage">
+
+	<Grid>
+		<TabControl Margin="5">
+			<TabItem Header="Daily Logs" Cursor="Hand">
+				<StackPanel>
+					<ScrollViewer Height="200" VerticalScrollBarVisibility="Auto">
+						<TextBox Name="FileContentTextBox" AcceptsReturn="True"/>
+					</ScrollViewer>
+				</StackPanel>
+			</TabItem>
+
+			<TabItem Header="Current States" Cursor="Hand">
+				<TextBlock Margin="5">Daily Logs content</TextBlock>
+			</TabItem>
+
+		</TabControl>
+	</Grid>
+</UserControl>

@@ -1,7 +1,7 @@
 ﻿using BackupLogger;
 using System.Diagnostics;
 
-namespace EasySave
+namespace EasySaveV1
 {
     public class DifferentialBackup : IBackupStrategy
     {
