@@ -144,6 +144,9 @@ namespace EasySave {
                     
                     default:
                         Console.WriteLine(languageManager.GetTranslation("invalid_choice"));
+                        Thread.Sleep(1000);
+                        Console.Clear();
+                        LogSubMenu();
                         break;
                 }
             }
