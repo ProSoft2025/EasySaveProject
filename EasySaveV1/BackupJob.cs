@@ -45,7 +45,7 @@ namespace EasySave
             foreach (string file in files)
             {
                 string destination = Path.Combine(TargetDirectory, Path.GetFileName(file));
-                File.Copy(file, destination, true);
+                // File.Copy(file, destination, true);
                 filesProcessed++;
                 sizeProcessed += new FileInfo(file).Length;
 

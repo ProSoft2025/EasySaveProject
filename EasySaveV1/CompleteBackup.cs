@@ -30,7 +30,7 @@ namespace EasySave
                     var fileExtension = Path.GetExtension(sourceFilePath);
                     if (jobBackup.extensionsToEncrypt.Contains(fileExtension))
                     {
-                        var fileManager = new CryptoSoft.FileManager(targetFilePath, "EasySaveCESICESICESICESI");
+                        var fileManager = new CryptoSoft.FileManager(targetFilePath, "EasySave");
                         int ElapsedTime = fileManager.TransformFile();
                         loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
                         Console.WriteLine($"{targetFilePath} a été chiffré");
