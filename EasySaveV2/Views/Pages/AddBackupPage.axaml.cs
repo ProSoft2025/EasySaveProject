@@ -5,19 +5,21 @@ using System;
 using System.Threading.Tasks;
 
 
+
+
 namespace EasySaveV2
 {
     public partial class AddBackupPage : UserControl
-    {
-        //private readonly IBackupJobFactory backupJobFactory;
-        //private readonly IStateManager stateManager;
-        //private readonly IBackupManager manager;IBackupJobFactory backupJobFactory, IStateManager stateManager, IBackupManager manager
+    {    
 
-        public AddBackupPage()
+        private readonly BackupJobFactory backupJobFactory;
+        private readonly StateManager stateManager;
+        private readonly EasySaveApp manager;
+        public AddBackupPage(BackupJobFactory backupJobFactory, StateManager stateManager, EasySaveApp manager)
         {
-            //this.backupJobFactory = backupJobFactory;
-            //this.stateManager = stateManager;
-            //this.manager = manager;
+            this.backupJobFactory = backupJobFactory;
+            this.stateManager = stateManager;
+            this.manager = EasySaveApp.GetInstance();
             InitializeComponent();
         }
 
@@ -27,7 +29,6 @@ namespace EasySaveV2
             string sourceDirectory = SourceDirectoryTextBox.Text;
             string targetDirectory = TargetDirectoryTextBox.Text;
             string strategyChoice = ((ComboBoxItem)BackupTypeComboBox.SelectedItem).Content.ToString();
-            
 
             IBackupStrategy strategy;
             switch (strategyChoice)
@@ -39,13 +40,14 @@ namespace EasySaveV2
                     strategy = new DifferentialBackup();
                     break;
                 default:
-                    ShowMessage("Incorrect choice, please try again");
+                    ShowMessage("Incorrect choice, please try again").Wait();
                     return;
             }
 
-            AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
+            EasySaveApp.GetInstance().AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
             ShowMessage("Backup added successfully");
         }
+
         private async Task ShowMessage(string message)
         {
             var dialog = new Window

@@ -50,7 +50,11 @@ namespace EasySaveV1 {
                 this.backupJobFactory = new BackupJobFactory();
                 this.languageManager = languageManager; // Passer languageManager
                 this.stateManager = stateManager; // Initialize stateManager
-            }
+                 
+        }
+            public BackupJobFactory GetBackupJobFactory() => backupJobFactory;
+            public StateManager GetStateManager() => stateManager;
+            public EasySaveApp GetEasySaveApp() => manager;
             public void Run()
             {
                 bool exit = false;

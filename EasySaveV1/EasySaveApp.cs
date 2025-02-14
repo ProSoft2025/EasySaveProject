@@ -4,7 +4,7 @@ namespace EasySaveV1
 {
     public class EasySaveApp
     {
-        // Déclaration des variables
+        
         private static EasySaveApp? _instance;
 
         private static readonly object _lock = new object();

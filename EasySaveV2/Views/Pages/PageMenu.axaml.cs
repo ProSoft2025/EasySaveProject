@@ -1,13 +1,25 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using BackupLogger;
+using EasySaveV1;
+using static EasySaveV1.UserInterface;
 
 namespace EasySaveV2
 {
     public partial class PageMenu : UserControl
     {
+        private MenuManager menuManager;
+
+
         public PageMenu()
         {
             InitializeComponent();
+            InitializeMenuManager();
+        }
+        private void InitializeMenuManager()
+        {
+            var ui = new UserInterface(new LanguageManager());
+            menuManager = new MenuManager(ui, EasySaveApp.GetInstance(), new LoggerService("path/to/log/file"), new LanguageManager(), new StateManager("state.json"));
         }
 
         private void OnMenuSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -25,7 +37,9 @@ namespace EasySaveV2
                         ContentArea.Content = new ViewBackupPage();
                         break;
                     case "AddBackup":
-                        ContentArea.Content = new AddBackupPage();
+                        ContentArea.Content = new AddBackupPage(menuManager.GetBackupJobFactory(),
+                            menuManager.GetStateManager(),
+                            menuManager.GetEasySaveApp());
                         break;
                     
                     case "RemoveBackup":
