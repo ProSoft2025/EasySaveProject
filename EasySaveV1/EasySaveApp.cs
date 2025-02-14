@@ -28,15 +28,18 @@ namespace EasySave
             }
             return _instance;
         }
-        public void AddBackup(BackupJob job)
+        public int AddBackup(BackupJob job)
         {
-            if (BackupJobs.Count < 5) {
-                BackupJobs.Add(job);
-            }
-            else
+            // Vérification nom unique
+            foreach (var backup in BackupJobs)
             {
-                Console.Error.WriteLine("Il y a déjà 5 sauvegardes, veuillez en supprimez une");
+                if (backup.Name == job.Name)
+                {
+                    return 1;
+                }
             }
+            BackupJobs.Add(job);
+            return 0;
         }
         public void RemoveBackup(string name)
         {
