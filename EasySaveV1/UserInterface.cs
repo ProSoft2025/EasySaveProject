@@ -217,7 +217,6 @@ namespace EasySave {
                 Console.Write(languageManager.GetTranslation("enter_backup_name_to_remove"));
                 string name = ui.GetUserInput();
                 manager.RemoveBackup(name);
-                Console.WriteLine(string.Format((languageManager.GetTranslation("backup_removed")) + name));
             }
 
             private void RestoreBackup(EasySaveApp manager)
