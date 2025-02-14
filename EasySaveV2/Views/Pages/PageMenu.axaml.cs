@@ -32,7 +32,7 @@ namespace EasySaveV2
                 switch (selectedItem.Tag)
                 {
                     case "Home":
-                        ContentArea.Content = new MainWindow();
+                        ContentArea.Content = new HomePage();
                         break;
 
                     case "ViewBackup":

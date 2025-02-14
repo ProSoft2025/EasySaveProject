@@ -1,13 +1,22 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using EasySaveV2.Views;
 
-namespace EasySaveV2;
+namespace EasySaveV2
+{ 
 
-public partial class HomePage : UserControl
-{
-    public HomePage()
+  public partial class HomePage : UserControl
     {
-        InitializeComponent();
+        public HomePage()
+        {
+            InitializeComponent();
+        }
+        private void OnReturnToMainClick(object sender, RoutedEventArgs e)
+        {
+      
+            
+        }
     }
 }
