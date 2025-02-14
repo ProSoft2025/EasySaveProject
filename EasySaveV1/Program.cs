@@ -6,11 +6,10 @@ partial class Program
 {
     public static void Main(string[] args)
     {
-
         // Initialisation des menus
-        var manager = EasySaveApp.GetInstance();
-        var langageManager = new LanguageManager();
-        var ui = new UserInterface(langageManager);
+        var languageManager = new LanguageManager();
+        var manager = EasySaveApp.GetInstance(languageManager);
+        var ui = new UserInterface(languageManager);
 
         // Create a StateManager instance
         var stateManager = new StateManager("state.json");
@@ -33,7 +32,7 @@ partial class Program
         //<<<<<<<<<<<<Gestion du format log via DI>>>>>>>>>>>> 
 
         // Démarrer le menu
-        var menu = new UserInterface.MenuManager(ui, manager, config, logFormat, langageManager, stateManager);
+        var menu = new UserInterface.MenuManager(ui, manager, config, logFormat, languageManager, stateManager);
         menu.Run(); // Changed from menu.DisplayMenu() to menu.Run()
     }
 }

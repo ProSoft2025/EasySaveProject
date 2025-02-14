@@ -4,7 +4,6 @@ namespace EasySave
 {
     public class EasySaveApp
     {
-
         private LanguageManager languageManager;
 
         public EasySaveApp(LanguageManager languageManager)
@@ -20,8 +19,7 @@ namespace EasySave
 
         private EasySaveApp() { }
 
-
-        public static EasySaveApp GetInstance()
+        public static EasySaveApp GetInstance(LanguageManager languageManager)
         {
             if (_instance == null)
             {
@@ -29,33 +27,36 @@ namespace EasySave
                 {
                     if (_instance == null)
                     {
-                        _instance = new EasySaveApp();
+                        _instance = new EasySaveApp(languageManager);
                     }
                 }
             }
             return _instance;
         }
+
         public void AddBackup(BackupJob job)
         {
-            if (BackupJobs.Count < 5) {
+            if (BackupJobs.Count < 5)
+            {
                 BackupJobs.Add(job);
             }
             else
             {
-                Console.Error.WriteLine(languageManager.GetTranslation(("5_backup_rule")));
+                Console.Error.WriteLine(languageManager.GetTranslation("5_backup_rule"));
             }
         }
+
         public void RemoveBackup(string name)
         {
             var job = BackupJobs.FirstOrDefault(j => j.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
             if (job != null)
             {
                 BackupJobs.Remove(job);
-                Console.WriteLine(languageManager.GetTranslation("save") + $"'{name}'" + languageManager.GetTranslation("successfull_delete"));
+                Console.WriteLine((languageManager.GetTranslation("save")) + $"'{name}'" + (languageManager.GetTranslation("successfull_delete")));
             }
             else
             {
-                Console.WriteLine(languageManager.GetTranslation("no_backup_found_name") + $"'{name}'.");
+                Console.WriteLine((languageManager.GetTranslation("no_backup_found_name")) + $"'{name}'.");
             }
         }
     }

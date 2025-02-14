@@ -217,7 +217,7 @@ namespace EasySave {
                 Console.Write(languageManager.GetTranslation("enter_backup_name_to_remove"));
                 string name = ui.GetUserInput();
                 manager.RemoveBackup(name);
-                Console.WriteLine(string.Format(languageManager.GetTranslation("backup_removed") + name));
+                Console.WriteLine(string.Format((languageManager.GetTranslation("backup_removed")) + name));
             }
 
             private void RestoreBackup(EasySaveApp manager)
@@ -281,12 +281,12 @@ namespace EasySave {
                             }
                             else
                             {
-                                Console.WriteLine(languageManager.GetTranslation(("incorrect_interval")) + $"{segment}");
+                                Console.WriteLine((languageManager.GetTranslation("incorrect_interval")) + $"{segment}");
                             }
                         }
                         else
                         {
-                            Console.WriteLine(languageManager.GetTranslation("intervals_format_incorrect") + $" {segment}");
+                            Console.WriteLine((languageManager.GetTranslation("intervals_format_incorrect")) + $" {segment}");
                         }
                     }
                     else
@@ -297,7 +297,7 @@ namespace EasySave {
                         }
                         else
                         {
-                            Console.WriteLine(languageManager.GetTranslation("backup_number_incorrect") +$" {segment}");
+                            Console.WriteLine((languageManager.GetTranslation("backup_number_incorrect")) +$" {segment}");
                         }
                     }
                 }
@@ -312,7 +312,7 @@ namespace EasySave {
                 {
                     if (backupIndex >= 0 && backupIndex < manager.BackupJobs.Count)
                     {
-                        Console.WriteLine(languageManager.GetTranslation("execute_backup") + $"{backupIndex + 1}: {manager.BackupJobs[backupIndex].Name}");
+                        Console.WriteLine((languageManager.GetTranslation("execute_backup")) + $"{backupIndex + 1}: {manager.BackupJobs[backupIndex].Name}");
                         manager.BackupJobs[backupIndex].Execute(loggerStrategy);
                     }
                 }
@@ -328,16 +328,16 @@ namespace EasySave {
                     return;
                 }
 
-                Console.WriteLine(languageManager.GetTranslation("backup_task") + $"{state.TaskName}");
-                Console.WriteLine(languageManager.GetTranslation("time_stamp") + $"{state.Timestamp}");
-                Console.WriteLine(languageManager.GetTranslation("status") + $" {state.Status}");
-                Console.WriteLine(languageManager.GetTranslation("progress") + $" {state.Progress}%");
-                Console.WriteLine(languageManager.GetTranslation("total_files") + $" {state.TotalFiles}");
-                Console.WriteLine(languageManager.GetTranslation("remaining_files") + $" {state.RemainingFiles}");
-                Console.WriteLine(languageManager.GetTranslation("total_size") + $" {state.TotalSize} " + (languageManager.GetTranslation("bytes")));
-                Console.WriteLine(languageManager.GetTranslation("remaining_size") + $" {state.RemainingSize} " + (languageManager.GetTranslation("bytes")));
-                Console.WriteLine(languageManager.GetTranslation("current_source") + $" {state.CurrentSource}");
-                Console.WriteLine(languageManager.GetTranslation("current_target") + $"{state.CurrentTarget}");
+                Console.WriteLine((languageManager.GetTranslation("backup_task")) + $"{state.TaskName}");
+                Console.WriteLine((languageManager.GetTranslation("time_stamp")) + $"{state.Timestamp}");
+                Console.WriteLine((languageManager.GetTranslation("status")) + $" {state.Status}");
+                Console.WriteLine((languageManager.GetTranslation("progress")) + $" {state.Progress}%");
+                Console.WriteLine((languageManager.GetTranslation("total_files")) + $" {state.TotalFiles}");
+                Console.WriteLine((languageManager.GetTranslation("remaining_files")) + $" {state.RemainingFiles}");
+                Console.WriteLine((languageManager.GetTranslation("total_size")) + $" {state.TotalSize} " + (languageManager.GetTranslation("bytes")));
+                Console.WriteLine((languageManager.GetTranslation("remaining_size")) + $" {state.RemainingSize} " + (languageManager.GetTranslation("bytes")));
+                Console.WriteLine((languageManager.GetTranslation("current_source")) + $" {state.CurrentSource}");
+                Console.WriteLine((languageManager.GetTranslation("current_target")) + $"{state.CurrentTarget}");
             }
 
             private void SetLogFormat()
@@ -372,7 +372,7 @@ namespace EasySave {
 
                     // Mettre à jour le format des logs dans le ConfigManager
                     configManager.SetLogFormat(newFormat);
-                    Console.WriteLine(languageManager.GetTranslation("update_format") + newFormat);
+                    Console.WriteLine((languageManager.GetTranslation("update_format")) + newFormat);
                 }
                 else
                 {

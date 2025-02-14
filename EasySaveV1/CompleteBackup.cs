@@ -32,12 +32,12 @@ namespace EasySave
                     loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, 10);
                     loggerStrategy.DisplayLogFileContent();
 
-                    Console.WriteLine(languageManager.GetTranslation("copied") + $" {sourceFilePath}" + languageManager.GetTranslation("to") + $"{targetFilePath}");                }
+                    Console.WriteLine((languageManager.GetTranslation("copied")) + $" {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{targetFilePath}");                }
                 Console.WriteLine(languageManager.GetTranslation(("complete_backup_finished")));
             }
             catch (Exception ex)
             {
-                Console.WriteLine(languageManager.GetTranslation("complete_backup_error") + $"{ex.Message}");
+                Console.WriteLine((languageManager.GetTranslation("complete_backup_error")) + $"{ex.Message}");
             }
         }
 
@@ -58,7 +58,7 @@ namespace EasySave
             }
             catch (Exception ex)
             {
-                Console.WriteLine(languageManager.GetTranslation("restore_error") + $"{ex.Message}");
+                Console.WriteLine((languageManager.GetTranslation("restore_error")) + $"{ex.Message}");
             }
         }
     }

@@ -45,14 +45,14 @@ namespace EasySave
                         loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, 10);
                         loggerStrategy.DisplayLogFileContent();
 
-                        Console.WriteLine(languageManager.GetTranslation("copied") + $" : {sourceFilePath}" + languageManager.GetTranslation("to") + $"{differentialBackupFilePath}");
+                        Console.WriteLine((languageManager.GetTranslation("copied")) + $" : {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{differentialBackupFilePath}");
                     }
                 }
                 Console.WriteLine(languageManager.GetTranslation("diff_backup_finished"));
             }
             catch (Exception ex)
             {
-                Console.WriteLine(languageManager.GetTranslation("error_diff_backup") + $"{ex.Message}");
+                Console.WriteLine((languageManager.GetTranslation("error_diff_backup")) + $"{ex.Message}");
             }
         }
 
@@ -79,7 +79,7 @@ namespace EasySave
             }
             catch (Exception ex)
             {
-                Console.WriteLine(languageManager.GetTranslation("restore_error") + $"{ex.Message}");
+                Console.WriteLine((languageManager.GetTranslation("restore_error")) + $"{ex.Message}");
             }
         }
     }
