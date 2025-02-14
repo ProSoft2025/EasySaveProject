@@ -1,4 +1,5 @@
 ﻿using BackupLogger;
+using System.Diagnostics;
 
 namespace EasySave
 {
@@ -40,9 +41,14 @@ namespace EasySave
                     if (!File.Exists(lastFullBackupFilePath) || File.GetLastWriteTime(sourceFilePath) > File.GetLastWriteTime(lastFullBackupFilePath))
                     {
                         Directory.CreateDirectory(Path.GetDirectoryName(differentialBackupFilePath));
+                        Stopwatch stopwatch = new Stopwatch();
+                        stopwatch.Start();
                         File.Copy(sourceFilePath, differentialBackupFilePath, true);
+                        stopwatch.Stop();
+                        var fileManager = new CryptoSoft.FileManager(differentialBackupFilePath, "EasySave");
+                        int ElapsedTime = fileManager.TransformFile();
 
-                        loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, 10);
+                        loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
                         loggerStrategy.DisplayLogFileContent();
 
                         Console.WriteLine((languageManager.GetTranslation("copied")) + $" : {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{differentialBackupFilePath}");
@@ -73,7 +79,7 @@ namespace EasySave
                 // Utiliser la méthode utilitaire pour copier les fichiers et sous-répertoires de la sauvegarde différentielle
                 FileManager.CopyDirectory(jobBackup.TargetDirectory, jobBackup.SourceDirectory);
 
-                loggerStrategy.Update(jobBackup.Name, jobBackup.TargetDirectory, jobBackup.SourceDirectory, new FileInfo(jobBackup.TargetDirectory).Length, 10);
+                loggerStrategy.Update(jobBackup.Name, jobBackup.TargetDirectory, jobBackup.SourceDirectory, new FileInfo(jobBackup.TargetDirectory).Length, 10, 10);
 
                 Console.WriteLine(languageManager.GetTranslation("restore_success"));
             }

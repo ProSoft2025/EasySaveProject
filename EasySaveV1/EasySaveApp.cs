@@ -16,6 +16,7 @@ namespace EasySave
 
         private static readonly object _lock = new object();
         public List<BackupJob> BackupJobs { get; set; } = new List<BackupJob>();
+        public List<string> ExtensionToEncrypt { get; set; } = new List<string>();
 
         private EasySaveApp() { }
 
@@ -33,17 +34,18 @@ namespace EasySave
             }
             return _instance;
         }
-
-        public void AddBackup(BackupJob job)
+        public int AddBackup(BackupJob job)
         {
-            if (BackupJobs.Count < 5)
+            // Vérification nom unique
+            foreach (var backup in BackupJobs)
             {
-                BackupJobs.Add(job);
+                if (backup.Name == job.Name)
+                {
+                    return 1;
+                }
             }
-            else
-            {
-                Console.Error.WriteLine(languageManager.GetTranslation("5_backup_rule"));
-            }
+            BackupJobs.Add(job);
+            return 0;
         }
 
         public void RemoveBackup(string name)
@@ -58,6 +60,16 @@ namespace EasySave
             {
                 Console.WriteLine((languageManager.GetTranslation("no_backup_found_name")) + $"'{name}'.");
             }
+        }
+        public void AddExtension(string extension)
+        {
+            ExtensionToEncrypt.Add(extension);
+        }
+        public void RemoveExtension(string extension)
+        {
+            if (ExtensionToEncrypt.Contains(extension))
+                ExtensionToEncrypt.Remove(extension);
+            else throw new Exception("Extension not found");
         }
     }
 }

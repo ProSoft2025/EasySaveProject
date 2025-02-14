@@ -1,4 +1,6 @@
 ﻿using BackupLogger;
+using CryptoSoft;
+using System.Diagnostics;
 
 namespace EasySave
 {
@@ -27,13 +29,27 @@ namespace EasySave
                     var targetFilePath = Path.Combine(jobBackup.TargetDirectory, file);
 
                     Directory.CreateDirectory(Path.GetDirectoryName(targetFilePath));
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
                     File.Copy(sourceFilePath, targetFilePath, true);
+                    stopwatch.Stop();
 
-                    loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, 10);
-                    loggerStrategy.DisplayLogFileContent();
-
-                    Console.WriteLine((languageManager.GetTranslation("copied")) + $" {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{targetFilePath}");                }
-                Console.WriteLine(languageManager.GetTranslation(("complete_backup_finished")));
+                    var fileExtension = Path.GetExtension(sourceFilePath);
+                    if (jobBackup.extensionsToEncrypt.Contains(fileExtension))
+                    {
+                        var fileManager = new CryptoSoft.FileManager(targetFilePath, "EasySave");
+                        int ElapsedTime = fileManager.TransformFile();
+                        loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
+                        Console.WriteLine($"{targetFilePath} a été chiffré");
+                    }
+                    else
+                    {
+                        loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, 0);
+                        Console.WriteLine((languageManager.GetTranslation("copied")) + $" {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{targetFilePath}");
+                    }
+                }
+                loggerStrategy.DisplayLogFileContent();
+                Console.WriteLine(languageManager.GetTranslation(("complete_backup_finished")));                    
             }
             catch (Exception ex)
             {

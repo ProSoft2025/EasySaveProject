@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySaveV1", "EasySaveV1\EasySaveV1.csproj", "{BD7EAC3E-5295-4B20-9ADD-B30AFF937241}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasySaveV1", "EasySaveV1\EasySaveV1.csproj", "{BD7EAC3E-5295-4B20-9ADD-B30AFF937241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackupLogger", "BackupLogger\BackupLogger.csproj", "{C88A2E92-0461-438A-A2E8-29D4EE7D248E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackupLogger", "BackupLogger\BackupLogger.csproj", "{C88A2E92-0461-438A-A2E8-29D4EE7D248E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoSoftApp", "CryptoSoftApp\CryptoSoftApp.csproj", "{A70C85FC-C19D-4B16-B64C-74FBCA6E93B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{C88A2E92-0461-438A-A2E8-29D4EE7D248E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C88A2E92-0461-438A-A2E8-29D4EE7D248E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C88A2E92-0461-438A-A2E8-29D4EE7D248E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A70C85FC-C19D-4B16-B64C-74FBCA6E93B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A70C85FC-C19D-4B16-B64C-74FBCA6E93B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A70C85FC-C19D-4B16-B64C-74FBCA6E93B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A70C85FC-C19D-4B16-B64C-74FBCA6E93B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F83A4D74-073D-4109-8729-173E9A84176A}
 	EndGlobalSection
 EndGlobal

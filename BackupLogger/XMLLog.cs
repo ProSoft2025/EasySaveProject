@@ -20,7 +20,7 @@ namespace BackupLogger
             }
         }
 
-        public override void Update(string taskName, string sourcePath, string targetPath, long fileSize, int transferTime)
+        public override void Update(string taskName, string sourcePath, string targetPath, long fileSize, long transferTime, int EncryptionTIme)
         {
             string logFileName = Path.Combine(configManager.LogDirectory, $"{DateTime.Now:yyyy-MM-dd}.xml");
 
@@ -63,6 +63,10 @@ namespace BackupLogger
             XmlElement transferTimeElement = doc.CreateElement("TransferTime");
             transferTimeElement.InnerText = transferTime.ToString();
             logEntry.AppendChild(transferTimeElement);
+
+            XmlElement EncryptionTimeElement = doc.CreateElement("EncryptionTime");
+            EncryptionTimeElement.InnerText = EncryptionTime.ToString();
+            logEntry.AppendChild(EncryptionTimeElement);
 
             // Ajouter l'élément logEntry au fichier XML
             doc.DocumentElement.AppendChild(logEntry);
