@@ -66,7 +66,7 @@ namespace EasySave
 
             try
             {
-                var completeBackup = new CompleteBackup();
+                var completeBackup = new CompleteBackup(this.languageManager);
                 // Restaurer d'abord la dernière sauvegarde totale en utilisant la stratégie complète
                 completeBackup.Restore(tempBackupJob, loggerStrategy);
 
