@@ -8,15 +8,7 @@
 		<TextBlock Text="Remove Backup" FontSize="24" Margin="0 0 0 20"/>
 		<TextBlock Text="Job Name"/>
 		<TextBox Name="JobNameTextBox"/>
-		<TextBlock Text="Source Directory"/>
-		<TextBox Name="SourceDirectoryTextBox"/>
-		<TextBlock Text="Target Directory"/>
-		<TextBox Name="TargetDirectoryTextBox"/>
-		<TextBlock Text="Backup Type"/>
-		<ComboBox Name="BackupTypeComboBox">
-			<ComboBoxItem Content="Complete Backup"/>
-			<ComboBoxItem Content="Differential Backup"/>
-		</ComboBox>
+		
 		<Button Content="Remove Backup" Click="OnRemoveBackupClick"/>
 	</StackPanel>
 </UserControl>

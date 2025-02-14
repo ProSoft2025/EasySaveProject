@@ -3,6 +3,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EasySaveV2.ViewBackupPage">
-  Welcome to Avalonia!
+             x:Class="EasySaveV2.ViewBackupPage"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+	<ScrollViewer>
+		<ListBox ItemsSource="{Binding BackupJobs}" HorizontalAlignment="Stretch">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel />
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+						<StackPanel>
+							<TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16"/>
+							<TextBlock Text="{Binding SourceDirectory}" FontSize="14"/>
+							<TextBlock Text="{Binding TargetDirectory}" FontSize="14"/>
+						</StackPanel>
+					</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</ScrollViewer>
 </UserControl>

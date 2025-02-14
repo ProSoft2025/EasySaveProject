@@ -3,7 +3,7 @@ using Avalonia.Interactivity;
 using EasySaveV1;
 using System;
 using System.Threading.Tasks;
-
+using EasySaveV2.Services;
 
 
 
@@ -15,15 +15,17 @@ namespace EasySaveV2
         private readonly BackupJobFactory backupJobFactory;
         private readonly StateManager stateManager;
         private readonly EasySaveApp manager;
+        private readonly MessageService messageService;
         public AddBackupPage(BackupJobFactory backupJobFactory, StateManager stateManager, EasySaveApp manager)
         {
             this.backupJobFactory = backupJobFactory;
             this.stateManager = stateManager;
             this.manager = EasySaveApp.GetInstance();
+            this.messageService = new MessageService();
             InitializeComponent();
         }
 
-        private void OnAddBackupClick(object sender, RoutedEventArgs e)
+        private async void OnAddBackupClick(object sender, RoutedEventArgs e)
         {
             string name = JobNameTextBox.Text;
             string sourceDirectory = SourceDirectoryTextBox.Text;
@@ -40,25 +42,12 @@ namespace EasySaveV2
                     strategy = new DifferentialBackup();
                     break;
                 default:
-                    ShowMessage("Incorrect choice, please try again").Wait();
+                    await messageService.ShowMessage((Window)this.VisualRoot, "Incorrect choice, please try again");
                     return;
             }
 
             EasySaveApp.GetInstance().AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
-            ShowMessage("Backup added successfully");
-        }
-
-        private async Task ShowMessage(string message)
-        {
-            var dialog = new Window
-            {
-                Content = new TextBlock { Text = message },
-                Width = 300,
-                Height = 100,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner
-            };
-
-            await dialog.ShowDialog((Window)this.VisualRoot);
+            await messageService.ShowMessage((Window)this.VisualRoot, "Backup added successfully");
         }
     }
 }

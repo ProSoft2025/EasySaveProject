@@ -3,7 +3,7 @@ using Avalonia.Interactivity;
 using BackupLogger;
 using EasySaveV1;
 using static EasySaveV1.UserInterface;
-
+using EasySaveV2.Views;
 namespace EasySaveV2
 {
     public partial class PageMenu : UserControl
