@@ -4,6 +4,13 @@ namespace EasySave
 {
     public class EasySaveApp
     {
+        private LanguageManager languageManager;
+
+        public EasySaveApp(LanguageManager languageManager)
+        {
+            this.languageManager = languageManager;
+        }
+
         // Déclaration des variables
         private static EasySaveApp? _instance;
 
@@ -12,8 +19,7 @@ namespace EasySave
 
         private EasySaveApp() { }
 
-
-        public static EasySaveApp GetInstance()
+        public static EasySaveApp GetInstance(LanguageManager languageManager)
         {
             if (_instance == null)
             {
@@ -21,48 +27,36 @@ namespace EasySave
                 {
                     if (_instance == null)
                     {
-                        _instance = new EasySaveApp();
+                        _instance = new EasySaveApp(languageManager);
                     }
                 }
             }
             return _instance;
         }
+
         public void AddBackup(BackupJob job)
         {
-            if (BackupJobs.Count < 5) {
+            if (BackupJobs.Count < 5)
+            {
                 BackupJobs.Add(job);
             }
             else
             {
-                Console.Error.WriteLine("Il y a déjà 5 sauvegardes, veuillez en supprimez une");
+                Console.Error.WriteLine(languageManager.GetTranslation("5_backup_rule"));
             }
         }
+
         public void RemoveBackup(string name)
         {
             var job = BackupJobs.FirstOrDefault(j => j.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
             if (job != null)
             {
                 BackupJobs.Remove(job);
-                Console.WriteLine($"Sauvegarde '{name}' supprimée avec succès.");
+                Console.WriteLine((languageManager.GetTranslation("save")) + $"'{name}'" + (languageManager.GetTranslation("successfull_delete")));
             }
             else
             {
-                Console.WriteLine($"Aucune sauvegarde trouvée avec le nom '{name}'.");
-            }
-        }
-        public void ExecuteBackupJob (string[] names)
-        {
-            foreach (var name in names)
-            {
-                var job = BackupJobs.Find(j => j.Name == name);
-                job?.Execute();
-            }
-        }
-        public void ExecuteAllBackupJobs()
-        {
-            foreach (var job in BackupJobs)
-            {
-                job.Execute();
+                Console.WriteLine((languageManager.GetTranslation("no_backup_found_name")) + $"'{name}'.");
             }
         }
     }

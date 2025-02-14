@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using BackupLogger;
 
+/*SUMMARY
+ * Handle menu display and navigation, user input, and interactions with the application's core functionalities :
+ * managing backups (creation, deletion, restoration, execution), viewing logs, and settings (language and log format).*/
+
 namespace EasySave {
     public class UserInterface
     {
@@ -36,17 +40,19 @@ namespace EasySave {
         {
             private readonly UserInterface ui;
             private readonly EasySaveApp manager;
-            private readonly Logger logger;
+            private readonly IConfigManager configManager;
+            private readonly ILoggerStrategy loggerStrategy;
             private readonly BackupJobFactory backupJobFactory;
             private readonly LanguageManager languageManager;
 
             private readonly StateManager stateManager; // Add this line
 
-            public MenuManager(UserInterface ui, EasySaveApp manager, Logger logger, LanguageManager languageManager,  StateManager stateManager)
+            public MenuManager(UserInterface ui, EasySaveApp manager, IConfigManager configManager, ILoggerStrategy loggerStrategy , LanguageManager languageManager,  StateManager stateManager)
             {
                 this.ui = ui;
                 this.manager = manager;
-                this.logger = logger;
+                this.configManager = configManager;
+                this.loggerStrategy = loggerStrategy;
                 this.backupJobFactory = new BackupJobFactory();
                 this.languageManager = languageManager; // Passer languageManager
                 this.stateManager = stateManager; // Initialize stateManager
@@ -105,12 +111,13 @@ namespace EasySave {
 
             private void LogSubMenu()
             {
-                Console.WriteLine("===== Menu Logs =====");
-                Console.WriteLine("1. Voir les logs journaliers");
-                Console.WriteLine("2. Voir l'état en temps réel");
-                Console.WriteLine("3. Retour au menu principal");
+                Console.WriteLine(languageManager.GetTranslation("menu_log"));
+                Console.WriteLine("1. " + languageManager.GetTranslation("daily_logs"));
+                Console.WriteLine("2. " + languageManager.GetTranslation("real_time"));
+                Console.WriteLine("3. " + languageManager.GetTranslation("logs_format"));
+                Console.WriteLine("4. " + languageManager.GetTranslation("press_any_key"));
                 Console.WriteLine("============================");
-                Console.Write("Votre choix : ");
+                Console.Write(languageManager.GetTranslation("your_choice"));
 
                 ConsoleKeyInfo choixLog = Console.ReadKey();
                 Console.Clear();
@@ -119,19 +126,24 @@ namespace EasySave {
                 {
                     case '1':
                         // Implémentation pour afficher les logs journaliers
-                        Console.WriteLine("Affichage des logs journaliers");
-                        logger.DisplayLogFileContent();
+                        Console.WriteLine(languageManager.GetTranslation("daily_logs2"));
+                        loggerStrategy.DisplayLogFileContent();
                         break;
                     case '2':
                         // Implémentation pour afficher l'état en temps réel
-                        Console.WriteLine("Affichage de l'état en temps réel");
+                        Console.WriteLine(languageManager.GetTranslation("real_time2"));
                         DisplayBackupState();
                         break;
                     case '3':
+                        Console.Clear();
+                        SetLogFormat();
+                        break;
+                    case '4':
                         // Retour au menu principal
                         break;
+                    
                     default:
-                        Console.WriteLine("Invalid choice, please try again.");
+                        Console.WriteLine(languageManager.GetTranslation("invalid_choice"));
                         break;
                 }
             }
@@ -186,13 +198,13 @@ namespace EasySave {
                 switch (strategyChoice)
                 {
                     case "1":
-                        strategy = new CompleteBackup();
+                        strategy = new CompleteBackup(languageManager);
                         break;
                     case "2":
-                        strategy = new DifferentialBackup();
+                        strategy = new DifferentialBackup(languageManager);
                         break;
                     default:
-                        Console.WriteLine("Choix Incorrect, veuillez recommencer");
+                        Console.WriteLine(languageManager.GetTranslation(("incorrect_choice_try_again")));
                         return;
                 }
 
@@ -205,17 +217,17 @@ namespace EasySave {
                 Console.Write(languageManager.GetTranslation("enter_backup_name_to_remove"));
                 string name = ui.GetUserInput();
                 manager.RemoveBackup(name);
-                Console.WriteLine(string.Format(languageManager.GetTranslation("backup_removed"), name));
+                Console.WriteLine(string.Format((languageManager.GetTranslation("backup_removed")) + name));
             }
 
             private void RestoreBackup(EasySaveApp manager)
             {
-                Console.WriteLine("Entrez le nom de la sauvegarde à restaurer : ");
+                Console.WriteLine(languageManager.GetTranslation("backup_name_restore"));
                 string userChoice = ui.GetUserInput();
 
                 if (string.IsNullOrWhiteSpace(userChoice))
                 {
-                    Console.WriteLine("L'entrée est vide ou non valide.");
+                    Console.WriteLine(languageManager.GetTranslation("invalid_input"));
                     return;
                 }
 
@@ -228,7 +240,7 @@ namespace EasySave {
                         string restoreDirectory = manager.BackupJobs[i].SourceDirectory;
 
                         // Appel de la méthode de restauration via l'interface
-                        manager.BackupJobs[i].BackupStrategy.Restore(backupDirectory, restoreDirectory);
+                        manager.BackupJobs[i].Restore(loggerStrategy);
                         found = true;
                         break;
                     }
@@ -236,20 +248,20 @@ namespace EasySave {
 
                 if (!found)
                 {
-                    Console.WriteLine("Nom de sauvegarde invalide.");
+                    Console.WriteLine(languageManager.GetTranslation("backup_name_incorrect"));
                 }
             }
 
             public List<int> ReadBackupExecute(List<BackupJob> backupJobs)
             {
-                Console.WriteLine("Saisir le numéro de Backup à exécuter : \n" +
-                "Exemple : '1-3' -> Exécuter les sauvegardes 1,2,3" +
-                "\nExemple2 : '1;3;4' -> Exécute les sauvegardes 1, 3 et 4");
+                Console.WriteLine(languageManager.GetTranslation("backup_number_execute"));
+                Console.WriteLine(languageManager.GetTranslation("1-3"));
+                Console.WriteLine(languageManager.GetTranslation("1, 2 and 3"));
                 string userChoice = ui.GetUserInput();
 
                 if (string.IsNullOrWhiteSpace(userChoice))
                 {
-                    Console.WriteLine("L'entrée est vide ou non valide.");
+                    Console.WriteLine(languageManager.GetTranslation("invalid_input"));
                     return new List<int>();
                 }
 
@@ -269,12 +281,12 @@ namespace EasySave {
                             }
                             else
                             {
-                                Console.WriteLine($"Intervalle invalide : {segment}");
+                                Console.WriteLine((languageManager.GetTranslation("incorrect_interval")) + $"{segment}");
                             }
                         }
                         else
                         {
-                            Console.WriteLine($"Format d'intervalle incorrect : {segment}");
+                            Console.WriteLine((languageManager.GetTranslation("intervals_format_incorrect")) + $" {segment}");
                         }
                     }
                     else
@@ -285,7 +297,7 @@ namespace EasySave {
                         }
                         else
                         {
-                            Console.WriteLine($"Numéro de sauvegarde invalide : {segment}");
+                            Console.WriteLine((languageManager.GetTranslation("backup_number_incorrect")) +$" {segment}");
                         }
                     }
                 }
@@ -300,11 +312,11 @@ namespace EasySave {
                 {
                     if (backupIndex >= 0 && backupIndex < manager.BackupJobs.Count)
                     {
-                        Console.WriteLine($"Exécution de la sauvegarde {backupIndex + 1}: {manager.BackupJobs[backupIndex].Name}");
-                        manager.BackupJobs[backupIndex].Execute();
+                        Console.WriteLine((languageManager.GetTranslation("execute_backup")) + $"{backupIndex + 1}: {manager.BackupJobs[backupIndex].Name}");
+                        manager.BackupJobs[backupIndex].Execute(loggerStrategy);
                     }
                 }
-                Console.WriteLine("Exécution de toutes les sauvegardes terminée.");
+                Console.WriteLine(languageManager.GetTranslation("execute_backup_finished"));
             }
 
             private void DisplayBackupState()
@@ -312,21 +324,63 @@ namespace EasySave {
                 StateEntry state = stateManager.GetState();
                 if (state == null)
                 {
-                    Console.WriteLine("No backup state available.");
+                    Console.WriteLine(languageManager.GetTranslation("backup_state_availability"));
                     return;
                 }
 
-                Console.WriteLine($"Backup Task: {state.TaskName}");
-                Console.WriteLine($"Timestamp: {state.Timestamp}");
-                Console.WriteLine($"Status: {state.Status}");
-                Console.WriteLine($"Progress: {state.Progress}%");
-                Console.WriteLine($"Total Files: {state.TotalFiles}");
-                Console.WriteLine($"Remaining Files: {state.RemainingFiles}");
-                Console.WriteLine($"Total Size: {state.TotalSize} bytes");
-                Console.WriteLine($"Remaining Size: {state.RemainingSize} bytes");
-                Console.WriteLine($"Current Source: {state.CurrentSource}");
-                Console.WriteLine($"Current Target: {state.CurrentTarget}");
+                Console.WriteLine((languageManager.GetTranslation("backup_task")) + $"{state.TaskName}");
+                Console.WriteLine((languageManager.GetTranslation("time_stamp")) + $"{state.Timestamp}");
+                Console.WriteLine((languageManager.GetTranslation("status")) + $" {state.Status}");
+                Console.WriteLine((languageManager.GetTranslation("progress")) + $" {state.Progress}%");
+                Console.WriteLine((languageManager.GetTranslation("total_files")) + $" {state.TotalFiles}");
+                Console.WriteLine((languageManager.GetTranslation("remaining_files")) + $" {state.RemainingFiles}");
+                Console.WriteLine((languageManager.GetTranslation("total_size")) + $" {state.TotalSize} " + (languageManager.GetTranslation("bytes")));
+                Console.WriteLine((languageManager.GetTranslation("remaining_size")) + $" {state.RemainingSize} " + (languageManager.GetTranslation("bytes")));
+                Console.WriteLine((languageManager.GetTranslation("current_source")) + $" {state.CurrentSource}");
+                Console.WriteLine((languageManager.GetTranslation("current_target")) + $"{state.CurrentTarget}");
             }
+
+            private void SetLogFormat()
+            {
+                // Afficher le format actuel des logs
+                Console.WriteLine(languageManager.GetTranslation("menu_logs_format"));
+                Console.WriteLine(languageManager.GetTranslation("current_logs_format") + configManager.LogFormat);
+
+                // Demander à l'utilisateur s'il veut modifier le format
+                Console.WriteLine(languageManager.GetTranslation("change_logs_format"));
+                string choice = Console.ReadLine()?.ToUpper();
+
+                if (choice == "O" || choice =="Y")
+                {
+                    string newFormat = "";
+                    bool validFormat = false;
+
+                    while (!validFormat)
+                    {
+                        Console.WriteLine(languageManager.GetTranslation("format_xml_json"));
+                        newFormat = Console.ReadLine()?.ToUpper();
+
+                        if (newFormat == "XML" || newFormat == "JSON")
+                        {
+                            validFormat = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine(languageManager.GetTranslation("incorrect_xml_json"));
+                        }
+                    }
+
+                    // Mettre à jour le format des logs dans le ConfigManager
+                    configManager.SetLogFormat(newFormat);
+                    Console.WriteLine((languageManager.GetTranslation("update_format")) + newFormat);
+                }
+                else
+                {
+                    // Si l'utilisateur ne veut pas modifier, retourner au menu principal
+                    Console.WriteLine(languageManager.GetTranslation("press_any_key"));
+                }
+            }
+
         }
     }
 

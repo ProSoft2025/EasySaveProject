@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading;
+﻿using System.Text.Json;
 
-/* Summary */
+/* SUMMARY
+ * persisting and retrieving backup progress information to a JSON file.
+ * updates it with current progress, and retrieves the latest state
+*/
 
 namespace EasySave
 {
