@@ -7,7 +7,7 @@
 
 	<DockPanel>
 		<!-- Sidebar -->
-		<ListBox DockPanel.Dock="Left" Width="200" Background="#333" Foreground="White" SelectionChanged="OnMenuSelectionChanged">
+		<ListBox DockPanel.Dock="Left" Width="200" Background="#333" Cursor="Hand" Foreground="White" SelectionChanged="OnMenuSelectionChanged">
 			<ListBoxItem Tag="Home">🏠 Home</ListBoxItem>
 			<ListBoxItem Tag="ViewBackup">📁 View Backup</ListBoxItem>
 			<ListBoxItem Tag="AddBackup">⚙️  Add a backup</ListBoxItem>

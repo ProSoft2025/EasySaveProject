@@ -59,7 +59,7 @@ namespace EasySaveV2
                         ContentArea.Content = new DailyLogsPage();
                         break;
                     case "ViewState":
-                        ContentArea.Content = new ViewStatePage();
+                        //ContentArea.Content = new ViewStatePage();
                         break;
 
 
