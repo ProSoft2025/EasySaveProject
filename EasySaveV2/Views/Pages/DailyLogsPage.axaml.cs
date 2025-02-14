@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace EasySaveV2;
 
-public partial class ViewLogsPage : UserControl
+public partial class DailyLogsPage : UserControl
 {
-    public ViewLogsPage()
+    public DailyLogsPage()
     {
         InitializeComponent();
     }

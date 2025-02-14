@@ -1,7 +1,9 @@
+
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using BackupLogger;
 using EasySaveV1;
+using EasySaveV2.Views;
 using static EasySaveV1.UserInterface;
 
 namespace EasySaveV2
@@ -30,7 +32,7 @@ namespace EasySaveV2
                 switch (selectedItem.Tag)
                 {
                     case "Home":
-                        ContentArea.Content = new HomePage();
+                        ContentArea.Content = new MainWindow();
                         break;
 
                     case "ViewBackup":
@@ -53,10 +55,13 @@ namespace EasySaveV2
                     case "RestoreBackup":
                         ContentArea.Content = new RestoreBackupPage();
                         break;                    
-                    case "ViewLogs":
-                        ContentArea.Content = new ViewLogsPage();
+                    case "DailyLogs":
+                        ContentArea.Content = new DailyLogsPage();
                         break;
-                        
+                    case "ViewState":
+                        ContentArea.Content = new ViewStatePage();
+                        break;
+
 
                 }
             }
