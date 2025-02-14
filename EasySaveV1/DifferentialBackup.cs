@@ -45,15 +45,23 @@ namespace EasySave
                         stopwatch.Start();
                         File.Copy(sourceFilePath, differentialBackupFilePath, true);
                         stopwatch.Stop();
-                        var fileManager = new CryptoSoft.FileManager(differentialBackupFilePath, "EasySave");
-                        int ElapsedTime = fileManager.TransformFile();
-
-                        loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
-                        loggerStrategy.DisplayLogFileContent();
-
-                        Console.WriteLine((languageManager.GetTranslation("copied")) + $" : {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{differentialBackupFilePath}");
+                        
+                        var fileExtension = Path.GetExtension(sourceFilePath);
+                        if (jobBackup.extensionsToEncrypt.Contains(fileExtension))
+                        {
+                            var fileManager = new CryptoSoft.FileManager(targetFilePath, "EasySave");
+                            int ElapsedTime = fileManager.TransformFile();
+                            loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
+                            Console.WriteLine($"{targetFilePath} a été chiffré");
+                        }
+                        else
+                        {
+                            loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, 0);
+                            Console.WriteLine((languageManager.GetTranslation("copied")) + $" : {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{differentialBackupFilePath}");
+                        }
                     }
                 }
+                loggerStrategy.DisplayLogFileContent();
                 Console.WriteLine(languageManager.GetTranslation("diff_backup_finished"));
             }
             catch (Exception ex)
