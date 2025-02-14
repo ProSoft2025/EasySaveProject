@@ -4,6 +4,12 @@ namespace EasySave
 {
     public class DifferentialBackup : IBackupStrategy
     {
+        private LanguageManager languageManager;
+
+        public DifferentialBackup(LanguageManager languageManager)
+        {
+            this.languageManager = languageManager;
+        }
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             Console.WriteLine("Début de la sauvegarde différentielle.");
