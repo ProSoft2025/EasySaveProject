@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/* SUMMARY 
+ * It stores translations in a dictionary, using a key word linked to EN and FR */
+
 public class LanguageManager
 {
     private string currentLanguage = "en"; // Langue par défaut

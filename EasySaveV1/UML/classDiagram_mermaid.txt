@@ -1,0 +1,137 @@
+classDiagram
+    namespace EasySave {
+        class BackupJob {
+            +string name
+            +string sourceDirectory
+            +string targetDirectory
+            +BackupTypeStrategy BackupStrategy
+            +execute()
+            +displayAttributs()
+        }
+
+        class EasySaveApp {
+            +List~BackupJob~ backupJobs
+            +addBackupJob(BackupJob job)
+            +removeBackupJob(string name)
+            +executeBackupJob(string[] names)
+            +executeAllBackupJobs()
+        }
+
+        class Logger {
+            +string logFilePath
+            +logAction(LogEntry entry)
+            +openLogFile() : void
+            +DisplayLogFileContent()
+        }
+
+        class LogEntry {
+            +string timestamp
+            +string taskName
+            +string sourcePath
+            +string targetPath
+            +int fileSize
+            +int transferTime
+        }
+
+        class StateManager {
+            +string stateFilePath
+            +updateState(StateEntry entry)
+            +getState() : string
+        }
+
+        class StateEntry {
+            +string taskName
+            +string timestamp
+            +string status
+            +int totalFiles
+            +int totalSize
+            +int progress
+            +int remainingFiles
+            +int remainingSize
+            +string currentSource
+            +string currentTarget
+        }
+
+        class FileManager {
+            +copyFile(string source, string target)
+            +createDirectory(string path)
+        }
+
+        class UserInterface {
+            +displayMenu()
+            +getUserInput() : string
+        }
+
+        class MenuManager {
+            -UserInterface ui
+            -EasySaveApp manager
+            -Logger logger
+            -BackupJobFactory backupJobFactory
+            +Run()
+            +DisplayBackup()
+            +AddBackupMenu()
+            +RemoveBackupMenu()
+            +RestoreBackup()
+            +BackupExecute()
+            +ReadBackupExecute()
+        }
+
+        class LanguageManager {
+            +Language currentLanguage
+            +setLanguage(Language language)
+            +getLanguage() : Language
+        }
+
+        class BackupJobFactory {
+            +createBackupJob(string name, string source, string target, BackupType type) : BackupJob
+        }
+
+        class BackupStrategy {
+            <<interface>>
+            +executeBackup(string source, string target)
+        }
+
+        class CompleteBackup {
+            +executeBackup(string source, string target)
+        }
+
+        class DifferentialBackup {
+            +executeBackup(string source, string target)
+        }
+
+        class BackupObserver {
+            +update(string message)
+        }
+
+        class Language {
+            <<enum>>
+            FRENCH
+            ENGLISH
+        }
+    }
+
+    %% Relations principales
+    EasySaveApp "1" *-- "0..5" BackupJob : contains
+    EasySaveApp "1" --> "1" Logger : uses
+    EasySaveApp "1" --> "1" StateManager : uses
+    EasySaveApp "1" --> "1" LanguageManager : uses
+    EasySaveApp "1" --> "1" BackupJobFactory : uses
+    EasySaveApp "1" --> "1..*" BackupObserver : notifies
+    BackupJob "1" --> "1" FileManager : uses
+    BackupJob "1" --> "1" BackupStrategy : uses
+    
+    UserInterface "1" <-- "1" MenuManager : uses
+    MenuManager "1" --> "1" EasySaveApp : interacts with
+    MenuManager "1" --> "1" Logger : interacts with
+    MenuManager "1" --> "1" BackupJobFactory : uses
+
+    BackupJobFactory "1" --> "1" BackupJob : creates
+    BackupStrategy <|-- CompleteBackup : implements
+    BackupStrategy <|-- DifferentialBackup : implements
+    BackupObserver <.. EasySaveApp : observes
+    LanguageManager "1" --> "0..*" BackupObserver : updates
+    LanguageManager "1" --> "1" Language : handle
+
+    %% Relations pour LogEntry et StateEntry
+    Logger "1" --> "1..*" LogEntry : logs
+    StateManager "1" --> "1..*" StateEntry : updates

@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using BackupLogger;
 
+/*SUMMARY
+ * Handle menu display and navigation, user input, and interactions with the application's core functionalities :
+ * managing backups (creation, deletion, restoration, execution), viewing logs, and settings (language and log format).*/
+
 namespace EasySave {
     public class UserInterface
     {
