@@ -14,14 +14,15 @@
 			<ListBoxItem Tag="RemoveBackup">⚙️ Delete a backup</ListBoxItem>
 			<ListBoxItem Tag="RestoreBackup">⚙️ Restore a backup</ListBoxItem>
 			<ListBoxItem Tag="ExecuteBackup">⚙️ Execute backups</ListBoxItem>
-			<ListBoxItem Tag="ViewLogs">⚙️ View logs</ListBoxItem>
-			
+			<ListBoxItem Tag="ViewState">⚙️ View Backup State</ListBoxItem>
+			<ListBoxItem Tag="DailyLogs">⚙️ Daily logs</ListBoxItem>
+
 		</ListBox>
 
 		<!-- Contenu principal -->
-		<ContentControl Name="ContentArea">
-			
-		</ContentControl>
+		<ContentControl x:Name="ContentArea">
+
+			</ContentControl>
 	</DockPanel>
 	
 	
