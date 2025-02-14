@@ -93,7 +93,8 @@ public class LanguageManager
                 { "input_complete_backup_path", "Input the path of the last complete backup :" },
                 { "diff_backup_finished", "The differential backup is finished" },
                 { "error_diff_backup", "An error has occured during the differential backup :" },
-                { "start_backup_restore", "Start the restore of the backup :" }
+                { "start_backup_restore", "Start the restore of the backup :" },
+                { "encrypted", "has been encrypted" }
 
 
             }
@@ -181,10 +182,8 @@ public class LanguageManager
                 { "input_complete_backup_path", "Saisir le chemin de la dernière sauvegarde totale :" },
                 { "diff_backup_finished", "La sauvegarde différentielle est terminée" },
                 { "error_diff_backup", "Erreur lors de la sauvegarde différentielle :" },
-                { "start_backup_restore", "Début de la restauration de la sauvegarde :" }
-
-
-
+                { "start_backup_restore", "Début de la restauration de la sauvegarde :" },
+                { "encrypted", "a été chiffré" }
 
 
             }

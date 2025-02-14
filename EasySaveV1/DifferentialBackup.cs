@@ -49,14 +49,14 @@ namespace EasySave
                         var fileExtension = Path.GetExtension(sourceFilePath);
                         if (jobBackup.extensionsToEncrypt.Contains(fileExtension))
                         {
-                            var fileManager = new CryptoSoft.FileManager(targetFilePath, "EasySave");
+                            var fileManager = new CryptoSoft.FileManager(differentialBackupFilePath, "EasySave");
                             int ElapsedTime = fileManager.TransformFile();
-                            loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
-                            Console.WriteLine($"{targetFilePath} a été chiffré");
+                            loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
+                            Console.WriteLine(differentialBackupFilePath + languageManager.GetTranslation("encrypted"));
                         }
                         else
                         {
-                            loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, 0);
+                            loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, 0);
                             Console.WriteLine((languageManager.GetTranslation("copied")) + $" : {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{differentialBackupFilePath}");
                         }
                     }
