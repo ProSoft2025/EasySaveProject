@@ -14,8 +14,7 @@
 			<ListBoxItem Tag="RemoveBackup">➖ Delete a backup</ListBoxItem>
 			<ListBoxItem Tag="RestoreBackup">↩️ Restore a backup</ListBoxItem>
 			<ListBoxItem Tag="ExecuteBackup">▶️ Execute backups</ListBoxItem>
-			<ListBoxItem Tag="ViewState">⚙️ View Backup State</ListBoxItem>
-			<ListBoxItem Tag="DailyLogs">⚙️ Daily logs</ListBoxItem>
+			<ListBoxItem Tag="DailyLogs">⚙️ Logs</ListBoxItem>
 
 		</ListBox>
 
