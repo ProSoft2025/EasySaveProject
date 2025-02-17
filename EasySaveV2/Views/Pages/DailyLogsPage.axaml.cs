@@ -17,25 +17,38 @@ namespace EasySaveV2
 
         private void OpenFileAndDisplayContent()
         {
-            string filePath = Path.Combine("C:\\EasySave\\logs", $"{DateTime.Now:yyyy-MM-dd}.json");
+            string LogsFilePath = Path.Combine("C:\\EasySave\\logs", $"{DateTime.Now:yyyy-MM-dd}.json");
+            string StateFilePath = Path.Combine("C:\\EasySave\\state", $"{DateTime.Now:yyyy-MM-dd}.json");
 
-            // Check if TextBox with name "FileContentTextBox" exists
-            var textBox = this.FindControl<TextBox>("FileContentTextBox");
-            if (textBox == null)
+            // Check if TextBox with name "...TextBox" exists
+            var LogsTextBox = this.FindControl<TextBox>("LogsContentTextBox");
+            var StateTextBox = this.FindControl<TextBox>("StateContentTextBox");
+
+            if (LogsTextBox == null)
             {
-                System.Console.WriteLine("TextBox 'FileContentTextBox' not found.");
+                System.Console.WriteLine("TextBox 'LogsContentTextBox' not found.");
                 return;
             }
 
             // Read file content
-            if (File.Exists(filePath))
+            if (File.Exists(LogsFilePath))
             {
-                string fileContent = File.ReadAllText(filePath);
-                textBox.Text = fileContent;
+                string fileContent = File.ReadAllText(LogsFilePath);
+                LogsTextBox.Text = fileContent;
             }
             else
             {
-                textBox.Text = "No logs found";
+                LogsTextBox.Text = "No logs found";
+            }
+
+            if (File.Exists(StateFilePath))
+            {
+                string fileContent = File.ReadAllText(StateFilePath);
+                StateTextBox.Text = fileContent;
+            }
+            else
+            {
+                StateTextBox.Text = "No State found";
             }
         }
     }

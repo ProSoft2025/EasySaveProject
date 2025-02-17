@@ -13,7 +13,8 @@ partial class Program
         var ui = new UserInterface(languageManager);
 
         // Create a StateManager instance
-        var stateManager = new StateManager("state.json");
+        var stateManager = new StateManager("C:\\EasySave\\state");
+        //var stateManager = new StateManager("state.json");
 
         //<<<<<<<<<<<<Gestion du format log via DI>>>>>>>>>>>> 
         var services = new ServiceCollection();

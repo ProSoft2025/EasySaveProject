@@ -60,7 +60,7 @@
 						<DropShadowEffect BlurRadius="10" Color="Black" Opacity="0.5" OffsetX="3" OffsetY="3"/>
 					</Border.Effect>
 					<Button Width="200" Height="50"
-                            Background="#555" Foreground="White"
+                            Background="#555" Foreground="White" Cursor="Hand"
                             FontSize="36" FontWeight="Bold" FontStyle="Italic"
                             Click="OnStartButtonClick">
 						<TextBlock Text="Start" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -73,14 +73,14 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Bottom"
                             Margin="10">
-					<Button Width="75" Background="Transparent" BorderThickness="0">
+					<Button Width="75" Background="Transparent" BorderThickness="0" Cursor="Hand">
 						<Image Source="/Assets/english.png" Stretch="Uniform"/>
 					</Button>
 
 					<!-- Separator -->
 					<Rectangle Width="2" Height="30" Fill="Black" Margin="5,0"/>
 
-					<Button Width="75" Background="Transparent" BorderThickness="0">
+					<Button Width="75" Background="Transparent" BorderThickness="0" Cursor="Hand">
 						<Image Source="/Assets/franceflag.png" Stretch="Uniform"/>
 					</Button>
 				</StackPanel>

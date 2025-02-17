@@ -10,10 +10,10 @@
 		<ListBox DockPanel.Dock="Left" Width="200" Background="#333" Cursor="Hand" Foreground="White" SelectionChanged="OnMenuSelectionChanged">
 			<ListBoxItem Tag="Home">🏠 Home</ListBoxItem>
 			<ListBoxItem Tag="ViewBackup">📁 View Backup</ListBoxItem>
-			<ListBoxItem Tag="AddBackup">⚙️  Add a backup</ListBoxItem>
-			<ListBoxItem Tag="RemoveBackup">⚙️ Delete a backup</ListBoxItem>
-			<ListBoxItem Tag="RestoreBackup">⚙️ Restore a backup</ListBoxItem>
-			<ListBoxItem Tag="ExecuteBackup">⚙️ Execute backups</ListBoxItem>
+			<ListBoxItem Tag="AddBackup">➕ Add a backup</ListBoxItem>
+			<ListBoxItem Tag="RemoveBackup">➖ Delete a backup</ListBoxItem>
+			<ListBoxItem Tag="RestoreBackup">↩️ Restore a backup</ListBoxItem>
+			<ListBoxItem Tag="ExecuteBackup">▶️ Execute backups</ListBoxItem>
 			<ListBoxItem Tag="ViewState">⚙️ View Backup State</ListBoxItem>
 			<ListBoxItem Tag="DailyLogs">⚙️ Daily logs</ListBoxItem>
 
