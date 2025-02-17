@@ -13,10 +13,12 @@ public partial class RestoreBackupPage : UserControl
     private readonly StateManager stateManager;
     private readonly EasySaveApp manager;
     private readonly MessageService messageService;
+    private readonly LanguageManager languageManager;
+
 
     public RestoreBackupPage()
     {
-        this.manager = EasySaveApp.GetInstance();
+        this.manager = EasySaveApp.GetInstance(languageManager);
         this.messageService = new MessageService();
         InitializeComponent();
     }
@@ -31,7 +33,7 @@ public partial class RestoreBackupPage : UserControl
             return;
         }
 
-        EasySaveApp appInstance = EasySaveApp.GetInstance();
+        EasySaveApp appInstance = EasySaveApp.GetInstance(languageManager);
         bool isRemoved = appInstance.BackupJobs.RemoveAll(job => job.Name == name) > 0;
         if (isRemoved)
         {

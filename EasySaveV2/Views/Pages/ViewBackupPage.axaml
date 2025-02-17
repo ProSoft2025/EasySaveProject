@@ -20,9 +20,10 @@
 					<DataTemplate>
 						<Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
 							<StackPanel>
-								<TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16"/>
-								<TextBlock Text="{Binding SourceDirectory}" FontSize="14"/>
-								<TextBlock Text="{Binding TargetDirectory}" FontSize="14"/>
+								<TextBlock Text="{Binding Name, StringFormat='Nom : {0}'}" FontWeight="Bold" FontSize="16"/>
+								<TextBlock Text="{Binding SourceDirectory, StringFormat='Source : {0}'}" FontSize="14"/>
+								<TextBlock Text="{Binding TargetDirectory, StringFormat='Destination : {0}'}" FontSize="14"/>
+								<TextBlock Text="{Binding BackupStrategy, StringFormat='Type : {0}'}" FontSize="14"/>
 							</StackPanel>
 						</Border>
 					</DataTemplate>

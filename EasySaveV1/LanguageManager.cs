@@ -95,12 +95,8 @@ namespace EasySaveV1
                 { "diff_backup_finished", "The differential backup is finished" },
                 { "error_diff_backup", "An error has occured during the differential backup :" },
                 { "start_backup_restore", "Start the restore of the backup :" },
-                { "encrypted", "has been encrypted" }
-
-
-                { "Error_BackupAdd", "Error : The Backup Name already exists."}
-
-            
+                { "encrypted", "has been encrypted" },
+                { "Error_BackupAdd", "Error : The Backup Name already exists."}            
             }
         },
         { "fr", new Dictionary<string, string>
@@ -187,10 +183,8 @@ namespace EasySaveV1
                 { "diff_backup_finished", "La sauvegarde différentielle est terminée" },
                 { "error_diff_backup", "Erreur lors de la sauvegarde différentielle :" },
                 { "start_backup_restore", "Début de la restauration de la sauvegarde :" },
-                { "encrypted", "a été chiffré" }
-
+                { "encrypted", "a été chiffré" },
                 { "Error_BackupAdd", "Erreur : Ce nom de sauvegarde existe déjà."}
-
             }
         }
     };

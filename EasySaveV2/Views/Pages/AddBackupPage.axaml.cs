@@ -16,11 +16,12 @@ namespace EasySaveV2
         private readonly StateManager stateManager;
         private readonly EasySaveApp manager;
         private readonly MessageService messageService;
+        private readonly LanguageManager languageManager;
         public AddBackupPage(BackupJobFactory backupJobFactory, StateManager stateManager, EasySaveApp manager)
         {
             this.backupJobFactory = backupJobFactory;
             this.stateManager = stateManager;
-            this.manager = EasySaveApp.GetInstance();
+            this.manager = EasySaveApp.GetInstance(languageManager);
             this.messageService = new MessageService();
             InitializeComponent();
         }
@@ -36,17 +37,17 @@ namespace EasySaveV2
             switch (strategyChoice)
             {
                 case "Complete Backup":
-                    strategy = new CompleteBackup();
+                    strategy = new CompleteBackup(languageManager);
                     break;
                 case "Differential Backup":
-                    strategy = new DifferentialBackup();
+                    strategy = new DifferentialBackup(languageManager);
                     break;
                 default:
                     await messageService.ShowMessage((Window)this.VisualRoot, "Incorrect choice, please try again");
                     return;
             }
 
-            EasySaveApp.GetInstance().AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
+            EasySaveApp.GetInstance(languageManager).AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
             await messageService.ShowMessage((Window)this.VisualRoot, "Backup added successfully");
         }
     }

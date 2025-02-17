@@ -11,6 +11,7 @@ namespace EasySaveV2
     public partial class ViewBackupPage : UserControl, INotifyPropertyChanged
     {
         private ObservableCollection<BackupJob> _backupJobs;
+        private readonly LanguageManager languageManager;
 
         public ObservableCollection<BackupJob> BackupJobs
         {
@@ -29,7 +30,7 @@ namespace EasySaveV2
         {
             InitializeComponent();
             DataContext = this;
-            BackupJobs = new ObservableCollection<BackupJob>(EasySaveApp.GetInstance().BackupJobs);
+            BackupJobs = new ObservableCollection<BackupJob>(EasySaveApp.GetInstance(languageManager).BackupJobs);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

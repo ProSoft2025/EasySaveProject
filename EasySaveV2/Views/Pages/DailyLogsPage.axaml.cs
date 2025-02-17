@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using BackupLogger;
+using System;
 using System.IO;
 
 namespace EasySaveV2
@@ -15,7 +17,7 @@ namespace EasySaveV2
 
         private void OpenFileAndDisplayContent()
         {
-            string filePath = "C:\\EasySave\\logs\\test.txt";
+            string filePath = Path.Combine("C:\\EasySave\\logs", $"{DateTime.Now:yyyy-MM-dd}.json");
 
             // Check if TextBox with name "FileContentTextBox" exists
             var textBox = this.FindControl<TextBox>("FileContentTextBox");

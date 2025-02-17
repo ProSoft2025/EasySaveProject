@@ -5,12 +5,14 @@ using BackupLogger;
 using EasySaveV1;
 using EasySaveV2.Views;
 using static EasySaveV1.UserInterface;
-using EasySaveV2.Views;
+using BackupLogger;
+
 namespace EasySaveV2
 {
     public partial class PageMenu : UserControl
     {
         private MenuManager menuManager;
+        private LanguageManager languageManager;
 
 
         public PageMenu()
@@ -21,7 +23,8 @@ namespace EasySaveV2
         private void InitializeMenuManager()
         {
             var ui = new UserInterface(new LanguageManager());
-            menuManager = new MenuManager(ui, EasySaveApp.GetInstance(), new LoggerService("path/to/log/file"), new LanguageManager(), new StateManager("state.json"));
+            var config = new ConfigManager();
+            menuManager = new MenuManager(ui, EasySaveApp.GetInstance(languageManager), config, new JSONLog(config), new LanguageManager(), new StateManager("state.json"));
         }
 
         private void OnMenuSelectionChanged(object sender, SelectionChangedEventArgs e)
