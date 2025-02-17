@@ -1,11 +1,10 @@
-
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using BackupLogger;
 using EasySaveV1;
 using EasySaveV2.Views;
+using EasySaveV2.Services;
 using static EasySaveV1.UserInterface;
-using BackupLogger;
 
 namespace EasySaveV2
 {
@@ -13,17 +12,19 @@ namespace EasySaveV2
     {
         private MenuManager menuManager;
         private LanguageManager languageManager;
-
+        private MessageService messageService;
 
         public PageMenu()
         {
             InitializeComponent();
             InitializeMenuManager();
         }
+
         private void InitializeMenuManager()
         {
             var ui = new UserInterface(new LanguageManager());
             var config = new ConfigManager();
+            messageService = new MessageService();
             menuManager = new MenuManager(ui, EasySaveApp.GetInstance(languageManager), config, new JSONLog(config), new LanguageManager(), new StateManager("state.json"));
         }
 
@@ -41,31 +42,32 @@ namespace EasySaveV2
                     case "ViewBackup":
                         ContentArea.Content = new ViewBackupPage();
                         break;
+
                     case "AddBackup":
                         ContentArea.Content = new AddBackupPage(menuManager.GetBackupJobFactory(),
                             menuManager.GetStateManager(),
                             menuManager.GetEasySaveApp());
                         break;
-                    
+
                     case "RemoveBackup":
                         ContentArea.Content = new RemoveBackupPage();
                         break;
-                    
+
                     case "ExecuteBackup":
                         ContentArea.Content = new ExecuteBackupPage();
                         break;
 
                     case "RestoreBackup":
                         ContentArea.Content = new RestoreBackupPage();
-                        break;                    
+                        break;
+
                     case "DailyLogs":
                         ContentArea.Content = new DailyLogsPage();
                         break;
-                    case "ViewState":
-                        //ContentArea.Content = new ViewStatePage();
+
+                    case "Encryption":
+                        ContentArea.Content = new EncryptionPage(menuManager.GetEasySaveApp(), messageService);
                         break;
-
-
                 }
             }
         }
