@@ -10,13 +10,17 @@
 			<TabItem Header="Daily Logs" Cursor="Hand">
 				<StackPanel>
 					<ScrollViewer Height="200" VerticalScrollBarVisibility="Auto">
-						<TextBox Name="FileContentTextBox" AcceptsReturn="True"/>
+						<TextBox Name="LogsContentTextBox" AcceptsReturn="True"/>
 					</ScrollViewer>
 				</StackPanel>
 			</TabItem>
 
-			<TabItem Header="Current States" Cursor="Hand">
-				<TextBlock Margin="5">Daily Logs content</TextBlock>
+			<TabItem Header="Current State" Cursor="Hand">
+				<StackPanel>
+					<ScrollViewer Height="200" VerticalScrollBarVisibility="Auto">
+						<TextBox Name="StateContentTextBox" AcceptsReturn="True"/>
+					</ScrollViewer>
+				</StackPanel>
 			</TabItem>
 
 		</TabControl>
