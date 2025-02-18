@@ -15,7 +15,7 @@ namespace EasySaveV1
 
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
-            Console.WriteLine(languageManager.GetTranslation("start_complete_backup"));
+            //Console.WriteLine(languageManager.GetTranslation("start_complete_backup"));
 
             try
             {
@@ -45,15 +45,15 @@ namespace EasySaveV1
                     else
                     {
                         loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, 0);
-                        Console.WriteLine((languageManager.GetTranslation("copied")) + $" {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{targetFilePath}");
+                        //Console.WriteLine((languageManager.GetTranslation("copied")) + $" {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{targetFilePath}");
                     }
                 }
                 loggerStrategy.DisplayLogFileContent();
-                Console.WriteLine(languageManager.GetTranslation(("complete_backup_finished")));                    
+                //Console.WriteLine(languageManager.GetTranslation(("complete_backup_finished")));                    
             }
             catch (Exception ex)
             {
-                Console.WriteLine((languageManager.GetTranslation("complete_backup_error")) + $"{ex.Message}");
+               // Console.WriteLine((languageManager.GetTranslation("complete_backup_error")) + $"{ex.Message}");
             }
         }
 

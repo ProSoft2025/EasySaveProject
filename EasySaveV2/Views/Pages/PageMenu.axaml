@@ -5,7 +5,6 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EasySaveV2.PageMenu">
 
-
 	<UserControl.Styles>
 		<Style Selector="ListBoxItem:selected">
 			<Setter Property="Background" Value="Red"/>
@@ -33,6 +32,9 @@
 
 			</ContentControl>
 	</DockPanel>
+	
+	
+	
 	
 	
 	
