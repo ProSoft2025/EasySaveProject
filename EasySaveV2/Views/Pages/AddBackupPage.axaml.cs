@@ -50,5 +50,25 @@ namespace EasySaveV2
             EasySaveApp.GetInstance(languageManager).AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
             await messageService.ShowMessage((Window)this.VisualRoot, "Backup added successfully");
         }
+
+        private async void OnBrowseSourceClick(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFolderDialog();
+            var result = await dialog.ShowAsync((Window)this.VisualRoot);
+            if (!string.IsNullOrEmpty(result))
+            {
+                SourceDirectoryTextBox.Text = result;
+            }
+        }
+
+        private async void OnBrowseTargetClick(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFolderDialog();
+            var result = await dialog.ShowAsync((Window)this.VisualRoot);
+            if (!string.IsNullOrEmpty(result))
+            {
+                TargetDirectoryTextBox.Text = result;
+            }
+        }
     }
 }
