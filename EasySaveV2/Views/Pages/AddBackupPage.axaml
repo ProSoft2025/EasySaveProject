@@ -5,13 +5,17 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EasySaveV2.AddBackupPage">
 	<StackPanel Margin="20">
+		
 		<TextBlock Text="Add Backup" FontSize="24" Margin="0 0 0 20"/>
 		<TextBlock Text="Job Name"/>
 		<TextBox Name="JobNameTextBox"/>
+		
 		<TextBlock Text="Source Directory"/>
 		<TextBox Name="SourceDirectoryTextBox"/>
+		
 		<TextBlock Text="Target Directory"/>
 		<TextBox Name="TargetDirectoryTextBox"/>
+		
 		<TextBlock Text="Backup Type"/>
 		<ComboBox Name="BackupTypeComboBox">
 			<ComboBoxItem Content="Complete Backup"/>

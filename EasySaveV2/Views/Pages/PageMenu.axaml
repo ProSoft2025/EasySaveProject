@@ -3,7 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EasySaveV2.PageMenu">
+             x:Class="EasySaveV2.PageMenu"
+			 Background="#14172D">
 
 	<UserControl.Styles>
 		<Style Selector="ListBoxItem:selected">
@@ -15,7 +16,13 @@
 	
 	<DockPanel>
 		<!-- Sidebar -->
-		<ListBox DockPanel.Dock="Left" Width="200" Background="#333" Cursor="Hand" Foreground="White" SelectionChanged="OnMenuSelectionChanged">
+		<ListBox DockPanel.Dock="Left" Width="200" Cursor="Hand" Foreground="White" SelectionChanged="OnMenuSelectionChanged">
+			<ListBox.Background>
+				<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+					<GradientStop Color="#111214" Offset="0"/>
+					<GradientStop Color="#151E3E" Offset="1"/>
+				</LinearGradientBrush>
+			</ListBox.Background>
 			<ListBoxItem Tag="Home">🏠 Home</ListBoxItem>
 			<ListBoxItem Tag="ViewBackup">📁 View Backup</ListBoxItem>
 			<ListBoxItem Tag="AddBackup">⚙️  Add a backup</ListBoxItem>

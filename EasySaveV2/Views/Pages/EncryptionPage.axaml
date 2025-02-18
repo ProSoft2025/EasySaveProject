@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EasySaveV2.EncryptionPage">
-    <StackPanel Margin="20">
+    <StackPanel Margin="20">		
         <TextBlock Text="Extensions List :" FontWeight="Bold" Margin="0,0,0,10"/>
         <ListBox x:Name="ExtensionsListBox" Height="400" Margin="0,0,0,20"/>
         <TextBox x:Name="ExtensionTextBox" Watermark="Enter extension (Ex: .txt)" Margin="0,0,0,10"/>
