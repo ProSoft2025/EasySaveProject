@@ -51,7 +51,7 @@ namespace EasySaveV2
                 job.updateExtensionsToEncrypt(manager.ExtensionToEncrypt);
             }
             LoadExtensions();
-            
+            await messageService.ShowMessage((Window)this.VisualRoot, "Extension ajoutée avec succès");
         }
 
         private async void OnRemoveExtensionClick(object sender, RoutedEventArgs e)
@@ -70,7 +70,7 @@ namespace EasySaveV2
                 job.updateExtensionsToEncrypt(manager.ExtensionToEncrypt);
             }
             LoadExtensions();
-            
+            await messageService.ShowMessage((Window)this.VisualRoot, "Extension supprimée avec succès");
         }
     }
 }
