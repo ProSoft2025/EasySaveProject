@@ -23,14 +23,61 @@
 					<GradientStop Color="#151E3E" Offset="1"/>
 				</LinearGradientBrush>
 			</ListBox.Background>
-			<ListBoxItem Tag="Home">🏠 Home</ListBoxItem>
-			<ListBoxItem Tag="ViewBackup">📁 View Backup</ListBoxItem>
-			<ListBoxItem Tag="AddBackup">⚙️  Add a backup</ListBoxItem>
-			<ListBoxItem Tag="RemoveBackup">⚙️ Delete a backup</ListBoxItem>
-			<ListBoxItem Tag="RestoreBackup">⚙️ Restore a backup</ListBoxItem>
-			<ListBoxItem Tag="ExecuteBackup">⚙️ Execute backups</ListBoxItem>
-			<ListBoxItem Tag="Encryption">⚙️ Encryption </ListBoxItem>
-			<ListBoxItem Tag="DailyLogs">⚙️ Daily logs</ListBoxItem>
+			
+			<ListBoxItem Tag="Home" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/home.png" Width="22" Height="20" Margin="0,0,5,0" />  <TextBlock Text="Home" />
+				</StackPanel>
+			</ListBoxItem>
+			
+			<ListBoxItem Tag="ViewBackup" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/viewBackup.png" Width="22" Height="20" Margin="0,0,5,0" />  
+					<TextBlock Text="View Backup" />
+				</StackPanel>
+			</ListBoxItem>
+			
+			<ListBoxItem Tag="AddBackup" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/add.png" Width="22" Height="20" Margin="0,0,5,0" />  
+					<TextBlock Text="Add Backup" />
+				</StackPanel>
+			</ListBoxItem>
+			
+			<ListBoxItem Tag="RemoveBackup" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/remove.png" Width="22" Height="20" Margin="0,0,5,0" />  
+					<TextBlock Text="Remove Backup" />
+				</StackPanel>
+			</ListBoxItem>
+			
+			<ListBoxItem Tag="RestoreBackup" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/restore.png" Width="22" Height="20" Margin="0,0,5,0" />  
+					<TextBlock Text="Restore Backup" />
+				</StackPanel>
+			</ListBoxItem>
+			
+			<ListBoxItem Tag="ExecuteBackup" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/execute.png" Width="22" Height="20" Margin="0,0,5,0" />  
+					<TextBlock Text="Execute Backup" />
+				</StackPanel>
+			</ListBoxItem>
+			
+			<ListBoxItem Tag="Encryption" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/encryption.png" Width="22" Height="20" Margin="0,0,5,0" />  
+					<TextBlock Text="Encryption" />
+				</StackPanel>
+			</ListBoxItem>
+			
+			<ListBoxItem Tag="ViewLogs" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/view.png" Width="22" Height="20" Margin="0,0,5,0" />  
+					<TextBlock Text="View Logs" />
+				</StackPanel>
+			</ListBoxItem>
 
 		</ListBox>
 

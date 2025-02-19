@@ -34,6 +34,12 @@
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Pages\ViewLogs.axaml.cs">
+      <DependentUpon>ViewLogs.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 	
 
 	

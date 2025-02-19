@@ -16,7 +16,7 @@
 	<Grid>
 		<ContentControl x:Name="MainContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 			<!-- Contenu par défaut -->
-			<Grid Background="#333">
+			<Grid Background="#14172D">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="75"/>
 					<RowDefinition Height="*"/>
@@ -60,7 +60,7 @@
 						<DropShadowEffect BlurRadius="10" Color="Black" Opacity="0.5" OffsetX="3" OffsetY="3"/>
 					</Border.Effect>
 					<Button Width="200" Height="50"
-                            Background="#555" Foreground="White" Cursor="Hand"
+                            Background="#313558" Foreground="White" Cursor="Hand"
                             FontSize="36" FontWeight="Bold" FontStyle="Italic"
                             Click="OnStartButtonClick">
 						<TextBlock Text="Start" HorizontalAlignment="Center" VerticalAlignment="Center"/>

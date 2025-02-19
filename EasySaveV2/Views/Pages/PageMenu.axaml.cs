@@ -61,8 +61,8 @@ namespace EasySaveV2
                         ContentArea.Content = new RestoreBackupPage();
                         break;
 
-                    case "DailyLogs":
-                        ContentArea.Content = new DailyLogsPage();
+                    case "ViewLogs":
+                        ContentArea.Content = new ViewLogsPage();
                         break;
 
                     case "Encryption":

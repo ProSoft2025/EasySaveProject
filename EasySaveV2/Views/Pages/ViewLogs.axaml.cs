@@ -7,9 +7,9 @@ using System.IO;
 
 namespace EasySaveV2
 {
-    public partial class DailyLogsPage : UserControl
+    public partial class ViewLogsPage : UserControl
     {
-        public DailyLogsPage()
+        public ViewLogsPage()
         {
             InitializeComponent();
             OpenFileAndDisplayContent();

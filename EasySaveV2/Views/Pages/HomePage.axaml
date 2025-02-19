@@ -8,7 +8,8 @@
 	
 	<StackPanel>
 
-		<Button Content="Return to Home Page" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="OnReturnToMainClick" />
+		<Button Content="Return to Home Page" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="OnReturnToMainClick"
+				Background="#313558" Foreground="White" Cursor="Hand"/>
 	</StackPanel>
 </UserControl>
 
