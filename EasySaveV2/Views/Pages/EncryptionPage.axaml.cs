@@ -18,6 +18,8 @@ namespace EasySaveV2
             InitializeComponent();
             LoadExtensions();
         }
+        
+
 
         private void LoadExtensions()
         {
@@ -52,6 +54,7 @@ namespace EasySaveV2
             }
             LoadExtensions();
             await messageService.ShowMessage((Window)this.VisualRoot, "Extension ajoutée avec succès");
+            extensionTextBox.Clear();
         }
 
         private async void OnRemoveExtensionClick(object sender, RoutedEventArgs e)
@@ -71,6 +74,19 @@ namespace EasySaveV2
             }
             LoadExtensions();
             await messageService.ShowMessage((Window)this.VisualRoot, "Extension supprimée avec succès");
+            extensionTextBox.Clear();
         }
+
+        private void ExtensionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var extensionsListBox = this.FindControl<ListBox>("ExtensionsListBox");
+            var extensionTextBox = this.FindControl<TextBox>("ExtensionTextBox");
+
+            if (extensionsListBox.SelectedItem != null)
+            {
+                extensionTextBox.Text = extensionsListBox.SelectedItem.ToString();
+            }
+        }
+
     }
 }

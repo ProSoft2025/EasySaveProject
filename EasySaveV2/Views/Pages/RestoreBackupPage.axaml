@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EasySaveV2.RestoreBackupPage">
 	<StackPanel Margin="20">		
-		<TextBlock Text="Remove Backup" FontSize="24" Margin="0 0 0 20"/>
+		<TextBlock Text="Restore Backup" FontSize="24" Margin="0 0 0 20"/>
 		<TextBlock Text="Job Name"/>
 		<TextBox Name="JobNameTextBox"/>
 

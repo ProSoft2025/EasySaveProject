@@ -14,9 +14,11 @@ namespace EasySaveV2
 
         private readonly BackupJobFactory backupJobFactory;
         private readonly StateManager stateManager;
-        private readonly EasySaveApp manager;
         private readonly MessageService messageService;
         private readonly LanguageManager languageManager;
+        private readonly EasySaveApp manager;
+
+
         public AddBackupPage(BackupJobFactory backupJobFactory, StateManager stateManager, EasySaveApp manager)
         {
             this.backupJobFactory = backupJobFactory;

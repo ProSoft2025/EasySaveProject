@@ -6,7 +6,7 @@
              x:Class="EasySaveV2.EncryptionPage">
     <StackPanel Margin="20">		
         <TextBlock Text="Extensions List :" FontWeight="Bold" Margin="0,0,0,10"/>
-        <ListBox x:Name="ExtensionsListBox" Height="400" Margin="0,0,0,20"/>
+        <ListBox x:Name="ExtensionsListBox" Height="400" Margin="0,0,0,20" SelectionChanged="ExtensionsListBox_SelectionChanged"/>
         <TextBox x:Name="ExtensionTextBox" Watermark="Enter extension (Ex: .txt)" Margin="0,0,0,10"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="Add Extension" Click="OnAddExtensionClick" Margin="0,0,10,0"/>
