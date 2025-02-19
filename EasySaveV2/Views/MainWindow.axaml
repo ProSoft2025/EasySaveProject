@@ -7,7 +7,8 @@
         x:Class="EasySaveV2.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/logo.ico"
-        Title="EasySaveV2">
+        Title="EasySaveV2"
+		KeyDown="OnKeyDown">
 
 	<Design.DataContext>
 		<vm:MainWindowViewModel/>
@@ -59,7 +60,7 @@
 					<Border.Effect>
 						<DropShadowEffect BlurRadius="10" Color="Black" Opacity="0.5" OffsetX="3" OffsetY="3"/>
 					</Border.Effect>
-					<Button Width="200" Height="50"
+					<Button x:Name="StartButton" Width="200" Height="50"
                             Background="#313558" Foreground="White" Cursor="Hand"
                             FontSize="36" FontWeight="Bold" FontStyle="Italic"
                             Click="OnStartButtonClick">

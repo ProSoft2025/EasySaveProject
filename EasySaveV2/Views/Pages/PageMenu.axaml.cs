@@ -5,6 +5,7 @@ using EasySaveV1;
 using EasySaveV2.Views;
 using EasySaveV2.Services;
 using static EasySaveV1.UserInterface;
+using System.Linq;
 
 namespace EasySaveV2
 {
@@ -18,6 +19,12 @@ namespace EasySaveV2
         {
             InitializeComponent();
             InitializeMenuManager();
+
+            var homeItem = MenuListBox.Items.OfType<ListBoxItem>().FirstOrDefault(item => item.Tag.ToString() == "Home");
+            if (homeItem != null)
+            {
+                MenuListBox.SelectedItem = homeItem;
+            } 
         }
 
         private void InitializeMenuManager()

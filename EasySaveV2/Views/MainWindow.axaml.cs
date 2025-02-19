@@ -1,4 +1,6 @@
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using EasySaveV1;
@@ -12,7 +14,9 @@ namespace EasySaveV2.Views
         {
 
             InitializeComponent();
-            _initialContent = this.FindControl<ContentControl>("MainContent");
+            var contentControl = this.FindControl<ContentControl>("MainContent");
+            _initialContent = contentControl.Content;
+            this.KeyDown += OnKeyDown;
         }
 
 
@@ -29,6 +33,14 @@ namespace EasySaveV2.Views
         {
             var contentControl = this.FindControl<ContentControl>("MainContent");
             contentControl.Content = _initialContent;
+        }
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var startButton = this.FindControl<Button>("StartButton");
+                startButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            }
         }
     }
 }

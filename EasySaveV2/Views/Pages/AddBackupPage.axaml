@@ -4,29 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EasySaveV2.AddBackupPage">
-	<StackPanel Margin="20">
-		
-		<TextBlock Text="Add Backup" FontSize="24" Margin="0 0 0 20"/>
-		<TextBlock Text="Job Name"/>
-		<TextBox Name="JobNameTextBox"/>
 
-		<TextBlock Text="Source Directory"/>
-		<StackPanel Orientation="Horizontal">
-			<TextBox Name="SourceDirectoryTextBox" Width="750"/>
-			<Button Content="Browse" Click="OnBrowseSourceClick" Margin="10 0 5 0"/>
+	<UserControl.Styles>
+		<Style Selector="Button.proButton">
+			<Setter Property="FontSize" Value="18"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Background" Value="#0078D7"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Padding" Value="10"/>
+			<Setter Property="Margin" Value="20"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="CornerRadius" Value="5"/>
+		</Style>
+	</UserControl.Styles>
+
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Row="0" Margin="0 0 0 40">
+			
+			<TextBlock Text="Add Backup" FontSize="24" Margin="0 0 0 40"/>
+			<TextBlock Text="Job Name" Margin="0 0 0 5"/>
+			<TextBox Name="JobNameTextBox" Margin="0 0 0 15"/>
+
+			<TextBlock Text="Source Directory" Margin="0 0 0 5"/>
+			<StackPanel Orientation="Horizontal">
+				<TextBox Name="SourceDirectoryTextBox" Width="750" Margin="0 0 0 15"/>
+				<Button Content="Browse" Click="OnBrowseSourceClick" Margin="10 0 5 15"/>
+			</StackPanel>
+
+			<TextBlock Text="Target Directory" Margin="0 0 0 5"/>
+			<StackPanel Orientation="Horizontal">
+				<TextBox Name="TargetDirectoryTextBox" Width="750" Margin="0 0 0 15"/>
+				<Button Content="Browse" Click="OnBrowseTargetClick" Margin="10 0 5 15"/>
+			</StackPanel>
+
+			<TextBlock Text="Backup Type" Margin="0 10 0 5"/>
+			<ComboBox Name="BackupTypeComboBox">
+				<ComboBoxItem Content="Complete Backup"/>
+				<ComboBoxItem Content="Differential Backup"/>
+			</ComboBox>
 		</StackPanel>
 
-		<TextBlock Text="Target Directory"/>
-		<StackPanel Orientation="Horizontal">
-			<TextBox Name="TargetDirectoryTextBox" Width="750"/>
-			<Button Content="Browse" Click="OnBrowseTargetClick"/>
-		</StackPanel>
-		
-		<TextBlock Text="Backup Type"/>
-		<ComboBox Name="BackupTypeComboBox">
-			<ComboBoxItem Content="Complete Backup"/>
-			<ComboBoxItem Content="Differential Backup"/>
-		</ComboBox>
-		<Button Content="Add Backup" Click="OnAddBackupClick"/>
-	</StackPanel>
+		<Button Grid.Row="2" Content="Add Backup" Click="OnAddBackupClick" Classes="proButton" Margin="0 0 0 100"/>
+	</Grid>
 </UserControl>
+

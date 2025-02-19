@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -9,14 +10,18 @@ namespace EasySaveV2
 
   public partial class HomePage : UserControl
     {
+        
+
         public HomePage()
         {
             InitializeComponent();
+          
+          
         }
         private void OnReturnToMainClick(object sender, RoutedEventArgs e)
         {
-      
-            
+            var mainWindow = this.VisualRoot as MainWindow;
+            mainWindow?.ResetToMainContent();
         }
     }
 }
