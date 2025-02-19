@@ -30,11 +30,17 @@ namespace EasySaveV2
 
         private async void OnAddBackupClick(object sender, RoutedEventArgs e)
         {
+            
             string name = JobNameTextBox.Text;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return;
+            }
             string sourceDirectory = SourceDirectoryTextBox.Text;
             string targetDirectory = TargetDirectoryTextBox.Text;
             string strategyChoice = ((ComboBoxItem)BackupTypeComboBox.SelectedItem).Content.ToString();
-
+            
+           
             IBackupStrategy strategy;
             switch (strategyChoice)
             {

@@ -26,27 +26,30 @@ namespace EasySaveV2
             var jobs = easySaveApp.BackupJobs;
             List<BackupJob> selectedJobs = new List<BackupJob>();
 
-            foreach (var part in input.Split(';'))
+
+            if (input != null)
             {
-                if (part.Contains("-"))
+                foreach (var part in input.Split(';'))
                 {
-                    var rangeParts = part.Split('-');
-                    if (rangeParts.Length == 2 && int.TryParse(rangeParts[0], out int start) && int.TryParse(rangeParts[1], out int end))
+                    if (part.Contains("-"))
                     {
-                        for (int i = start - 1; i < end; i++)
+                        var rangeParts = part.Split('-');
+                        if (rangeParts.Length == 2 && int.TryParse(rangeParts[0], out int start) && int.TryParse(rangeParts[1], out int end))
                         {
-                            if (i >= 0 && i < jobs.Count)
-                                selectedJobs.Add(jobs[i]);
+                            for (int i = start - 1; i < end; i++)
+                            {
+                                if (i >= 0 && i < jobs.Count)
+                                    selectedJobs.Add(jobs[i]);
+                            }
                         }
                     }
-                }
-                else if (int.TryParse(part, out int index))
-                {
-                    if (index > 0 && index <= jobs.Count)
-                        selectedJobs.Add(jobs[index - 1]);
+                    else if (int.TryParse(part, out int index))
+                    {
+                        if (index > 0 && index <= jobs.Count)
+                            selectedJobs.Add(jobs[index - 1]);
+                    }
                 }
             }
-
             return selectedJobs;
         }
 
