@@ -61,6 +61,34 @@ The locations of both files (daily log and real-time status) will have to be stu
 
 The files (daily log and status) and any configuration files will be in JSON format. To allow quick reading via Notepad, it is necessary to put line breaks between JSON elements. Pagination would be a plus.
 
+### Version 2
+
+EasySave version 1 has been distributed to many customers.  
+
+Following a customer survey, the management decided to create a version 2 with the following improvements:  
+
+* Graphic Interface 
+
+Abandoning Console mode. The application must now be developed in WPF under .Net Core. 
+
+ * Unlimited number of jobs 
+
+The number of backup jobs is now unlimited.  
+
+* Encryption via CryptoSoft software 
+
+The software will have to be able to encrypt the files using CryptoSoft software (made during prosit 5).  Only the files with extensions defined by the user in the general settings should be encrypted. 
+
+ * Evolution of the Daily Log file 
+
+The daily log file must contain additional information: Time needed to encrypt the file (in ms)   
+ 
+* Business software 
+
+If the presence of business software is detected, the software must prohibit the launch of a backup job. In the case of sequential jobs, the software must complete the current job and stop before launching the next job. The user will be able to define the business software in the general settings of the software. (Note: the calculator application can substitute the business software during demonstrations).
+#Getting Started
+To get a local copy up and running follow these simple example steps. But before anything else you should be sure to have Visual Studio 2019 in order to run the program.
+
 Once you will have set up your computer You will have to clone this project.
 
 You can do it in HTTPS with this link: 
