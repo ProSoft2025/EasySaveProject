@@ -1,6 +1,4 @@
-﻿
-
-namespace EasySaveV1
+﻿namespace EasySaveV1
 {
     public class EasySaveApp
     {

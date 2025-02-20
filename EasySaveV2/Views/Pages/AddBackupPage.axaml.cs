@@ -45,10 +45,10 @@ namespace EasySaveV2
             switch (strategyChoice)
             {
                 case "Complete Backup":
-                    strategy = new CompleteBackup(languageManager);
+                    strategy = new CompleteBackup(languageManager, stateManager);
                     break;
                 case "Differential Backup":
-                    strategy = new DifferentialBackup(languageManager);
+                    strategy = new DifferentialBackup(languageManager, stateManager);
                     break;
                 default:
                     await messageService.ShowMessage((Window)this.VisualRoot, "Incorrect choice, please try again");

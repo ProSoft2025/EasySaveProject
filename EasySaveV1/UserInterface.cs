@@ -209,10 +209,10 @@ namespace EasySaveV1 {
                 switch (strategyChoice)
                 {
                     case "1":
-                        strategy = new CompleteBackup(languageManager);
+                        strategy = new CompleteBackup(languageManager, stateManager);
                         break;
                     case "2":
-                        strategy = new DifferentialBackup(languageManager);
+                        strategy = new DifferentialBackup(languageManager, stateManager);
                         break;
                     default:
                         Console.WriteLine(languageManager.GetTranslation(("incorrect_choice_try_again")));
