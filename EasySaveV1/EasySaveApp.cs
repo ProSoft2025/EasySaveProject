@@ -1,4 +1,4 @@
-﻿
+﻿using System.Diagnostics;
 
 namespace EasySaveV1
 {
@@ -16,7 +16,8 @@ namespace EasySaveV1
 
         private static readonly object _lock = new object();
         public List<BackupJob> BackupJobs { get; set; } = new List<BackupJob>();
-        public List<string> ExtensionToEncrypt { get; set; } = new List<string>();
+        public List<string> ProcessesToMonitor { get; set; } = new List<string>();
+        public List<string> ExtensionsToEncrypt { get; set; } = new List<string>();
 
         private EasySaveApp() { }
 
@@ -34,6 +35,7 @@ namespace EasySaveV1
             }
             return _instance;
         }
+
         public int AddBackup(BackupJob job)
         {
             // Vérification nom unique
@@ -58,17 +60,68 @@ namespace EasySaveV1
             }
             else
             {
-                Console.WriteLine((languageManager.GetTranslation("no_backup_found_name")) + $"'{name}'.");
+                Console.WriteLine((languageManager.GetTranslation("no_backup_found_name")) + $"'{name}'");
+            }
+        }
+
+        public void AddProcess(string process)
+        {
+            ProcessesToMonitor.Add(process);
+        }
+
+        public void RemoveProcess(string process)
+        {
+            if (ProcessesToMonitor.Contains(process))
+                ProcessesToMonitor.Remove(process);
+            else throw new Exception("Process not found");
+        }
+
+        public void MonitorProcesses()
+        {
+            Task.Run(async () =>
+            {
+                while (true)
+                {
+                    foreach (var processName in ProcessesToMonitor)
+                    {
+                        var processes = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(processName));
+                        if (processes.Any())
+                        {
+                            PauseBackups();
+                        }
+                        else
+                        {
+                            ResumeBackups();
+                        }
+                    }
+                    await Task.Delay(1000); // Vérifie toutes les secondes
+                }
+            });
+        }
+
+        private void PauseBackups()
+        {
+            foreach (var job in BackupJobs)
+            {
+                job.Pause();
+            }
+        }
+
+        private void ResumeBackups()
+        {
+            foreach (var job in BackupJobs)
+            {
+                job.Resume();
             }
         }
         public void AddExtension(string extension)
         {
-            ExtensionToEncrypt.Add(extension);
+            ExtensionsToEncrypt.Add(extension);
         }
         public void RemoveExtension(string extension)
         {
-            if (ExtensionToEncrypt.Contains(extension))
-                ExtensionToEncrypt.Remove(extension);
+            if (ExtensionsToEncrypt.Contains(extension))
+                ExtensionsToEncrypt.Remove(extension);
             else throw new Exception("Extension not found");
         }
     }

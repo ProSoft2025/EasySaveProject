@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="EasySaveV2.JobProcess">
+	<StackPanel Margin="20">
+		<TextBlock Text="Process List:" Width="115" FontWeight="Bold" Margin="0,0,0,10"/>
+		<ListBox x:Name="ProcessListBox" Height="400" Margin="0,0,0,20" SelectionChanged="ProcessListBox_SelectionChanged"/>
+
+
+		<TextBox x:Name="ProcessTextBox" Watermark="Enter Process (Ex: .exe)" Margin="0,0,0,10"/>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+		
+		
+			<Button Content="Add Process" Click="OnAddProcessClick" Margin="0,0,10,0"/>
+			<Button Content="Delete Process" Click="OnRemoveProcessClick"/>
+		</StackPanel>
+	</StackPanel>
+</UserControl>

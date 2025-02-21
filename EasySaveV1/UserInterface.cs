@@ -400,7 +400,7 @@ namespace EasySaveV1 {
             private void ChiffrementMenu() {
 
                 Console.WriteLine("===== Menu Chiffrement =====");
-                Console.WriteLine("Liste des extensions actives :" +string.Join("; ", manager.ExtensionToEncrypt));
+                Console.WriteLine("Liste des extensions actives :" +string.Join("; ", manager.ExtensionsToEncrypt));
                 Console.WriteLine("1. Ajouter Extension");
                 Console.WriteLine("2. Supprimer Extension");
                 Console.WriteLine("3. Retour au menu principal");
@@ -426,7 +426,7 @@ namespace EasySaveV1 {
                             Console.WriteLine("L'extension doit commencer par un point");
                             break;
                         }
-                        else if (manager.ExtensionToEncrypt.Contains(ChoixExtension))
+                        else if (manager.ExtensionsToEncrypt.Contains(ChoixExtension))
                         {
                             Console.WriteLine("Extension déjà présente");
                             break;
@@ -436,7 +436,7 @@ namespace EasySaveV1 {
                             manager.AddExtension(ChoixExtension);
                             foreach (BackupJob job in manager.BackupJobs)
                             {
-                                job.updateExtensionsToEncrypt(manager.ExtensionToEncrypt);
+                                job.updateExtensionsToEncrypt(manager.ExtensionsToEncrypt);
                             }
                             break;
                         }
@@ -449,7 +449,7 @@ namespace EasySaveV1 {
                             manager.RemoveExtension(choixExtension);
                             foreach (BackupJob job in manager.BackupJobs)
                             {
-                                job.updateExtensionsToEncrypt(manager.ExtensionToEncrypt);
+                                job.updateExtensionsToEncrypt(manager.ExtensionsToEncrypt);
                             }
                             break;
                         }

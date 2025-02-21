@@ -18,13 +18,13 @@ namespace EasySaveV2
             InitializeComponent();
             LoadExtensions();
         }
-        
+
 
 
         private void LoadExtensions()
         {
             var extensionsListBox = this.FindControl<ListBox>("ExtensionsListBox");
-            extensionsListBox.ItemsSource = manager.ExtensionToEncrypt.ToList();
+            extensionsListBox.ItemsSource = manager.ExtensionsToEncrypt.ToList();
         }
 
         private async void OnAddExtensionClick(object sender, RoutedEventArgs e)
@@ -33,27 +33,26 @@ namespace EasySaveV2
             var extension = extensionTextBox.Text;
             if (string.IsNullOrEmpty(extension))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Extension invalide");
+                await messageService.ShowMessage((Window)this.VisualRoot, "Extension false");
                 return;
             }
             else if (extension[0] != '.')
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "L'extension doit commencer par un point");
+                await messageService.ShowMessage((Window)this.VisualRoot, "L'extension start with dot");
                 return;
             }
-            else if (manager.ExtensionToEncrypt.Contains(extension))
+            else if (manager.ExtensionsToEncrypt.Contains(extension))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Extension déjà présente");
+                await messageService.ShowMessage((Window)this.VisualRoot, "Extension exist");
                 return;
             }
 
             manager.AddExtension(extension);
             foreach (BackupJob job in manager.BackupJobs)
             {
-                job.updateExtensionsToEncrypt(manager.ExtensionToEncrypt);
+                job.updateExtensionsToEncrypt(manager.ExtensionsToEncrypt);
             }
             LoadExtensions();
-            await messageService.ShowMessage((Window)this.VisualRoot, "Extension ajoutée avec succès");
             extensionTextBox.Clear();
         }
 
@@ -61,19 +60,18 @@ namespace EasySaveV2
         {
             var extensionTextBox = this.FindControl<TextBox>("ExtensionTextBox");
             var extension = extensionTextBox.Text;
-            if (string.IsNullOrEmpty(extension) || !manager.ExtensionToEncrypt.Contains(extension))
+            if (string.IsNullOrEmpty(extension) || !manager.ExtensionsToEncrypt.Contains(extension))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Extension invalide");
+                await messageService.ShowMessage((Window)this.VisualRoot, "Extension false");
                 return;
             }
 
             manager.RemoveExtension(extension);
             foreach (BackupJob job in manager.BackupJobs)
             {
-                job.updateExtensionsToEncrypt(manager.ExtensionToEncrypt);
+                job.updateExtensionsToEncrypt(manager.ExtensionsToEncrypt);
             }
             LoadExtensions();
-            await messageService.ShowMessage((Window)this.VisualRoot, "Extension supprimée avec succès");
             extensionTextBox.Clear();
         }
 

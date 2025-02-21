@@ -35,7 +35,7 @@ namespace EasySaveV1
                     stopwatch.Stop();
 
                     var fileExtension = Path.GetExtension(sourceFilePath);
-                    if (jobBackup.extensionsToEncrypt.Contains(fileExtension))
+                    if (jobBackup.ExtensionsToEncrypt.Contains(fileExtension))
                     {
                         var fileManager = new CryptoSoft.FileManager(targetFilePath, "EasySave");
                         int ElapsedTime = fileManager.TransformFile();

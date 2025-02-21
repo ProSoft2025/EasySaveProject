@@ -75,6 +75,9 @@ namespace EasySaveV2
                     case "Encryption":
                         ContentArea.Content = new EncryptionPage(menuManager.GetEasySaveApp(), messageService);
                         break;
+                    case "Processus":
+                        ContentArea.Content = new JobProcess(menuManager.GetEasySaveApp(), messageService);
+                        break;
                 }
             }
         }

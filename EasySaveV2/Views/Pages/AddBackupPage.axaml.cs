@@ -56,7 +56,7 @@ namespace EasySaveV2
             }
 
             EasySaveApp.GetInstance(languageManager).AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
-            await messageService.ShowMessage((Window)this.VisualRoot, "Backup added successfully");
+         
         }
 
         private async void OnBrowseSourceClick(object sender, RoutedEventArgs e)

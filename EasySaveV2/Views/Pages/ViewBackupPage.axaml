@@ -6,6 +6,8 @@
              x:Class="EasySaveV2.ViewBackupPage"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
+	
+	
 	<UserControl.Styles>
 		<Style Selector="ListBoxItem:selected">
 			<Setter Property="Background" Value="#0078D7"/>
@@ -21,6 +23,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<TextBlock Text="Backup List"
@@ -47,6 +50,7 @@
                                 CornerRadius="5"
                                 Background="White">
 							<StackPanel>
+								
 								<TextBlock Text="{Binding Name, StringFormat='Name : {0}'}"
                                            FontWeight="Bold"
                                            FontSize="16"
@@ -70,5 +74,6 @@
 				</ListBox.ItemTemplate>
 			</ListBox>
 		</ScrollViewer>
+	
 	</Grid>
 </UserControl>

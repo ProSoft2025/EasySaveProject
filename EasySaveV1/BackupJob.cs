@@ -5,12 +5,16 @@ namespace EasySaveV1
 
     public class BackupJob
     {
+        private bool _isSelected;
+        private bool _isPaused;
+
         public string Name { get; set; }
         public string SourceDirectory { get; set; }
         public string TargetDirectory { get; set; }
         public StateManager StateManager { get; set; }
         public IBackupStrategy BackupStrategy { get; set; }
-        public List<string> extensionsToEncrypt { get; set; } = new List<string>();
+        public List<string> ExtensionsToEncrypt { get; set; } = new List<string>();
+
 
         public BackupJob(string name, string sourceDirectory, string targetDirectory, IBackupStrategy backupStrategy, StateManager stateManager)
         {
@@ -21,7 +25,7 @@ namespace EasySaveV1
             BackupStrategy = backupStrategy;
         }
 
-        // Executes the backup job and updates state after each file copy
+
         public void Execute(ILoggerStrategy logger)
         {
             BackupStrategy.ExecuteBackup(this, logger);
@@ -44,6 +48,11 @@ namespace EasySaveV1
 
             foreach (string file in files)
             {
+                while (_isPaused)
+                {
+                    Thread.Sleep(100); // Attendre que la pause soit terminée
+                }
+
                 string destination = Path.Combine(TargetDirectory, Path.GetFileName(file));
                 // File.Copy(file, destination, true);
                 filesProcessed++;
@@ -68,7 +77,16 @@ namespace EasySaveV1
 
             StateManager.UpdateState(new StateEntry { TaskName = Name, Timestamp = DateTime.Now, Status = "Completed" });
         }
-        
+        public void Pause()
+        {
+            _isPaused = true;
+        }
+
+        public void Resume()
+        {
+            _isPaused = false;
+        }
+
         public void Restore(ILoggerStrategy logger) 
         { 
             BackupStrategy.Restore(this, logger);
@@ -82,7 +100,8 @@ namespace EasySaveV1
         }
         public void updateExtensionsToEncrypt(List<string> extensions)
         {
-            extensionsToEncrypt = extensions;
+            ExtensionsToEncrypt = extensions;
         }
+
     }
 }

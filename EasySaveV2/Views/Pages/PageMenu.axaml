@@ -30,13 +30,6 @@
 				</StackPanel>
 			</ListBoxItem>
 			
-			<ListBoxItem Tag="ViewBackup" FontSize="18">
-				<StackPanel Orientation="Horizontal">
-					<Image Source="/Assets/viewBackup.png" Width="22" Height="20" Margin="0,0,5,0" />  
-					<TextBlock Text="View Backup" />
-				</StackPanel>
-			</ListBoxItem>
-			
 			<ListBoxItem Tag="AddBackup" FontSize="18">
 				<StackPanel Orientation="Horizontal">
 					<Image Source="/Assets/add.png" Width="22" Height="20" Margin="0,0,5,0" />  
@@ -71,11 +64,25 @@
 					<TextBlock Text="Encryption" />
 				</StackPanel>
 			</ListBoxItem>
+
+			<ListBoxItem Tag="ViewBackup" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/viewBackup.png" Width="22" Height="20" Margin="0,0,5,0" />
+					<TextBlock Text="View Backup" />
+				</StackPanel>
+			</ListBoxItem>
 			
 			<ListBoxItem Tag="ViewLogs" FontSize="18">
 				<StackPanel Orientation="Horizontal">
 					<Image Source="/Assets/view.png" Width="22" Height="20" Margin="0,0,5,0" />  
 					<TextBlock Text="View Logs" />
+				</StackPanel>
+			</ListBoxItem>
+			
+			<ListBoxItem Tag="Processus" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/Processus.png" Width="22" Height="20" Margin="0,0,5,0" />
+					<TextBlock Text="Job Process" />
 				</StackPanel>
 			</ListBoxItem>
 
