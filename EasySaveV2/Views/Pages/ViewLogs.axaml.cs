@@ -1,9 +1,10 @@
-using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using BackupLogger;
-using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace EasySaveV2
 {
@@ -12,43 +13,64 @@ namespace EasySaveV2
         public ViewLogsPage()
         {
             InitializeComponent();
-            OpenFileAndDisplayContent();
         }
 
-        private void OpenFileAndDisplayContent()
+        private void InitializeComponent()
         {
-            string LogsFilePath = Path.Combine("C:\\EasySave\\logs", $"{DateTime.Now:yyyy-MM-dd}.json");
-            string StateFilePath = Path.Combine("C:\\EasySave\\state", $"{DateTime.Now:yyyy-MM-dd}.json");
+            AvaloniaXamlLoader.Load(this);
+        }
 
-            // Check if TextBox with name "...TextBox" exists
-            var LogsTextBox = this.FindControl<TextBox>("LogsContentTextBox");
-            var StateTextBox = this.FindControl<TextBox>("StateContentTextBox");
+        private void OpenFileManager_Click(object sender, RoutedEventArgs e)
+        {
+            string logDirectoryPath = @"C:\EasySave\logs"; // Remplacez par le chemin de votre répertoire de logs
+            Process.Start("explorer.exe", logDirectoryPath);
+        }
 
-            if (LogsTextBox == null)
+        private async void SelectLogFile_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog
             {
-                System.Console.WriteLine("TextBox 'LogsContentTextBox' not found.");
-                return;
-            }
+                Filters = new List<FileDialogFilter>
+                {
+                    new FileDialogFilter { Name = "JSON and XML files", Extensions = new List<string> { "json", "xml" } }
+                }
+            };
 
-            // Read file content
-            if (File.Exists(LogsFilePath))
+            var result = await openFileDialog.ShowAsync((Window)this.VisualRoot);
+            if (result != null && result.Length > 0)
             {
-                string fileContent = File.ReadAllText(LogsFilePath);
-                LogsTextBox.Text = fileContent;
+                string selectedFilePath = result[0];
+                string fileContent = await ReadFileContentAsync(selectedFilePath);
+                var logsTextBox = this.FindControl<TextBox>("LogsContentTextBox");
+                logsTextBox.Text = fileContent;
             }
-            else
-            {
-                LogsTextBox.Text = "No logs found";
-            }
+        }
 
-            if (File.Exists(StateFilePath))
+        private async void SelectStateFile_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog
             {
-                string fileContent = File.ReadAllText(StateFilePath);
-                StateTextBox.Text = fileContent;
+                Filters = new List<FileDialogFilter>
+                {
+                    new FileDialogFilter { Name = "JSON and XML files", Extensions = new List<string> { "json", "xml" } }
+                }
+            };
+
+            var result = await openFileDialog.ShowAsync((Window)this.VisualRoot);
+            if (result != null && result.Length > 0)
+            {
+                string selectedFilePath = result[0];
+                string fileContent = await ReadFileContentAsync(selectedFilePath);
+                var stateTextBox = this.FindControl<TextBox>("StateContentTextBox");
+                stateTextBox.Text = fileContent;
             }
-            else
+        }
+
+        private async Task<string> ReadFileContentAsync(string filePath)
+        {
+            using (var reader = new StreamReader(filePath))
             {
-                StateTextBox.Text = "No State found";
+                return await reader.ReadToEndAsync();
             }
         }
     }

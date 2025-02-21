@@ -12,7 +12,6 @@ namespace EasySaveV1
     {
         public string StateFilePath { get; set; } = string.Empty;
 
-
         public StateManager(string stateFilePath)
         {
             StateFilePath = stateFilePath;

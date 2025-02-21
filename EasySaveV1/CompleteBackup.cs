@@ -7,21 +7,31 @@ namespace EasySaveV1
     public class CompleteBackup : IBackupStrategy
     {
         private LanguageManager languageManager;
+        private readonly StateManager stateManager;
 
-        public CompleteBackup(LanguageManager languageManager)
+
+        public CompleteBackup(LanguageManager languageManager, StateManager stateManager)
         {
             this.languageManager = languageManager;
+            this.stateManager = stateManager;
+
         }
 
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
-            //Console.WriteLine(languageManager.GetTranslation("start_complete_backup"));
+            jobBackup.Status = BackupStatus.Running; // Définir l’état comme en cours d’exécution
+            stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Running" });
 
             try
             {
                 var sourceFiles = Directory.GetFiles(jobBackup.SourceDirectory, "*", SearchOption.AllDirectories)
-                                            .Select(f => f.Substring(jobBackup.SourceDirectory.Length + 1))
-                                            .ToList();
+                                           .Select(f => f.Substring(jobBackup.SourceDirectory.Length + 1))
+                                           .ToList();
+
+                int totalFiles = sourceFiles.Count;
+                long totalSize = sourceFiles.Sum(file => new FileInfo(Path.Combine(jobBackup.SourceDirectory, file)).Length);
+                int filesProcessed = 0;
+                long sizeProcessed = 0;
 
                 foreach (var file in sourceFiles)
                 {
@@ -32,45 +42,81 @@ namespace EasySaveV1
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();
                     File.Copy(sourceFilePath, targetFilePath, true);
+
+                    filesProcessed++;
+                    sizeProcessed += new FileInfo(sourceFilePath).Length;
+
+                    // Mise à jour de l’état après chaque fichier copié
+                    StateEntry state = new StateEntry
+                    {
+                        TaskName = jobBackup.Name,
+                        Timestamp = DateTime.Now,
+                        Status = "Running",
+                        TotalFiles = totalFiles,
+                        TotalSize = totalSize,
+                        Progress = (int)((double)filesProcessed / totalFiles * 100),
+                        RemainingFiles = totalFiles - filesProcessed,
+                        RemainingSize = totalSize - sizeProcessed,
+                        CurrentSource = sourceFilePath,
+                        CurrentTarget = targetFilePath
+                    };
+                    stateManager.UpdateState(state);
+
                     stopwatch.Stop();
 
+                    // Gestion du chiffrement des fichiers
                     var fileExtension = Path.GetExtension(sourceFilePath);
                     if (jobBackup.ExtensionsToEncrypt.Contains(fileExtension))
                     {
                         var fileManager = new CryptoSoft.FileManager(targetFilePath, "EasySave");
                         int ElapsedTime = fileManager.TransformFile();
                         loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
-                        Console.WriteLine($"{targetFilePath} a été chiffré");
                     }
                     else
                     {
                         loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, 0);
-                        //Console.WriteLine((languageManager.GetTranslation("copied")) + $" {sourceFilePath}" + (languageManager.GetTranslation("to")) + $"{targetFilePath}");
                     }
                 }
+
+                // Mise à jour du statut une fois terminé
+                jobBackup.Status = BackupStatus.Completed;
+                stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Completed" });
+
                 loggerStrategy.DisplayLogFileContent();
-                //Console.WriteLine(languageManager.GetTranslation(("complete_backup_finished")));                    
             }
             catch (Exception ex)
             {
-               // Console.WriteLine((languageManager.GetTranslation("complete_backup_error")) + $"{ex.Message}");
+                jobBackup.Status = BackupStatus.Error; // Gestion des erreurs
+                stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Error" });
+                Console.WriteLine($"{languageManager.GetTranslation("complete_backup_error")}: {ex.Message}");
             }
         }
+
 
         public void Restore(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             try
             {
-                // Créer le répertoire de restauration s'il n'existe pas
-                if (!Directory.Exists(jobBackup.SourceDirectory))
+                // Supprimer le répertoire source s'il existe
+                if (Directory.Exists(jobBackup.SourceDirectory))
                 {
-                    Directory.CreateDirectory(jobBackup.SourceDirectory);
+                    Directory.Delete(jobBackup.SourceDirectory, true);
                 }
 
-                // Utiliser la méthode utilitaire pour copier les fichiers et sous-répertoires
-                FileManager.CopyDirectory(jobBackup.TargetDirectory, jobBackup.SourceDirectory);
+                // Créer un nouvel objet BackupJob temporaire en inversant les répertoires source et cible
+                var tempBackupJob = new BackupJob
+                (
+                    jobBackup.Name,
+                    jobBackup.TargetDirectory,
+                    jobBackup.SourceDirectory,
+                    jobBackup.BackupStrategy,
+                    jobBackup.StateManager
+                );
 
-                Console.WriteLine(languageManager.GetTranslation("restore_success"));
+                tempBackupJob.extensionsToEncrypt = jobBackup.extensionsToEncrypt;
+
+                // Appeler la méthode ExecuteBackup avec le nouvel objet temporaire en inversant les sources et destination
+                ExecuteBackup(tempBackupJob, loggerStrategy);
             }
             catch (Exception ex)
             {

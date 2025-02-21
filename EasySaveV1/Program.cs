@@ -31,7 +31,7 @@ partial class Program
 
         var logFormat = provider.GetRequiredService<ILoggerStrategy>();
 
-        //<<<<<<<<<<<<Gestion du format log via DI>>>>>>>>>>>> 
+        //<<<<<<<<<<<<Gestion du format log via DI>>>>>>>>>>>>
 
         // Démarrer le menu
         var menu = new UserInterface.MenuManager(ui, manager, config, logFormat, languageManager, stateManager);
