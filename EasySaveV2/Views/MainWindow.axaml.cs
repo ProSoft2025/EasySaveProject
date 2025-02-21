@@ -1,50 +1,68 @@
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
-using Avalonia.Media;
-using EasySaveV1;
-using Microsoft.Extensions.DependencyInjection;
+using EasySaveV2.Localization;
+
 namespace EasySaveV2.Views
 {
     public partial class MainWindow : Window
     {
         private object _initialContent;
-        private bool _isHomePage;
+
         public MainWindow()
         {
-
             InitializeComponent();
+
             var contentControl = this.FindControl<ContentControl>("MainContent");
             _initialContent = contentControl.Content;
-            _isHomePage = true;
+
             this.KeyDown += OnKeyDown;
+
+            // ⚠️ Correction : On garde l'ancien DataContext et on ajoute la gestion de la traduction
+            this.DataContext = TranslationManager.Instance;
         }
 
-
-
-        private void OnStartButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-
-            var contentControl = this.FindControl<ContentControl>("MainContent");
-            contentControl.Content = new PageMenu();
-            _isHomePage = false;
-        }
-       
-
-       public void ResetToMainContent()
+        private void OnStartButtonClick(object sender, RoutedEventArgs e)
         {
             var contentControl = this.FindControl<ContentControl>("MainContent");
-            contentControl.Content = _initialContent;
-            _isHomePage =true;  
+
+            // ⚠️ Correction : Vérification que `PageMenu` est bien instancié avant de l'afficher
+            if (contentControl != null)
+            {
+                contentControl.Content = new PageMenu();
+            }
         }
+
+        public void ResetToMainContent()
+        {
+            var contentControl = this.FindControl<ContentControl>("MainContent");
+            if (contentControl != null)
+            {
+                contentControl.Content = _initialContent;
+            }
+        }
+
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (_isHomePage && e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 var startButton = this.FindControl<Button>("StartButton");
-                startButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                if (startButton != null)
+                {
+                    startButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                }
             }
+        }
+
+        // ⚠️ Correction : Ajout des méthodes de changement de langue
+        private void SetLanguageEnglish(object sender, RoutedEventArgs e)
+        {
+            TranslationManager.Instance.SetLanguage("en-US");
+        }
+
+        private void SetLanguageFrench(object sender, RoutedEventArgs e)
+        {
+            TranslationManager.Instance.SetLanguage("fr-FR");
         }
     }
 }
