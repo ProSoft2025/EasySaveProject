@@ -113,7 +113,7 @@ namespace EasySaveV1
                     jobBackup.StateManager
                 );
 
-                tempBackupJob.extensionsToEncrypt = jobBackup.extensionsToEncrypt;
+                tempBackupJob.ExtensionsToEncrypt = jobBackup.ExtensionsToEncrypt;
 
                 // Appeler la méthode ExecuteBackup avec le nouvel objet temporaire en inversant les sources et destination
                 ExecuteBackup(tempBackupJob, loggerStrategy);

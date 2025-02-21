@@ -2,9 +2,20 @@
 
 namespace EasySaveV1
 {
+    public enum BackupStatus
+    {
+        Idle,   // En attente
+        Running,
+        Paused,
+        Stopped,
+        Completed,
+        Error
+    }
 
     public class BackupJob
     {
+        
+
         private bool _isSelected;
         private bool _isPaused;
 
@@ -14,6 +25,8 @@ namespace EasySaveV1
         public StateManager StateManager { get; set; }
         public IBackupStrategy BackupStrategy { get; set; }
         public List<string> ExtensionsToEncrypt { get; set; } = new List<string>();
+
+        public BackupStatus Status { get; set; } = BackupStatus.Idle;
 
 
         public BackupJob(string name, string sourceDirectory, string targetDirectory, IBackupStrategy backupStrategy, StateManager stateManager)
