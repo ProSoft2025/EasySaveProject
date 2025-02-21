@@ -97,16 +97,26 @@ namespace EasySaveV1
         {
             try
             {
-                // Créer le répertoire de restauration s'il n'existe pas
-                if (!Directory.Exists(jobBackup.SourceDirectory))
+                // Supprimer le répertoire source s'il existe
+                if (Directory.Exists(jobBackup.SourceDirectory))
                 {
-                    Directory.CreateDirectory(jobBackup.SourceDirectory);
+                    Directory.Delete(jobBackup.SourceDirectory, true);
                 }
 
-                // Utiliser la méthode utilitaire pour copier les fichiers et sous-répertoires
-                FileManager.CopyDirectory(jobBackup.TargetDirectory, jobBackup.SourceDirectory);
+                // Créer un nouvel objet BackupJob temporaire en inversant les répertoires source et cible
+                var tempBackupJob = new BackupJob
+                (
+                    jobBackup.Name,
+                    jobBackup.TargetDirectory,
+                    jobBackup.SourceDirectory,
+                    jobBackup.BackupStrategy,
+                    jobBackup.StateManager
+                );
 
-                Console.WriteLine(languageManager.GetTranslation("restore_success"));
+                tempBackupJob.extensionsToEncrypt = jobBackup.extensionsToEncrypt;
+
+                // Appeler la méthode ExecuteBackup avec le nouvel objet temporaire en inversant les sources et destination
+                ExecuteBackup(tempBackupJob, loggerStrategy);
             }
             catch (Exception ex)
             {
