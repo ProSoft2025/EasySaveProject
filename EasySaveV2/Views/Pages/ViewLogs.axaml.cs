@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -13,6 +14,7 @@ namespace EasySaveV2
         public ViewLogsPage()
         {
             InitializeComponent();
+            LoadTodayLog();
         }
 
         private void InitializeComponent()
@@ -22,7 +24,7 @@ namespace EasySaveV2
 
         private void OpenFileManager_Click(object sender, RoutedEventArgs e)
         {
-            string logDirectoryPath = @"C:\EasySave\logs"; // Remplacez par le chemin de votre répertoire de logs
+            string logDirectoryPath = @"C:\EasySave\logs"; 
             Process.Start("explorer.exe", logDirectoryPath);
         }
 
@@ -71,6 +73,36 @@ namespace EasySaveV2
             using (var reader = new StreamReader(filePath))
             {
                 return await reader.ReadToEndAsync();
+            }
+        }
+
+        /// <summary>
+        /// Add daily log when enter the page so textbox is already loaded with the today log (priority json)
+        /// </summary>
+        private async void LoadTodayLog()
+        {
+            string todayLogFileName = $"{DateTime.Now:yyyy-MM-dd}.json";
+            string todayLogFilePath = Path.Combine(@"C:\EasySave\logs", todayLogFileName);
+
+            if (!File.Exists(todayLogFilePath))
+            {
+                todayLogFileName = $"{DateTime.Now:yyyy-MM-dd}.xml";
+                todayLogFilePath = Path.Combine(@"C:\EasySave\logs", todayLogFileName);
+            }
+
+            if (File.Exists(todayLogFilePath))
+            {
+                string fileContent = await ReadFileContentAsync(todayLogFilePath);
+                var logsTextBox = this.FindControl<TextBox>("LogsContentTextBox");
+                logsTextBox.Text = fileContent;
+            }
+
+            string stateFilePath = @"C:\EasySave\state.json";
+            if (File.Exists(stateFilePath))
+            {
+                string content = await ReadFileContentAsync(stateFilePath);
+                var stateTextBox = this.FindControl<TextBox>("StateContentTextBox");
+                stateTextBox.Text = content;
             }
         }
     }
