@@ -9,19 +9,19 @@
 		<TabControl Margin="5">
 			<TabItem Header="Daily Logs" Cursor="Hand">
 				<StackPanel>
-					<ScrollViewer Height="200" VerticalScrollBarVisibility="Auto">
+					<ScrollViewer Height="330" VerticalScrollBarVisibility="Auto">
 						<TextBox Name="LogsContentTextBox" AcceptsReturn="True" IsReadOnly="True"/>
 					</ScrollViewer>
-					<Button Content="Sélectionner le fichier de Log" Click="SelectLogFile_Click" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+					<Button Grid.Row="2" Content="Fichier de Log" Click="SelectLogFile_Click" Classes="proButton" Margin="0,10,0,0"/>
 				</StackPanel>
 			</TabItem>
 
 			<TabItem Header="Current State" Cursor="Hand">
 				<StackPanel>
-					<ScrollViewer Height="200" VerticalScrollBarVisibility="Auto">
+					<ScrollViewer Height="220" VerticalScrollBarVisibility="Auto">
 						<TextBox Name="StateContentTextBox" AcceptsReturn="True"/>
 					</ScrollViewer>
-					<Button Content="Sélectionner le fichier de State" Click="SelectStateFile_Click" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+					<Button Grid.Row="2" Content="Fichier d'état" Click="SelectStateFile_Click" Classes="proButton" Margin="0,10,0,0"/>
 				</StackPanel>
 			</TabItem>
 

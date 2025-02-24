@@ -8,9 +8,13 @@
 	<StackPanel Margin="20">
 		<TextBlock Text="Execute Backup" FontSize="24" Margin="0 0 0 20"/>
 		<TextBlock Text="Enter the number of Backup you would like to execute (Use - for backup 1 to X and ; for backup individually)"/>
-		<TextBox Name="BackupNumbersTextBox"/>
-		<Button Content="Execute Backup" Click="OnExecuteBackupClick" Margin="0 20 0 0"/>
-		<TextBlock Name="ExecutionOutputTextBlock" Text="Output will be shown here" Margin="20 0 0 0"/>
+		<TextBox Name="BackupNumbersTextBox" Margin="0 5 0 0"/>
+		<Button Grid.Row="2" Content="Execute" Click="OnExecuteBackupClick" Classes="proButton" Margin="0 40 0 0"/>
+
+		<TextBlock Name="ExecutionOutputTextBlock"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"
+           Text=" "/>
 	</StackPanel>
 	
 </UserControl>

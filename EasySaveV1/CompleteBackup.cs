@@ -9,18 +9,17 @@ namespace EasySaveV1
         private LanguageManager languageManager;
         private readonly StateManager stateManager;
 
-
         public CompleteBackup(LanguageManager languageManager, StateManager stateManager)
         {
             this.languageManager = languageManager;
             this.stateManager = stateManager;
-
         }
 
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             jobBackup.Status = BackupStatus.Running; // Définir l’état comme en cours d’exécution
             stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Running" });
+            //stateManager.StateFilePath = @"C:\EasySave\state.json";
 
             try
             {
@@ -46,7 +45,7 @@ namespace EasySaveV1
                     filesProcessed++;
                     sizeProcessed += new FileInfo(sourceFilePath).Length;
 
-                    // Mise à jour de l’état après chaque fichier copié
+                    // Update the state after each file copied
                     StateEntry state = new StateEntry
                     {
                         TaskName = jobBackup.Name,
@@ -64,13 +63,14 @@ namespace EasySaveV1
 
                     stopwatch.Stop();
 
-                    // Gestion du chiffrement des fichiers
+                    // Manage file encryption
                     var fileExtension = Path.GetExtension(sourceFilePath);
                     if (jobBackup.ExtensionsToEncrypt.Contains(fileExtension))
                     {
                         var fileManager = new CryptoSoft.FileManager(targetFilePath, "EasySave");
                         int ElapsedTime = fileManager.TransformFile();
                         loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
+
                     }
                     else
                     {
@@ -78,10 +78,19 @@ namespace EasySaveV1
                     }
                 }
 
-                // Mise à jour du statut une fois terminé
+                // Update status once completed
                 jobBackup.Status = BackupStatus.Completed;
-                stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Completed" });
-
+                stateManager.UpdateState(new StateEntry
+                {
+                    TaskName = jobBackup.Name,
+                    Timestamp = DateTime.Now,
+                    Status = "Completed",
+                    TotalFiles = totalFiles,
+                    TotalSize = totalSize,
+                    Progress = 100,
+                    RemainingFiles = totalFiles - filesProcessed,
+                    RemainingSize = totalSize - sizeProcessed
+                });
                 loggerStrategy.DisplayLogFileContent();
             }
             catch (Exception ex)
@@ -97,7 +106,6 @@ namespace EasySaveV1
         {
             try
             {
-                // Supprimer le répertoire source s'il existe
                 if (Directory.Exists(jobBackup.SourceDirectory))
                 {
                     Directory.Delete(jobBackup.SourceDirectory, true);

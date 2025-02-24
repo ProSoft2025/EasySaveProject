@@ -35,9 +35,10 @@
 				<ComboBoxItem Content="Complete Backup"/>
 				<ComboBoxItem Content="Differential Backup"/>
 			</ComboBox>
+			<Button Grid.Row="2" Content="Add Backup" Click="OnAddBackupClick" Classes="proButton" Margin="0 40 0 0"/>
+
 		</StackPanel>
 
-		<Button Grid.Row="2" Content="Add Backup" Click="OnAddBackupClick" Classes="proButton" Margin="0 0 0 100"/>
 	</Grid>
 </UserControl>
 

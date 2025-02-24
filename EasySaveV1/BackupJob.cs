@@ -42,53 +42,7 @@ namespace EasySaveV1
         public void Execute(ILoggerStrategy logger)
         {
             BackupStrategy.ExecuteBackup(this, logger);
-
-            if (!Directory.Exists(SourceDirectory) || !Directory.Exists(TargetDirectory))
-            {
-                Console.WriteLine("Error: Source or Target directory does not exist.");
-                return;
-            }
-
-
-            string[] files = Directory.GetFiles(SourceDirectory);
-            long totalSize = 0;
-            foreach (string file in files)
-                totalSize += new FileInfo(file).Length;
-
-            int totalFiles = files.Length;
-            int filesProcessed = 0;
-            long sizeProcessed = 0;
-
-            foreach (string file in files)
-            {
-                while (_isPaused)
-                {
-                    Thread.Sleep(100); // Attendre que la pause soit terminée
-                }
-
-                string destination = Path.Combine(TargetDirectory, Path.GetFileName(file));
-                // File.Copy(file, destination, true);
-                filesProcessed++;
-                sizeProcessed += new FileInfo(file).Length;
-
-                // Update the state after each file transfer
-                StateEntry state = new StateEntry
-                {
-                    TaskName = Name,
-                    Timestamp = DateTime.Now,
-                    Status = "Active",
-                    TotalFiles = totalFiles,
-                    TotalSize = totalSize,
-                    Progress = (int)((double)filesProcessed / totalFiles * 100),
-                    RemainingFiles = totalFiles - filesProcessed,
-                    RemainingSize = totalSize - sizeProcessed,
-                    CurrentSource = file,
-                    CurrentTarget = destination
-                };
-                StateManager.UpdateState(state);
-            }
-
-            StateManager.UpdateState(new StateEntry { TaskName = Name, Timestamp = DateTime.Now, Status = "Completed" });
+         
         }
         public void Pause()
         {

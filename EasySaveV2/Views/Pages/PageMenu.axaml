@@ -16,7 +16,7 @@
 	
 	<DockPanel>
 		
-		<ListBox x:Name="MenuListBox" DockPanel.Dock="Left" Width="200" Cursor="Hand" Foreground="White" SelectionChanged="OnMenuSelectionChanged">
+		<ListBox x:Name="MenuListBox" DockPanel.Dock="Left" Width="300" Cursor="Hand" Foreground="White" SelectionChanged="OnMenuSelectionChanged">
 			<ListBox.Background>
 				<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
 					<GradientStop Color="#111214" Offset="0"/>

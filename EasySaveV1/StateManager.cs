@@ -10,11 +10,11 @@ namespace EasySaveV1
     // Manages the state file and updates backup progress
     public class StateManager
     {
-        public string StateFilePath { get; set; } = string.Empty;
+        public string StateFilePath { get; set; } = "C:\\EasySave\\state.json";
 
         public StateManager(string stateFilePath)
         {
-            StateFilePath = stateFilePath;
+            StateFilePath = @"C:\EasySave\state.json";
             EnsureFileExists();
         }
 
