@@ -1,15 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using BackupLogger;
 using EasySaveV1;
 using EasySaveV2.Services;
+using EasySaveV2.Localization;
 
-namespace EasySaveV2
+namespace EasySaveV2.Views
 {
     public partial class ExecuteBackupPage : UserControl
     {
@@ -18,8 +15,7 @@ namespace EasySaveV2
         public ExecuteBackupPage()
         {
             InitializeComponent();
-            var languageManager = new LanguageManager(); // Assure que LanguageManager est bien instancié
-            easySaveApp = EasySaveApp.GetInstance(languageManager);
+            DataContext = TranslationManager.Instance;
         }
 
         private List<BackupJob> GetSelectedBackups(string input)
@@ -27,46 +23,31 @@ namespace EasySaveV2
             var jobs = easySaveApp.BackupJobs;
             List<BackupJob> selectedJobs = new List<BackupJob>();
 
-
-            if (input != null)
+            if (!string.IsNullOrEmpty(input))
             {
                 foreach (var part in input.Split(';'))
                 {
-                    if (part.Contains("-"))
-                    {
-                        var rangeParts = part.Split('-');
-                        if (rangeParts.Length == 2 && int.TryParse(rangeParts[0], out int start) && int.TryParse(rangeParts[1], out int end))
-                        {
-                            for (int i = start - 1; i < end; i++)
-                            {
-                                if (i >= 0 && i < jobs.Count)
-                                    selectedJobs.Add(jobs[i]);
-                            }
-                        }
-                    }
-                    else if (int.TryParse(part, out int index))
-                    {
-                        if (index > 0 && index <= jobs.Count)
-                            selectedJobs.Add(jobs[index - 1]);
-                    }
+                    if (int.TryParse(part, out int index) && index > 0 && index <= jobs.Count)
+                        selectedJobs.Add(jobs[index - 1]);
                 }
             }
             return selectedJobs;
         }
 
-        private async Task ExecuteBackups(List<BackupJob> backupJobs)
+        private void ExecuteBackups(List<BackupJob> backupJobs)
         {
             var configManager = new ConfigManager();
             var logger = new JSONLog(configManager);
 
             foreach (var job in backupJobs)
-            {
-                await job.Execute(logger);
-            }
+                job.Execute(logger);
         }
 
-        private async void OnExecuteBackupClick(object? sender, RoutedEventArgs e)
+        private void OnExecuteBackupClick(object? sender, RoutedEventArgs e)
         {
+            if (BackupNumbersTextBox == null || ExecutionOutputTextBlock == null)
+                return;
+
             string input = BackupNumbersTextBox.Text;
             var selectedJobs = GetSelectedBackups(input);
 
@@ -76,7 +57,7 @@ namespace EasySaveV2
                 return;
             }
 
-            await ExecuteBackups(selectedJobs);
+            ExecuteBackups(selectedJobs);
             ExecutionOutputTextBlock.Text = "Backup(s) executed successfully.";
         }
     }
