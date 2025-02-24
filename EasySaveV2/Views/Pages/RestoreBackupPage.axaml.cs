@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using BackupLogger;
 using EasySaveV1;
 using EasySaveV2.Services;
 
@@ -34,8 +35,22 @@ public partial class RestoreBackupPage : UserControl
         }
 
         EasySaveApp appInstance = EasySaveApp.GetInstance(languageManager);
-        bool isRemoved = appInstance.BackupJobs.RemoveAll(job => job.Name == name) > 0;
-        if (isRemoved)
+
+        var configManager = new ConfigManager();
+        var logger = new JSONLog(configManager);
+
+        bool isRestore = false;
+
+        foreach (var job in appInstance.BackupJobs)
+        {
+            if (job.Name == name)
+            {
+                job.Restore(logger);
+                isRestore = true;
+            }
+        }
+
+        if (isRestore)
         {
             await messageService.ShowMessage((Window)this.VisualRoot, "Backup restored successfully");
         }

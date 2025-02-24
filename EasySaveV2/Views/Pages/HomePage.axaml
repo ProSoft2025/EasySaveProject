@@ -1,34 +1,34 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:EasySaveV2.ViewModels"
+             xmlns:local="using:EasySaveV2.Localization"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EasySaveV2.HomePage">
+             x:Class="EasySaveV2.Views.HomePage"
+             x:DataType="local:TranslationManager">
 
-	<Grid Margin="20">
+	<Grid DataContext="{Binding}">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
+
 		<StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center">
 			<Border Background="#6C757D" Padding="10" CornerRadius="5">
 				<StackPanel>
-					<TextBlock Text="Total Data Backed Up" FontSize="16" Foreground="White"/>
-					<!-->TextBlock Text="{Binding TotalDataBackedUp}" FontSize="24" FontWeight="Bold" Foreground="White"/-->
+					<TextBlock Text="{Binding TotalDataBackedUp}" FontSize="16"/>
 				</StackPanel>
 			</Border>
 			<Border Background="#17A2B8" Padding="10" CornerRadius="5">
 				<StackPanel>
-					<TextBlock Text="Total Backup Time" FontSize="16" Foreground="White"/>
-					<!-->TextBlock Text="{Binding TotalBackupTime}" FontSize="24" FontWeight="Bold" Foreground="White"/-->
+					<TextBlock Text="{Binding TotalBackupTime}" FontSize="16"/>
 				</StackPanel>
 			</Border>
 		</StackPanel>
-		
-		<Button Content="Back to Home Page" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="OnReturnToMainClick"
-				Background="#313558" Foreground="White" Cursor="Hand"/>
-	
+
+		<Button Content="{Binding BackToHomePage}"
+                HorizontalAlignment="Right" Click="OnReturnToMainClick"/>
 	</Grid>
 </UserControl>
-

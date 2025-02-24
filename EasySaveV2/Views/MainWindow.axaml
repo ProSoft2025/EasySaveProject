@@ -1,22 +1,19 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:EasySaveV2.ViewModels"
+        xmlns:local="using:EasySaveV2.Localization"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="EasySaveV2.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/logo.ico"
-        Title="EasySaveV2"
+        Title="{Binding AppTitle, Source={x:Static local:TranslationManager.Instance}}"
 		KeyDown="OnKeyDown">
-
-	<Design.DataContext>
-		<vm:MainWindowViewModel/>
-	</Design.DataContext>
 
 	<Grid>
 		<ContentControl x:Name="MainContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-			<!-- Contenu par dÃ©faut -->
+			<!-- Contenu par défaut -->
 			<Grid Background="#14172D">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="75"/>
@@ -30,7 +27,8 @@
 				</Grid.ColumnDefinitions>
 
 				<!-- Title EasySave -->
-				<TextBlock Text="EasySave" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+				<TextBlock Text="{Binding AppTitle, Source={x:Static local:TranslationManager.Instance}}"
+                           Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontSize="36" FontWeight="Bold" FontStyle="Italic"
                            Margin="0,20,0,0">
@@ -64,7 +62,8 @@
                             Background="#313558" Foreground="White" Cursor="Hand"
                             FontSize="36" FontWeight="Bold" FontStyle="Italic"
                             Click="OnStartButtonClick">
-						<TextBlock Text="Start" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						<TextBlock Text="{Binding StartButton, Source={x:Static local:TranslationManager.Instance}}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
 					</Button>
 				</Border>
 
@@ -74,30 +73,30 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Bottom"
                             Margin="10">
-					<Button Width="75" Background="Transparent" BorderThickness="0" Cursor="Hand">
+					<Button Width="75" Background="Transparent" BorderThickness="0" Cursor="Hand"
+                            Click="SetLanguageEnglish">
 						<Image Source="/Assets/english.png" Stretch="Uniform"/>
 					</Button>
 
 					<!-- Separator -->
 					<Rectangle Width="2" Height="30" Fill="Black" Margin="5,0"/>
 
-					<Button Width="75" Background="Transparent" BorderThickness="0" Cursor="Hand">
+					<Button Width="75" Background="Transparent" BorderThickness="0" Cursor="Hand"
+                            Click="SetLanguageFrench">
 						<Image Source="/Assets/franceflag.png" Stretch="Uniform"/>
 					</Button>
 				</StackPanel>
-				
-				<TextBlock Text="Version 2.0"
+
+				<TextBlock Text="{Binding VersionInfo, Source={x:Static local:TranslationManager.Instance}}"
                            Grid.Row="2" Grid.Column="2"
                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
                            FontSize="12"  FontStyle="Italic" Foreground="White"/>
 
-				
-				<TextBlock Text="EasySave 2025 ALL rights reserved"
+				<TextBlock Text="{Binding Copyright, Source={x:Static local:TranslationManager.Instance}}"
                            Grid.Row="2" Grid.Column="1"
                            HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                           FontSize="12" Foreground="White"
-                           />
-				
+                           FontSize="12" Foreground="White"/>
+
 			</Grid>
 		</ContentControl>
 	</Grid>

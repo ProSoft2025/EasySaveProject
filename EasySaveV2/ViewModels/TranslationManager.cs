@@ -1,0 +1,51 @@
+﻿using System;
+using System.ComponentModel;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
+
+namespace EasySaveV2.Localization
+{
+    public class TranslationManager : INotifyPropertyChanged
+    {
+        private static readonly ResourceManager ResourceManager =
+            new ResourceManager("EasySaveV2.Resources.Strings", typeof(TranslationManager).Assembly);
+
+        private static TranslationManager _instance;
+        public static TranslationManager Instance => _instance ??= new TranslationManager();
+
+        private CultureInfo _currentCulture = CultureInfo.CurrentCulture;
+        public CultureInfo CurrentCulture
+        {
+            get => _currentCulture;
+            private set
+            {
+                _currentCulture = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
+            }
+        }
+
+        public static TranslationManager Translation => Instance;
+
+        // Ajout des propriétés utilisées dans le XAML
+        public string AppTitle => this["AppTitle"];
+        public string StartButton => this["StartButton"];
+        public string VersionInfo => this["VersionInfo"];
+        public string Copyright => this["Copyright"];
+        public string TotalDataBackedUp => this["TotalDataBackedUp"];
+        public string TotalBackupTime => this["TotalBackupTime"];
+        public string BackToHomePage => this["BackToHomePage"];
+
+        public string this[string key] => ResourceManager.GetString(key, _currentCulture) ?? key;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void SetLanguage(string cultureCode)
+        {
+            CurrentCulture = new CultureInfo(cultureCode);
+            Thread.CurrentThread.CurrentCulture = CurrentCulture;
+            Thread.CurrentThread.CurrentUICulture = CurrentCulture;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
+        }
+    }
+}
