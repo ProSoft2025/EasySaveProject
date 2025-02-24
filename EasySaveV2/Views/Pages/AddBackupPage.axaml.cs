@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 using EasySaveV1;
 using EasySaveV2.Services;
 using EasySaveV2.Localization;
+using System.IO;
 
 namespace EasySaveV2.Views
 {
@@ -33,34 +34,35 @@ namespace EasySaveV2.Views
 
         private async void OnAddBackupClick(object sender, RoutedEventArgs e)
         {
-            if (JobNameTextBox == null || SourceDirectoryTextBox == null || TargetDirectoryTextBox == null || BackupTypeComboBox == null)
-                return;
 
             string name = JobNameTextBox.Text;
-            if (string.IsNullOrWhiteSpace(name))
-                return;
 
             string sourceDirectory = SourceDirectoryTextBox.Text;
-            string targetDirectory = TargetDirectoryTextBox.Text;
-            string strategyChoice = ((ComboBoxItem)BackupTypeComboBox.SelectedItem)?.Content?.ToString();
+            string targetDirectory = Path.Combine(TargetDirectoryTextBox.Text, name);
 
-            if (strategyChoice == null)
+            if (string.IsNullOrWhiteSpace(name) || BackupTypeComboBox.SelectedItem == null)
             {
                 await messageService.ShowMessage((Window)this.VisualRoot, "Incorrect choice, please try again");
                 return;
             }
+            string strategyChoice = ((ComboBoxItem)BackupTypeComboBox.SelectedItem).Content.ToString();
 
-            IBackupStrategy strategy = strategyChoice switch
+            IBackupStrategy strategy;
+            switch (strategyChoice)
             {
-                "Complete Backup" => new CompleteBackup(languageManager, stateManager),
-                "Differential Backup" => new DifferentialBackup(languageManager, stateManager),
-                _ => null
-            };
-
-            if (strategy == null)
-                return;
+                case "Complete Backup":
+                    strategy = new CompleteBackup(languageManager, stateManager);
+                    break;
+                case "Differential Backup":
+                    strategy = new DifferentialBackup(languageManager, stateManager);
+                    break;
+                default:
+                    await messageService.ShowMessage((Window)this.VisualRoot, "Incorrect choice, please try again");
+                    return;
+            }
 
             EasySaveApp.GetInstance(languageManager).AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
+
         }
 
         private async void OnBrowseSourceClick(object sender, RoutedEventArgs e)

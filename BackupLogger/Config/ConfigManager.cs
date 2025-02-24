@@ -61,7 +61,7 @@ namespace BackupLogger
 
             Directory.CreateDirectory("C:\\EasySave\\Config");
             Directory.CreateDirectory("C:\\EasySave\\logs");
-
+            Directory.CreateDirectory("C:\\EasySave\\Sauvegardes");
         }
 
         public void SaveConfig()
