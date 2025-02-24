@@ -61,6 +61,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add new backup.
+        /// </summary>
+        public static string AddNewBackup {
+            get {
+                return ResourceManager.GetString("AddNewBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à EasySaveV2.
         /// </summary>
         public static string AppTitle {
@@ -70,11 +79,65 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Back to Home Page.
+        ///   Recherche une chaîne localisée semblable à Back to home page.
         /// </summary>
         public static string BackToHomePage {
             get {
                 return ResourceManager.GetString("BackToHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup management.
+        /// </summary>
+        public static string BackupManagement {
+            get {
+                return ResourceManager.GetString("BackupManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup progress.
+        /// </summary>
+        public static string BackupProgress {
+            get {
+                return ResourceManager.GetString("BackupProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup type.
+        /// </summary>
+        public static string BackupType {
+            get {
+                return ResourceManager.GetString("BackupType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Browse.
+        /// </summary>
+        public static string Browse {
+            get {
+                return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Complete backup.
+        /// </summary>
+        public static string CompleteBackup {
+            get {
+                return ResourceManager.GetString("CompleteBackup", resourceCulture);
             }
         }
         
@@ -88,6 +151,168 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Dark mode.
+        /// </summary>
+        public static string DarkMode {
+            get {
+                return ResourceManager.GetString("DarkMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Differential backup.
+        /// </summary>
+        public static string DifferentialBackup {
+            get {
+                return ResourceManager.GetString("DifferentialBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Encryption.
+        /// </summary>
+        public static string Encryption {
+            get {
+                return ResourceManager.GetString("Encryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the number of backups to execute.
+        /// </summary>
+        public static string EnterBackupNumbers {
+            get {
+                return ResourceManager.GetString("EnterBackupNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Execute backup.
+        /// </summary>
+        public static string ExecuteBackup {
+            get {
+                return ResourceManager.GetString("ExecuteBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Job name.
+        /// </summary>
+        public static string JobName {
+            get {
+                return ResourceManager.GetString("JobName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Job process.
+        /// </summary>
+        public static string JobProcess {
+            get {
+                return ResourceManager.GetString("JobProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Output will be shown here.
+        /// </summary>
+        public static string OutputPlaceholder {
+            get {
+                return ResourceManager.GetString("OutputPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remove backup.
+        /// </summary>
+        public static string RemoveBackup {
+            get {
+                return ResourceManager.GetString("RemoveBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Restore backup.
+        /// </summary>
+        public static string RestoreBackup {
+            get {
+                return ResourceManager.GetString("RestoreBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Return.
+        /// </summary>
+        public static string Return {
+            get {
+                return ResourceManager.GetString("Return", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save settings.
+        /// </summary>
+        public static string SaveSettings {
+            get {
+                return ResourceManager.GetString("SaveSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select destination folder.
+        /// </summary>
+        public static string SelectDestinationFolder {
+            get {
+                return ResourceManager.GetString("SelectDestinationFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select source folder.
+        /// </summary>
+        public static string SelectSourceFolder {
+            get {
+                return ResourceManager.GetString("SelectSourceFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Start backup.
+        /// </summary>
+        public static string StartBackup {
+            get {
+                return ResourceManager.GetString("StartBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Start.
         /// </summary>
         public static string StartButton {
@@ -97,7 +322,16 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Total Backup Time.
+        ///   Recherche une chaîne localisée semblable à Stop backup.
+        /// </summary>
+        public static string StopBackup {
+            get {
+                return ResourceManager.GetString("StopBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Total backup time.
         /// </summary>
         public static string TotalBackupTime {
             get {
@@ -106,7 +340,7 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Total Data Backed Up.
+        ///   Recherche une chaîne localisée semblable à Total data backed up.
         /// </summary>
         public static string TotalDataBackedUp {
             get {
@@ -120,6 +354,24 @@ namespace EasySaveV2.Resources {
         public static string VersionInfo {
             get {
                 return ResourceManager.GetString("VersionInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à View backup.
+        /// </summary>
+        public static string ViewBackup {
+            get {
+                return ResourceManager.GetString("ViewBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à View Logs.
+        /// </summary>
+        public static string ViewLogs {
+            get {
+                return ResourceManager.GetString("ViewLogs", resourceCulture);
             }
         }
     }

@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using EasySaveV2.Localization;
 
 namespace EasySaveV2.Views
@@ -12,7 +11,7 @@ namespace EasySaveV2.Views
             InitializeComponent();
 
             // Lier le DataContext au TranslationManager
-            DataContext = TranslationManager.Translation;
+            DataContext = TranslationManager.Instance;
         }
 
         private void OnReturnToMainClick(object sender, RoutedEventArgs e)

@@ -1,21 +1,18 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EasySaveV2.PageMenu"
-			 Background="#14172D">
+             xmlns:local="using:EasySaveV2.Localization"
+             x:Class="EasySaveV2.Views.PageMenu"
+             x:DataType="local:TranslationManager"
+             Background="#14172D">
 
 	<UserControl.Styles>
 		<Style Selector="ListBoxItem:selected">
 			<Setter Property="Background" Value="Red"/>
-			<!-- Couleur bleue -->
 			<Setter Property="Foreground" Value="White"/>
 		</Style>
 	</UserControl.Styles>
-	
-	<DockPanel>
-		
+
+	<DockPanel DataContext="{Binding}">
 		<ListBox x:Name="MenuListBox" DockPanel.Dock="Left" Width="200" Cursor="Hand" Foreground="White" SelectionChanged="OnMenuSelectionChanged">
 			<ListBox.Background>
 				<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
@@ -23,83 +20,71 @@
 					<GradientStop Color="#151E3E" Offset="1"/>
 				</LinearGradientBrush>
 			</ListBox.Background>
-			
+
 			<ListBoxItem Tag="Home" FontSize="18">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="/Assets/home.png" Width="22" Height="20" Margin="0,0,5,0" />  <TextBlock Text="Home" />
+					<Image Source="/Assets/home.png" Width="22" Height="20" Margin="0,0,5,0"/>
+					<TextBlock Text="{Binding Home}"/>
 				</StackPanel>
 			</ListBoxItem>
-			
+
 			<ListBoxItem Tag="AddBackup" FontSize="18">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="/Assets/add.png" Width="22" Height="20" Margin="0,0,5,0" />  
-					<TextBlock Text="Add Backup" />
+					<Image Source="/Assets/add.png" Width="22" Height="20" Margin="0,0,5,0"/>
+					<TextBlock Text="{Binding AddNewBackup}"/>
 				</StackPanel>
 			</ListBoxItem>
-			
+
 			<ListBoxItem Tag="RemoveBackup" FontSize="18">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="/Assets/remove.png" Width="22" Height="20" Margin="0,0,5,0" />  
-					<TextBlock Text="Remove Backup" />
+					<Image Source="/Assets/remove.png" Width="22" Height="20" Margin="0,0,5,0"/>
+					<TextBlock Text="{Binding RemoveBackup}"/>
 				</StackPanel>
 			</ListBoxItem>
-			
+
 			<ListBoxItem Tag="RestoreBackup" FontSize="18">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="/Assets/restore.png" Width="22" Height="20" Margin="0,0,5,0" />  
-					<TextBlock Text="Restore Backup" />
+					<Image Source="/Assets/restore.png" Width="22" Height="20" Margin="0,0,5,0"/>
+					<TextBlock Text="{Binding RestoreBackup}"/>
 				</StackPanel>
 			</ListBoxItem>
-			
+
 			<ListBoxItem Tag="ExecuteBackup" FontSize="18">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="/Assets/execute.png" Width="22" Height="20" Margin="0,0,5,0" />  
-					<TextBlock Text="Execute Backup" />
+					<Image Source="/Assets/execute.png" Width="22" Height="20" Margin="0,0,5,0"/>
+					<TextBlock Text="{Binding ExecuteBackup}"/>
 				</StackPanel>
 			</ListBoxItem>
-			
+
 			<ListBoxItem Tag="Encryption" FontSize="18">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="/Assets/encryption.png" Width="22" Height="20" Margin="0,0,5,0" />  
-					<TextBlock Text="Encryption" />
+					<Image Source="/Assets/encryption.png" Width="22" Height="20" Margin="0,0,5,0"/>
+					<TextBlock Text="{Binding Encryption}"/>
 				</StackPanel>
 			</ListBoxItem>
 
 			<ListBoxItem Tag="ViewBackup" FontSize="18">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="/Assets/viewBackup.png" Width="22" Height="20" Margin="0,0,5,0" />
-					<TextBlock Text="View Backup" />
+					<Image Source="/Assets/viewBackup.png" Width="22" Height="20" Margin="0,0,5,0"/>
+					<TextBlock Text="{Binding ViewBackup}"/>
 				</StackPanel>
 			</ListBoxItem>
-			
+
 			<ListBoxItem Tag="ViewLogs" FontSize="18">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="/Assets/view.png" Width="22" Height="20" Margin="0,0,5,0" />  
-					<TextBlock Text="View Logs" />
+					<Image Source="/Assets/view.png" Width="22" Height="20" Margin="0,0,5,0"/>
+					<TextBlock Text="{Binding ViewLogs}"/>
 				</StackPanel>
 			</ListBoxItem>
-			
+
 			<ListBoxItem Tag="Processus" FontSize="18">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="/Assets/Processus.png" Width="22" Height="20" Margin="0,0,5,0" />
-					<TextBlock Text="Job Process" />
+					<Image Source="/Assets/Processus.png" Width="22" Height="20" Margin="0,0,5,0"/>
+					<TextBlock Text="{Binding JobProcess}"/>
 				</StackPanel>
 			</ListBoxItem>
-
 		</ListBox>
 
-		<!-- Contenu principal -->
-		<ContentControl x:Name="ContentArea">
-
-			</ContentControl>
+		<ContentControl x:Name="ContentArea"/>
 	</DockPanel>
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </UserControl>

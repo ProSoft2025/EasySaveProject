@@ -18,7 +18,7 @@ namespace EasySaveV2.Views
 
             this.KeyDown += OnKeyDown;
 
-            // ⚠️ Correction : On garde l'ancien DataContext et on ajoute la gestion de la traduction
+            // Associer la gestion de la traduction
             this.DataContext = TranslationManager.Instance;
         }
 
@@ -26,7 +26,6 @@ namespace EasySaveV2.Views
         {
             var contentControl = this.FindControl<ContentControl>("MainContent");
 
-            // ⚠️ Correction : Vérification que `PageMenu` est bien instancié avant de l'afficher
             if (contentControl != null)
             {
                 contentControl.Content = new PageMenu();
@@ -54,7 +53,7 @@ namespace EasySaveV2.Views
             }
         }
 
-        // ⚠️ Correction : Ajout des méthodes de changement de langue
+        // Ajout des méthodes de changement de langue
         private void SetLanguageEnglish(object sender, RoutedEventArgs e)
         {
             TranslationManager.Instance.SetLanguage("en-US");

@@ -117,17 +117,95 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddNewBackup" xml:space="preserve">
+    <value>Ajouter une nouvelle sauvegarde</value>
+  </data>
   <data name="AppTitle" xml:space="preserve">
     <value>EasySaveV2</value>
   </data>
   <data name="BackToHomePage" xml:space="preserve">
     <value>Retour à l'accueil</value>
   </data>
+  <data name="BackupManagement" xml:space="preserve">
+    <value>Gestion des sauvegardes</value>
+  </data>
+  <data name="BackupProgress" xml:space="preserve">
+    <value>Progression de la sauvegarde</value>
+  </data>
+  <data name="BackupType" xml:space="preserve">
+    <value>Type de sauvegarde</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Parcourir</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CompleteBackup" xml:space="preserve">
+    <value>Sauvegarde complète</value>
+  </data>
   <data name="Copyright" xml:space="preserve">
     <value>EasySave 2025 TOUS droits réservés</value>
   </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>Mode sombre</value>
+  </data>
+  <data name="DifferentialBackup" xml:space="preserve">
+    <value>Sauvegarde différentielle</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Chiffrement</value>
+  </data>
+  <data name="EnterBackupNumbers" xml:space="preserve">
+    <value>Entrez le nombre de sauvegardes à exécuter</value>
+  </data>
+  <data name="ExecuteBackup" xml:space="preserve">
+    <value>Exécuter une sauvegarde</value>
+  </data>
+  <data name="JobName" xml:space="preserve">
+    <value>Nom de la tâche</value>
+  </data>
+  <data name="JobProcess" xml:space="preserve">
+    <value>Processus de tâche</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="OutputPlaceholder" xml:space="preserve">
+    <value>La sortie s'affichera içi</value>
+  </data>
+  <data name="RemoveBackup" xml:space="preserve">
+    <value>Supprimer une sauvegarde</value>
+  </data>
+  <data name="RestoreBackup" xml:space="preserve">
+    <value>Restaurer une sauvegarde</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="SaveSettings" xml:space="preserve">
+    <value>Enregistrer les paramètres</value>
+  </data>
+  <data name="SelectDestinationFolder" xml:space="preserve">
+    <value>Sélectionner le dossier de destination</value>
+  </data>
+  <data name="SelectSourceFolder" xml:space="preserve">
+    <value>Sélectionner le dossier source</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="StartBackup" xml:space="preserve">
+    <value>Lancer la sauvegarde</value>
+  </data>
   <data name="StartButton" xml:space="preserve">
     <value>Démarrer</value>
+  </data>
+  <data name="StopBackup" xml:space="preserve">
+    <value>Arrêter la sauvegarde</value>
   </data>
   <data name="TotalBackupTime" xml:space="preserve">
     <value>Temps total de sauvegarde</value>
@@ -137,5 +215,11 @@
   </data>
   <data name="VersionInfo" xml:space="preserve">
     <value>Version 2.0</value>
+  </data>
+  <data name="ViewBackup" xml:space="preserve">
+    <value>Voir les sauvegardes</value>
+  </data>
+  <data name="ViewLogs" xml:space="preserve">
+    <value>Voir les journaux</value>
   </data>
 </root>

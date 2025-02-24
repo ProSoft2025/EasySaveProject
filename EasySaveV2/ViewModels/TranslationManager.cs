@@ -35,6 +35,24 @@ namespace EasySaveV2.Localization
         public string TotalDataBackedUp => this["TotalDataBackedUp"];
         public string TotalBackupTime => this["TotalBackupTime"];
         public string BackToHomePage => this["BackToHomePage"];
+        public string AddNewBackup => this["AddNewBackup"];
+        public string JobName => this["JobName"];
+        public string SourceDirectory => this["SourceDirectory"];
+        public string TargetDirectory => this["TargetDirectory"];
+        public string Browse => this["Browse"];
+        public string BackupType => this["BackupType"];
+        public string CompleteBackup => this["CompleteBackup"];
+        public string DifferentialBackup => this["DifferentialBackup"];
+        public string ExecuteBackup => this["ExecuteBackup"];
+        public string EnterBackupNumbers => this["EnterBackupNumbers"];
+        public string OutputPlaceholder => this["OutputPlaceholder"];
+        public string Home => this["Home"];
+        public string RemoveBackup => this["RemoveBackup"];
+        public string RestoreBackup => this["RestoreBackup"];
+        public string Encryption => this["Encryption"];
+        public string ViewBackup => this["ViewBackup"];
+        public string ViewLogs => this["ViewLogs"];
+        public string JobProcess => this["JobProcess"];
 
         public string this[string key] => ResourceManager.GetString(key, _currentCulture) ?? key;
 
