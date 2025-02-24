@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -53,18 +54,18 @@ namespace EasySaveV2
             return selectedJobs;
         }
 
-        private void ExecuteBackups(List<BackupJob> backupJobs)
+        private async Task ExecuteBackups(List<BackupJob> backupJobs)
         {
             var configManager = new ConfigManager();
             var logger = new JSONLog(configManager);
 
             foreach (var job in backupJobs)
             {
-                job.Execute(logger);
+                await job.Execute(logger);
             }
         }
 
-        private void OnExecuteBackupClick(object? sender, RoutedEventArgs e)
+        private async void OnExecuteBackupClick(object? sender, RoutedEventArgs e)
         {
             string input = BackupNumbersTextBox.Text;
             var selectedJobs = GetSelectedBackups(input);
@@ -75,7 +76,7 @@ namespace EasySaveV2
                 return;
             }
 
-            ExecuteBackups(selectedJobs);
+            await ExecuteBackups(selectedJobs);
             ExecutionOutputTextBlock.Text = "Backup(s) executed successfully.";
         }
     }

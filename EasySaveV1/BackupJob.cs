@@ -1,4 +1,6 @@
 ﻿using BackupLogger;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace EasySaveV1
 {
@@ -39,13 +41,13 @@ namespace EasySaveV1
         }
 
 
-        public void Execute(ILoggerStrategy logger)
+        public async Task Execute(ILoggerStrategy logger)
         {
+            
             BackupStrategy.ExecuteBackup(this, logger);
 
             if (!Directory.Exists(SourceDirectory) || !Directory.Exists(TargetDirectory))
             {
-                Console.WriteLine("Error: Source or Target directory does not exist.");
                 return;
             }
 
@@ -63,15 +65,17 @@ namespace EasySaveV1
             {
                 while (_isPaused)
                 {
-                    Thread.Sleep(100); // Attendre que la pause soit terminée
+                    await Task.Delay(100); // Attendre que la pause soit terminée
                 }
 
+
                 string destination = Path.Combine(TargetDirectory, Path.GetFileName(file));
-                // File.Copy(file, destination, true);
+
+               
                 filesProcessed++;
                 sizeProcessed += new FileInfo(file).Length;
 
-                // Update the state after each file transfer
+                // Update the state after each transfer
                 StateEntry state = new StateEntry
                 {
                     TaskName = Name,
@@ -90,6 +94,8 @@ namespace EasySaveV1
 
             StateManager.UpdateState(new StateEntry { TaskName = Name, Timestamp = DateTime.Now, Status = "Completed" });
         }
+ 
+
         public void Pause()
         {
             _isPaused = true;
@@ -109,7 +115,7 @@ namespace EasySaveV1
         {
             string strategyType = BackupStrategy is CompleteBackup ? "Complete" :
                               BackupStrategy is DifferentialBackup ? "Differential" : "N/A";
-            Console.WriteLine("Name:" + Name + "\nSource:" + SourceDirectory + "\nDestination:" + TargetDirectory + "\nStrategy:" + strategyType);
+            //Console.WriteLine("Name:" + Name + "\nSource:" + SourceDirectory + "\nDestination:" + TargetDirectory + "\nStrategy:" + strategyType);
         }
         public void updateExtensionsToEncrypt(List<string> extensions)
         {
