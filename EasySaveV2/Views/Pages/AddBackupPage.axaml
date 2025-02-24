@@ -5,20 +5,6 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EasySaveV2.AddBackupPage">
 
-	<UserControl.Styles>
-		<Style Selector="Button.proButton">
-			<Setter Property="FontSize" Value="18"/>
-			<Setter Property="FontWeight" Value="Bold"/>
-			<Setter Property="Background" Value="#0078D7"/>
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="Padding" Value="10"/>
-			<Setter Property="Margin" Value="20"/>
-			<Setter Property="HorizontalAlignment" Value="Center"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-			<Setter Property="CornerRadius" Value="5"/>
-		</Style>
-	</UserControl.Styles>
-
 	<Grid Margin="20">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
