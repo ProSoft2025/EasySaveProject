@@ -117,25 +117,109 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddNewBackup" xml:space="preserve">
+    <value>Add new backup</value>
+  </data>
   <data name="AppTitle" xml:space="preserve">
     <value>EasySaveV2</value>
   </data>
   <data name="BackToHomePage" xml:space="preserve">
-    <value>Back to Home Page</value>
+    <value>Back to home page</value>
+  </data>
+  <data name="BackupManagement" xml:space="preserve">
+    <value>Backup management</value>
+  </data>
+  <data name="BackupProgress" xml:space="preserve">
+    <value>Backup progress</value>
+  </data>
+  <data name="BackupType" xml:space="preserve">
+    <value>Backup type</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CompleteBackup" xml:space="preserve">
+    <value>Complete backup</value>
   </data>
   <data name="Copyright" xml:space="preserve">
     <value>EasySave 2025 ALL rights reserved</value>
   </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>Dark mode</value>
+  </data>
+  <data name="DifferentialBackup" xml:space="preserve">
+    <value>Differential backup</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Encryption</value>
+  </data>
+  <data name="EnterBackupNumbers" xml:space="preserve">
+    <value>Enter the number of backups to execute</value>
+  </data>
+  <data name="ExecuteBackup" xml:space="preserve">
+    <value>Execute backup</value>
+  </data>
+  <data name="JobName" xml:space="preserve">
+    <value>Job name</value>
+  </data>
+  <data name="JobProcess" xml:space="preserve">
+    <value>Job process</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="OutputPlaceholder" xml:space="preserve">
+    <value>Output will be shown here</value>
+  </data>
+  <data name="RemoveBackup" xml:space="preserve">
+    <value>Remove backup</value>
+  </data>
+  <data name="RestoreBackup" xml:space="preserve">
+    <value>Restore backup</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveSettings" xml:space="preserve">
+    <value>Save settings</value>
+  </data>
+  <data name="SelectDestinationFolder" xml:space="preserve">
+    <value>Select destination folder</value>
+  </data>
+  <data name="SelectSourceFolder" xml:space="preserve">
+    <value>Select source folder</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="StartBackup" xml:space="preserve">
+    <value>Start backup</value>
+  </data>
   <data name="StartButton" xml:space="preserve">
     <value>Start</value>
   </data>
+  <data name="StopBackup" xml:space="preserve">
+    <value>Stop backup</value>
+  </data>
   <data name="TotalBackupTime" xml:space="preserve">
-    <value>Total Backup Time</value>
+    <value>Total backup time</value>
   </data>
   <data name="TotalDataBackedUp" xml:space="preserve">
-    <value>Total Data Backed Up</value>
+    <value>Total data backed up</value>
   </data>
   <data name="VersionInfo" xml:space="preserve">
     <value>Version 2.0</value>
+  </data>
+  <data name="ViewBackup" xml:space="preserve">
+    <value>View backup</value>
+  </data>
+  <data name="ViewLogs" xml:space="preserve">
+    <value>View Logs</value>
   </data>
 </root>

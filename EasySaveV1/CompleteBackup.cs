@@ -14,7 +14,11 @@ namespace EasySaveV1
             this.languageManager = languageManager;
             this.stateManager = stateManager;
         }
-
+        /// <summary>
+        /// Used to do a full copy of a directory including logs, encryption, state
+        /// </summary>
+        /// <param name="jobBackup">The job on which the copy is executed</param>
+        /// <param name="loggerStrategy">Instance of the logger used to write in log</param>
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             jobBackup.Status = BackupStatus.Running; // Définir l’état comme en cours d’exécution
@@ -101,29 +105,32 @@ namespace EasySaveV1
             }
         }
 
-
+        /// <summary>
+        /// Used to restore the source directory to the state he was during the backup
+        /// </summary>
+        /// <param name="jobBackup">The backup to restore</param>
+        /// <param name="loggerStrategy">Instance of the logger used to write in log</param>
         public void Restore(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             try
             {
+                // Error verification if the source already exist
                 if (Directory.Exists(jobBackup.SourceDirectory))
                 {
                     Directory.Delete(jobBackup.SourceDirectory, true);
                 }
 
-                // Créer un nouvel objet BackupJob temporaire en inversant les répertoires source et cible
+                // Create a temporary Backupjob to simplify the code using Execute method
                 var tempBackupJob = new BackupJob
                 (
                     jobBackup.Name,
                     jobBackup.TargetDirectory,
                     jobBackup.SourceDirectory,
-                    jobBackup.BackupStrategy,
-                    jobBackup.StateManager
+                    jobBackup.BackupStrategy
                 );
 
                 tempBackupJob.ExtensionsToEncrypt = jobBackup.ExtensionsToEncrypt;
 
-                // Appeler la méthode ExecuteBackup avec le nouvel objet temporaire en inversant les sources et destination
                 ExecuteBackup(tempBackupJob, loggerStrategy);
             }
             catch (Exception ex)

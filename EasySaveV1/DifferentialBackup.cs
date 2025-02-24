@@ -1,10 +1,6 @@
 ﻿using BackupLogger;
 using System.Diagnostics;
 
-using BackupLogger;
-using CryptoSoft;
-using System.Diagnostics;
-
 namespace EasySaveV1
 {
     public class DifferentialBackup : IBackupStrategy
@@ -18,6 +14,11 @@ namespace EasySaveV1
             this.stateManager = stateManager;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="jobBackup"></param>
+        /// <param name="loggerStrategy"></param>
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             Console.WriteLine(languageManager.GetTranslation("start_diff_backup"));
@@ -119,7 +120,7 @@ namespace EasySaveV1
             Console.WriteLine(languageManager.GetTranslation("input_complete_backup_path"));
             string lastFullBackupDir = Console.ReadLine();
 
-            var tempBackupJob = new BackupJob(jobBackup.Name, lastFullBackupDir, jobBackup.SourceDirectory, jobBackup.BackupStrategy, jobBackup.StateManager);
+            var tempBackupJob = new BackupJob(jobBackup.Name, lastFullBackupDir, jobBackup.SourceDirectory, jobBackup.BackupStrategy);
 
             try
             {

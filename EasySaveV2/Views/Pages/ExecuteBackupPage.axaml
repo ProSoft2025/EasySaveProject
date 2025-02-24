@@ -1,20 +1,15 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EasySaveV2.ExecuteBackupPage">
+             xmlns:local="using:EasySaveV2.Localization"
+             x:Class="EasySaveV2.Views.ExecuteBackupPage"
+             x:DataType="local:TranslationManager">
 
 	<StackPanel Margin="20">
-		<TextBlock Text="Execute Backup" FontSize="24" Margin="0 0 0 20"/>
-		<TextBlock Text="Enter the number of Backup you would like to execute (Use - for backup 1 to X and ; for backup individually)"/>
-		<TextBox Name="BackupNumbersTextBox" Margin="0 5 0 0"/>
-		<Button Grid.Row="2" Content="Execute" Click="OnExecuteBackupClick" Classes="proButton" Margin="0 40 0 0"/>
+		<TextBlock Text="{Binding ExecuteBackup}" FontSize="24" Margin="0 0 0 20"/>
+		<TextBlock Text="{Binding EnterBackupNumbers}" />
+		<TextBox Name="BackupNumbersTextBox"/>
+		<Button Grid.Row="2" Content="{Binding ExecuteBackup}" Click="OnExecuteBackupClick" Classes="proButton" Margin="0 40 0 0"/>
 
-		<TextBlock Name="ExecutionOutputTextBlock"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Center"
-           Text=" "/>
+		<TextBlock Name="ExecutionOutputTextBlock" Text="{Binding OutputPlaceholder}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20 0 0 0"/>
 	</StackPanel>
-	
 </UserControl>

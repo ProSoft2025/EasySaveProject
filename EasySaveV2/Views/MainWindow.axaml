@@ -2,9 +2,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:EasySaveV2.ViewModels"
         xmlns:local="using:EasySaveV2.Localization"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="EasySaveV2.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/logo.ico"
@@ -13,51 +10,25 @@
 
 	<Grid>
 		<ContentControl x:Name="MainContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-			<!-- Contenu par défaut -->
 			<Grid Background="#14172D">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="75"/>
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="75"/>
 				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
 
-				<!-- Title EasySave -->
 				<TextBlock Text="{Binding AppTitle, Source={x:Static local:TranslationManager.Instance}}"
                            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontSize="36" FontWeight="Bold" FontStyle="Italic"
-                           Margin="0,20,0,0">
-					<TextBlock.Foreground>
-						<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-							<GradientStop Offset="0" Color="#0077BE"/>
-							<GradientStop Offset="1" Color="white"/>
-						</LinearGradientBrush>
-					</TextBlock.Foreground>
-					<TextBlock.Styles>
-						<Style Selector="TextBlock">
-							<Setter Property="Effect">
-								<DropShadowEffect BlurRadius="8" Color="Black" Opacity="0.7" OffsetX="4" OffsetY="4"/>
-							</Setter>
-						</Style>
-					</TextBlock.Styles>
-				</TextBlock>
+                           Margin="0,20,0,0"/>
 
-				<!-- Logo -->
 				<Image Source="/Assets/logo.ico" Grid.Row="0" Width="100" Height="100"
                        HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-				<!-- Start Button -->
 				<Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
                         HorizontalAlignment="Center" VerticalAlignment="Center"
                         CornerRadius="10" BorderBrush="White" BorderThickness="2">
-					<Border.Effect>
-						<DropShadowEffect BlurRadius="10" Color="Black" Opacity="0.5" OffsetX="3" OffsetY="3"/>
-					</Border.Effect>
 					<Button x:Name="StartButton" Width="200" Height="50"
                             Background="#313558" Foreground="White" Cursor="Hand"
                             FontSize="36" FontWeight="Bold" FontStyle="Italic"
@@ -67,20 +38,13 @@
 					</Button>
 				</Border>
 
-				<!-- Language Selection -->
-				<StackPanel Grid.Row="2" Grid.Column="0"
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Margin="10">
+				<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal"
+                            HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">
 					<Button Width="75" Background="Transparent" BorderThickness="0" Cursor="Hand"
                             Click="SetLanguageEnglish">
 						<Image Source="/Assets/english.png" Stretch="Uniform"/>
 					</Button>
-
-					<!-- Separator -->
 					<Rectangle Width="2" Height="30" Fill="Black" Margin="5,0"/>
-
 					<Button Width="75" Background="Transparent" BorderThickness="0" Cursor="Hand"
                             Click="SetLanguageFrench">
 						<Image Source="/Assets/franceflag.png" Stretch="Uniform"/>
@@ -90,13 +54,12 @@
 				<TextBlock Text="{Binding VersionInfo, Source={x:Static local:TranslationManager.Instance}}"
                            Grid.Row="2" Grid.Column="2"
                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                           FontSize="12"  FontStyle="Italic" Foreground="White"/>
+                           FontSize="12" FontStyle="Italic" Foreground="White"/>
 
 				<TextBlock Text="{Binding Copyright, Source={x:Static local:TranslationManager.Instance}}"
                            Grid.Row="2" Grid.Column="1"
                            HorizontalAlignment="Center" VerticalAlignment="Bottom"
                            FontSize="12" Foreground="White"/>
-
 			</Grid>
 		</ContentControl>
 	</Grid>

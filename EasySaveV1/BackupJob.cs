@@ -4,7 +4,7 @@ namespace EasySaveV1
 {
     public enum BackupStatus
     {
-        Idle,   // En attente
+        Idle,
         Running,
         Paused,
         Stopped,
@@ -22,28 +22,27 @@ namespace EasySaveV1
         public string Name { get; set; }
         public string SourceDirectory { get; set; }
         public string TargetDirectory { get; set; }
-        public StateManager StateManager { get; set; }
         public IBackupStrategy BackupStrategy { get; set; }
         public List<string> ExtensionsToEncrypt { get; set; } = new List<string>();
-
         public BackupStatus Status { get; set; } = BackupStatus.Idle;
 
 
-        public BackupJob(string name, string sourceDirectory, string targetDirectory, IBackupStrategy backupStrategy, StateManager stateManager)
+        public BackupJob(string name, string sourceDirectory, string targetDirectory, IBackupStrategy backupStrategy)
         {
             Name = name;
             SourceDirectory = sourceDirectory;
             TargetDirectory = targetDirectory;
-            StateManager = stateManager;
             BackupStrategy = backupStrategy;
         }
 
 
-        public void Execute(ILoggerStrategy logger)
+        public async Task Execute(ILoggerStrategy logger)
         {
             BackupStrategy.ExecuteBackup(this, logger);
          
         }
+ 
+
         public void Pause()
         {
             _isPaused = true;
@@ -63,7 +62,7 @@ namespace EasySaveV1
         {
             string strategyType = BackupStrategy is CompleteBackup ? "Complete" :
                               BackupStrategy is DifferentialBackup ? "Differential" : "N/A";
-            Console.WriteLine("Name:" + Name + "\nSource:" + SourceDirectory + "\nDestination:" + TargetDirectory + "\nStrategy:" + strategyType);
+            //Console.WriteLine("Name:" + Name + "\nSource:" + SourceDirectory + "\nDestination:" + TargetDirectory + "\nStrategy:" + strategyType);
         }
         public void updateExtensionsToEncrypt(List<string> extensions)
         {

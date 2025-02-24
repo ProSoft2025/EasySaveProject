@@ -1,9 +1,8 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EasySaveV2.AddBackupPage">
+             xmlns:local="using:EasySaveV2.Localization"
+             x:Class="EasySaveV2.Views.AddBackupPage"
+             x:DataType="local:TranslationManager">
 
 	<Grid Margin="20">
 		<Grid.RowDefinitions>
@@ -13,32 +12,29 @@
 		</Grid.RowDefinitions>
 
 		<StackPanel Grid.Row="0" Margin="0 0 0 40">
-			
-			<TextBlock Text="Add Backup" FontSize="24" Margin="0 0 0 40"/>
-			<TextBlock Text="Job Name" Margin="0 0 0 5"/>
+			<TextBlock Text="{Binding AddNewBackup}" FontSize="24" Margin="0 0 0 40"/>
+			<TextBlock Text="{Binding JobName}" Margin="0 0 0 5"/>
 			<TextBox Name="JobNameTextBox" Margin="0 0 0 15"/>
 
-			<TextBlock Text="Source Directory" Margin="0 0 0 5"/>
+			<TextBlock Text="{Binding SourceDirectory}" Margin="0 0 0 5"/>
 			<StackPanel Orientation="Horizontal">
 				<TextBox Name="SourceDirectoryTextBox" Width="750" Margin="0 0 0 15"/>
-				<Button Content="Browse" Click="OnBrowseSourceClick" Margin="10 0 5 15"/>
+				<Button Content="{Binding Browse}" Click="OnBrowseSourceClick" Margin="10 0 5 15"/>
 			</StackPanel>
 
-			<TextBlock Text="Target Directory" Margin="0 0 0 5"/>
+			<TextBlock Text="{Binding TargetDirectory}" Margin="0 0 0 5"/>
 			<StackPanel Orientation="Horizontal">
 				<TextBox Name="TargetDirectoryTextBox" Width="750" Margin="0 0 0 15"/>
-				<Button Content="Browse" Click="OnBrowseTargetClick" Margin="10 0 5 15"/>
+				<Button Content="{Binding Browse}" Click="OnBrowseTargetClick" Margin="10 0 5 15"/>
 			</StackPanel>
 
-			<TextBlock Text="Backup Type" Margin="0 10 0 5"/>
+			<TextBlock Text="{Binding BackupType}" Margin="0 10 0 5"/>
 			<ComboBox Name="BackupTypeComboBox">
-				<ComboBoxItem Content="Complete Backup"/>
-				<ComboBoxItem Content="Differential Backup"/>
+				<ComboBoxItem Content="{Binding CompleteBackup}"/>
+				<ComboBoxItem Content="{Binding DifferentialBackup}"/>
 			</ComboBox>
-			<Button Grid.Row="2" Content="Add Backup" Click="OnAddBackupClick" Classes="proButton" Margin="0 40 0 0"/>
+			<Button Grid.Row="2" Content="{Binding AddNewBackup}" Click="OnAddBackupClick" Classes="proButton" Margin="0 40 0 0"/>
 
 		</StackPanel>
-
 	</Grid>
 </UserControl>
-

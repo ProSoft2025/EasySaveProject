@@ -55,7 +55,8 @@ namespace BackupLogger
 
             // Ensure config  and log directory exists
             Directory.CreateDirectory("C:\\EasySave\\Config");
-            Directory.CreateDirectory("C:\\EasySave\\logs"); 
+            Directory.CreateDirectory("C:\\EasySave\\logs");
+            Directory.CreateDirectory("C:\\EasySave\\Sauvegardes");
         }
 
         public void SaveConfig()
