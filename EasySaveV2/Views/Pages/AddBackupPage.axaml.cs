@@ -28,7 +28,7 @@ namespace EasySaveV2.Views
             DataContext = TranslationManager.Instance;
             this.backupJobFactory = backupJobFactory;
             this.stateManager = stateManager;
-            this.manager = EasySaveApp.GetInstance(languageManager);
+            this.manager = EasySaveApp.GetInstance();
             messageService = new MessageService();
         }
 
@@ -62,7 +62,7 @@ namespace EasySaveV2.Views
                     return;
             }
 
-            EasySaveApp.GetInstance(languageManager).AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
+            EasySaveApp.GetInstance().AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
             JobNameTextBox.Text = "";
             SourceDirectoryTextBox.Text = "";
             TargetDirectoryTextBox.Text = "";

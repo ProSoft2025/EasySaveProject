@@ -9,7 +9,7 @@ partial class Program
     {
         // Initialisation des menus
         var languageManager = new LanguageManager();
-        var manager = EasySaveApp.GetInstance(languageManager);
+        var manager = EasySaveApp.GetInstance();
         var ui = new UserInterface(languageManager);
 
         // Create a StateManager instance

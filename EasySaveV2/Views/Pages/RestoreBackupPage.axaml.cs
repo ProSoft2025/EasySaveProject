@@ -19,7 +19,7 @@ public partial class RestoreBackupPage : UserControl
 
     public RestoreBackupPage()
     {
-        this.manager = EasySaveApp.GetInstance(languageManager);
+        this.manager = EasySaveApp.GetInstance();
         this.messageService = new MessageService();
         InitializeComponent();
     }
@@ -34,7 +34,7 @@ public partial class RestoreBackupPage : UserControl
             return;
         }
 
-        EasySaveApp appInstance = EasySaveApp.GetInstance(languageManager);
+        EasySaveApp appInstance = EasySaveApp.GetInstance();
 
         var configManager = new ConfigManager();
         var logger = new JSONLog(configManager);

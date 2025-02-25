@@ -10,8 +10,6 @@ namespace EasySaveV2.Views
 {
     public partial class ExecuteBackupPage : UserControl
     {
-        private EasySaveApp easySaveApp;
-
         public ExecuteBackupPage()
         {
             InitializeComponent();
@@ -20,7 +18,7 @@ namespace EasySaveV2.Views
 
         private List<BackupJob> GetSelectedBackups(string input)
         {
-            var jobs = easySaveApp.BackupJobs;
+            var jobs = EasySaveApp.GetInstance().BackupJobs;
             List<BackupJob> selectedJobs = new List<BackupJob>();
 
             if (!string.IsNullOrEmpty(input))

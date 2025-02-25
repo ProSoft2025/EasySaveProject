@@ -38,7 +38,7 @@ namespace EasySaveV2.Views
             var ui = new UserInterface(new LanguageManager());
             var config = new ConfigManager();
             messageService = new MessageService();
-            menuManager = new MenuManager(ui, EasySaveApp.GetInstance(languageManager), config, new JSONLog(config), new LanguageManager(), new StateManager("state.json"));
+            menuManager = new MenuManager(ui, EasySaveApp.GetInstance(), config, new JSONLog(config), new LanguageManager(), new StateManager("state.json"));
         }
 
         private void OnMenuSelectionChanged(object sender, SelectionChangedEventArgs e)

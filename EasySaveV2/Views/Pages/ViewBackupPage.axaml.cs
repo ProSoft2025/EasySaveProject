@@ -30,7 +30,7 @@ namespace EasySaveV2
         {
             InitializeComponent();
             DataContext = this;
-            BackupJobs = new ObservableCollection<BackupJob>(EasySaveApp.GetInstance(languageManager).BackupJobs);
+            BackupJobs = new ObservableCollection<BackupJob>(EasySaveApp.GetInstance().BackupJobs);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

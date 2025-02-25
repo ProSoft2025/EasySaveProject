@@ -4,11 +4,11 @@ namespace EasySaveV1
 {
     public class EasySaveApp
     {
-        private LanguageManager languageManager;
+     
 
-        public EasySaveApp(LanguageManager languageManager)
+        public EasySaveApp()
         {
-            this.languageManager = languageManager;
+           
         }
 
         // Déclaration des variables
@@ -19,9 +19,7 @@ namespace EasySaveV1
         public List<string> ProcessesToMonitor { get; set; } = new List<string>();
         public List<string> ExtensionsToEncrypt { get; set; } = new List<string>();
 
-        private EasySaveApp() { }
-
-        public static EasySaveApp GetInstance(LanguageManager languageManager)
+        public static EasySaveApp GetInstance()
         {
             if (_instance == null)
             {
@@ -29,7 +27,7 @@ namespace EasySaveV1
                 {
                     if (_instance == null)
                     {
-                        _instance = new EasySaveApp(languageManager);
+                        _instance = new EasySaveApp();
                     }
                 }
             }
@@ -56,12 +54,9 @@ namespace EasySaveV1
             if (job != null)
             {
                 BackupJobs.Remove(job);
-                Console.WriteLine((languageManager.GetTranslation("save")) + $"'{name}'" + (languageManager.GetTranslation("successfull_delete")));
+               
             }
-            else
-            {
-                Console.WriteLine((languageManager.GetTranslation("no_backup_found_name")) + $"'{name}'");
-            }
+          
         }
 
         public void AddProcess(string process)
@@ -94,7 +89,7 @@ namespace EasySaveV1
                             ResumeBackups();
                         }
                     }
-                    await Task.Delay(1000); // Vérifie toutes les secondes
+                    await Task.Delay(1000); 
                 }
             });
         }

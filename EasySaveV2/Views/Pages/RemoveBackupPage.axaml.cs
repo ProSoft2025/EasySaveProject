@@ -15,7 +15,7 @@ namespace EasySaveV2
 
         public RemoveBackupPage()
         {
-            this.manager = EasySaveApp.GetInstance(languageManager);
+            this.manager = EasySaveApp.GetInstance();
             this.messageService = new MessageService();
             InitializeComponent();
         }
@@ -30,7 +30,7 @@ namespace EasySaveV2
                 return;
             }
 
-            EasySaveApp appInstance = EasySaveApp.GetInstance(languageManager);
+            EasySaveApp appInstance = EasySaveApp.GetInstance();
             bool isRemoved = appInstance.BackupJobs.RemoveAll(job => job.Name == name) > 0;
             if (isRemoved)
             {
