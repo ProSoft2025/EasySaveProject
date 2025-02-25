@@ -22,8 +22,6 @@ namespace EasySaveV1
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
             jobBackup.Status = BackupStatus.Running; // Définir l’état comme en cours d’exécution
-            stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Running" });
-            //stateManager.StateFilePath = @"C:\EasySave\state.json";
 
             try
             {
@@ -35,6 +33,9 @@ namespace EasySaveV1
                 long totalSize = sourceFiles.Sum(file => new FileInfo(Path.Combine(jobBackup.SourceDirectory, file)).Length);
                 int filesProcessed = 0;
                 long sizeProcessed = 0;
+
+                stateManager.UpdateState(new StateEntry {TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Running", TotalFiles = totalFiles,
+                    TotalSize = totalSize, Progress = 0, RemainingFiles = totalFiles - filesProcessed, RemainingSize = totalSize - sizeProcessed});
 
                 foreach (var file in sourceFiles)
                 {
@@ -101,7 +102,6 @@ namespace EasySaveV1
             {
                 jobBackup.Status = BackupStatus.Error; // Gestion des erreurs
                 stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Error" });
-               
             }
         }
 
@@ -134,9 +134,7 @@ namespace EasySaveV1
                 ExecuteBackup(tempBackupJob, loggerStrategy);
             }
             catch (Exception ex)
-            {
-                Console.WriteLine((languageManager.GetTranslation("restore_error")) + $"{ex.Message}");
-            }
+            { }
         }
     }
 }
