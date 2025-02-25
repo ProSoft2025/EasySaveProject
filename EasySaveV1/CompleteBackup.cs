@@ -101,7 +101,7 @@ namespace EasySaveV1
             {
                 jobBackup.Status = BackupStatus.Error; // Gestion des erreurs
                 stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Error" });
-                Console.WriteLine($"{languageManager.GetTranslation("complete_backup_error")}: {ex.Message}");
+               
             }
         }
 

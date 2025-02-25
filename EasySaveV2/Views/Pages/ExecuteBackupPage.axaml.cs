@@ -5,6 +5,7 @@ using BackupLogger;
 using EasySaveV1;
 using EasySaveV2.Services;
 using EasySaveV2.Localization;
+using System.Threading.Tasks;
 
 namespace EasySaveV2.Views
 {
@@ -32,16 +33,22 @@ namespace EasySaveV2.Views
             return selectedJobs;
         }
 
-        private void ExecuteBackups(List<BackupJob> backupJobs)
+        private async Task ExecuteBackups(List<BackupJob> backupJobs)
         {
             var configManager = new ConfigManager();
             var logger = new JSONLog(configManager);
 
+            var tasks = new List<Task>();
+
             foreach (var job in backupJobs)
-                job.Execute(logger);
+            {
+                tasks.Add(Task.Run(async () => await job.Execute(logger)));
+            }
+
+            await Task.WhenAll(tasks);
         }
 
-        private void OnExecuteBackupClick(object? sender, RoutedEventArgs e)
+        private async void OnExecuteBackupClick(object? sender, RoutedEventArgs e)
         {
             if (BackupNumbersTextBox == null || ExecutionOutputTextBlock == null)
                 return;
@@ -55,7 +62,7 @@ namespace EasySaveV2.Views
                 return;
             }
 
-            ExecuteBackups(selectedJobs);
+            await ExecuteBackups(selectedJobs);
             ExecutionOutputTextBlock.Text = "Backup(s) executed successfully.";
         }
     }
