@@ -18,20 +18,20 @@
 
 			<TextBlock Text="{Binding SourceDirectory}" Margin="0 0 0 5"/>
 			<StackPanel Orientation="Horizontal">
-				<TextBox Name="SourceDirectoryTextBox" Width="750" Margin="0 0 0 15"/>
+				<TextBox Name="SourceDirectoryTextBox" IsReadOnly="True" Width="750" Margin="0 0 0 15"/>
 				<Button Content="{Binding Browse}" Click="OnBrowseSourceClick" Margin="10 0 5 15"/>
 			</StackPanel>
 
 			<TextBlock Text="{Binding TargetDirectory}" Margin="0 0 0 5"/>
 			<StackPanel Orientation="Horizontal">
-				<TextBox Name="TargetDirectoryTextBox" Width="750" Margin="0 0 0 15"/>
+				<TextBox Name="TargetDirectoryTextBox" IsReadOnly="True" Width="750" Margin="0 0 0 15"/>
 				<Button Content="{Binding Browse}" Click="OnBrowseTargetClick" Margin="10 0 5 15"/>
 			</StackPanel>
 
 			<TextBlock Text="{Binding BackupType}" Margin="0 10 0 5"/>
 			<ComboBox Name="BackupTypeComboBox">
-				<ComboBoxItem Content="{Binding CompleteBackup}"/>
-				<ComboBoxItem Content="{Binding DifferentialBackup}"/>
+				<ComboBoxItem Content="Complete"/>
+				<ComboBoxItem Content="Differential"/>
 			</ComboBox>
 			<Button Grid.Row="2" Content="{Binding AddNewBackup}" Click="OnAddBackupClick" Classes="proButton" Margin="0 40 0 0"/>
 

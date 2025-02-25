@@ -38,22 +38,23 @@ namespace EasySaveV2.Views
             string name = JobNameTextBox.Text;
 
             string sourceDirectory = SourceDirectoryTextBox.Text;
-            string targetDirectory = Path.Combine(TargetDirectoryTextBox.Text, name);
 
-            if (string.IsNullOrWhiteSpace(name) || BackupTypeComboBox.SelectedItem == null)
+
+            if (string.IsNullOrWhiteSpace(name) || BackupTypeComboBox.SelectedItem == null || TargetDirectoryTextBox == null)
             {
                 await messageService.ShowMessage((Window)this.VisualRoot, "Incorrect choice, please try again");
                 return;
             }
+            string targetDirectory = Path.Combine(TargetDirectoryTextBox.Text, name);
             string strategyChoice = ((ComboBoxItem)BackupTypeComboBox.SelectedItem).Content.ToString();
 
             IBackupStrategy strategy;
             switch (strategyChoice)
             {
-                case "Complete Backup":
+                case "Complete":
                     strategy = new CompleteBackup(languageManager, stateManager);
                     break;
-                case "Differential Backup":
+                case "Differential":
                     strategy = new DifferentialBackup(languageManager, stateManager);
                     break;
                 default:
@@ -62,7 +63,10 @@ namespace EasySaveV2.Views
             }
 
             EasySaveApp.GetInstance(languageManager).AddBackup(backupJobFactory.CreateBackupJob(name, sourceDirectory, targetDirectory, strategy, stateManager));
-
+            JobNameTextBox.Text = "";
+            SourceDirectoryTextBox.Text = "";
+            TargetDirectoryTextBox.Text = "";
+            BackupTypeComboBox.SelectedItem = null;
         }
 
         private async void OnBrowseSourceClick(object sender, RoutedEventArgs e)
