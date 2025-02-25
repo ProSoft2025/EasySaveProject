@@ -61,6 +61,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à AddExtension.
+        /// </summary>
+        public static string AddExtension {
+            get {
+                return ResourceManager.GetString("AddExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Add new backup.
         /// </summary>
         public static string AddNewBackup {
@@ -133,15 +142,6 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Complete backup.
-        /// </summary>
-        public static string CompleteBackup {
-            get {
-                return ResourceManager.GetString("CompleteBackup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à EasySave 2025 ALL rights reserved.
         /// </summary>
         public static string Copyright {
@@ -160,20 +160,20 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Differential backup.
-        /// </summary>
-        public static string DifferentialBackup {
-            get {
-                return ResourceManager.GetString("DifferentialBackup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Encryption.
         /// </summary>
         public static string Encryption {
             get {
                 return ResourceManager.GetString("Encryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Extensions list to encrypt.
+        /// </summary>
+        public static string EncryptionExtensions {
+            get {
+                return ResourceManager.GetString("EncryptionExtensions", resourceCulture);
             }
         }
         
@@ -187,11 +187,56 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter extension (Ex: .txt).
+        /// </summary>
+        public static string EnterExtensionPlaceholder {
+            get {
+                return ResourceManager.GetString("EnterExtensionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Execute backup.
         /// </summary>
         public static string ExecuteBackup {
             get {
                 return ResourceManager.GetString("ExecuteBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Extension must start with a dot (.).
+        /// </summary>
+        public static string ExtensionErrorDot {
+            get {
+                return ResourceManager.GetString("ExtensionErrorDot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Extension cannot be empty.
+        /// </summary>
+        public static string ExtensionErrorEmpty {
+            get {
+                return ResourceManager.GetString("ExtensionErrorEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à This extension already exists.
+        /// </summary>
+        public static string ExtensionErrorExists {
+            get {
+                return ResourceManager.GetString("ExtensionErrorExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Extension not found.
+        /// </summary>
+        public static string ExtensionErrorNotFound {
+            get {
+                return ResourceManager.GetString("ExtensionErrorNotFound", resourceCulture);
             }
         }
         
@@ -237,6 +282,15 @@ namespace EasySaveV2.Resources {
         public static string RemoveBackup {
             get {
                 return ResourceManager.GetString("RemoveBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete extension.
+        /// </summary>
+        public static string RemoveExtention {
+            get {
+                return ResourceManager.GetString("RemoveExtention", resourceCulture);
             }
         }
         
@@ -304,6 +358,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Source directory.
+        /// </summary>
+        public static string SourceDirectory {
+            get {
+                return ResourceManager.GetString("SourceDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Start backup.
         /// </summary>
         public static string StartBackup {
@@ -327,6 +390,15 @@ namespace EasySaveV2.Resources {
         public static string StopBackup {
             get {
                 return ResourceManager.GetString("StopBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Target directory.
+        /// </summary>
+        public static string TargetDirectory {
+            get {
+                return ResourceManager.GetString("TargetDirectory", resourceCulture);
             }
         }
         

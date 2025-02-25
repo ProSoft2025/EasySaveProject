@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddExtension" xml:space="preserve">
+    <value>Ajouter une extension</value>
+  </data>
   <data name="AddNewBackup" xml:space="preserve">
     <value>Ajouter une sauvegarde</value>
   </data>
@@ -141,26 +144,35 @@
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
   </data>
-  <data name="CompleteBackup" xml:space="preserve">
-    <value>Sauvegarde complète</value>
-  </data>
   <data name="Copyright" xml:space="preserve">
     <value>EasySave 2025 TOUS droits réservés</value>
   </data>
   <data name="DarkMode" xml:space="preserve">
     <value>Mode sombre</value>
   </data>
-  <data name="DifferentialBackup" xml:space="preserve">
-    <value>Sauvegarde différentielle</value>
-  </data>
   <data name="Encryption" xml:space="preserve">
     <value>Chiffrement</value>
+  </data>
+  <data name="EncryptionExtensions" xml:space="preserve">
+    <value>Liste des extensions à chiffrer :</value>
   </data>
   <data name="EnterBackupNumbers" xml:space="preserve">
     <value>Entrez le nombre de sauvegardes à exécuter</value>
   </data>
+  <data name="EnterExtensionPlaceholder" xml:space="preserve">
+    <value>Entrez une extension (Ex: .txt)</value>
+  </data>
   <data name="ExecuteBackup" xml:space="preserve">
     <value>Exécuter une sauvegarde</value>
+  </data>
+  <data name="ExtensionErrorExists" xml:space="preserve">
+    <value>Cette extension existe déjà</value>
+  </data>
+  <data name="ExtensionErrorDot" xml:space="preserve">
+    <value>L'extension doit commencer par un point (.)</value>
+  </data>
+  <data name="ExtensionErrorEmpty" xml:space="preserve">
+    <value>L'extension ne peut pas être vide</value>
   </data>
   <data name="JobName" xml:space="preserve">
     <value>Nom de la tâche</value>
@@ -176,6 +188,9 @@
   </data>
   <data name="RemoveBackup" xml:space="preserve">
     <value>Supprimer une sauvegarde</value>
+  </data>
+  <data name="RemoveExtention" xml:space="preserve">
+    <value>Supprimer une extention</value>
   </data>
   <data name="RestoreBackup" xml:space="preserve">
     <value>Restaurer une sauvegarde</value>
@@ -198,6 +213,9 @@
   <data name="Settings" xml:space="preserve">
     <value>Paramètres</value>
   </data>
+  <data name="SourceDirectory" xml:space="preserve">
+    <value>Répertoire source</value>
+  </data>
   <data name="StartBackup" xml:space="preserve">
     <value>Lancer la sauvegarde</value>
   </data>
@@ -206,6 +224,9 @@
   </data>
   <data name="StopBackup" xml:space="preserve">
     <value>Arrêter la sauvegarde</value>
+  </data>
+  <data name="TargetDirectory" xml:space="preserve">
+    <value>Répertoire cible</value>
   </data>
   <data name="TotalBackupTime" xml:space="preserve">
     <value>Temps total de sauvegarde</value>
@@ -221,5 +242,8 @@
   </data>
   <data name="ViewLogs" xml:space="preserve">
     <value>Voir les journaux</value>
+  </data>
+  <data name="ExtensionErrorNotFound" xml:space="preserve">
+    <value>Extension introuvable</value>
   </data>
 </root>

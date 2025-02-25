@@ -53,6 +53,15 @@ namespace EasySaveV2.Localization
         public string ViewBackup => this["ViewBackup"];
         public string ViewLogs => this["ViewLogs"];
         public string JobProcess => this["JobProcess"];
+        public string EncryptionExtensions => this["EncryptionExtensions"];
+        public string EnterExtensionPlaceholder => this["EnterExtensionPlaceholder"];
+        public string AddExtension => this["AddExtension"];
+        public string RemoveExtension => this["RemoveExtension"];
+        public string ExtensionErrorEmpty => this["ExtensionErrorEmpty"];
+        public string ExtensionErrorDot => this["ExtensionErrorDot"];
+        public string ExtensionErrorExists => this["ExtensionErrorExists"];
+        public string ExtensionErrorNotFound => this["ExtensionErrorNotFound"];
+
 
         public string this[string key] => ResourceManager.GetString(key, _currentCulture) ?? key;
 

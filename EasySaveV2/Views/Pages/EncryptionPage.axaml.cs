@@ -3,8 +3,9 @@ using Avalonia.Interactivity;
 using EasySaveV1;
 using System.Linq;
 using EasySaveV2.Services;
+using EasySaveV2.Localization;
 
-namespace EasySaveV2
+namespace EasySaveV2.Views
 {
     public partial class EncryptionPage : UserControl
     {
@@ -16,10 +17,9 @@ namespace EasySaveV2
             this.manager = manager;
             this.messageService = messageService;
             InitializeComponent();
+            DataContext = TranslationManager.Translation; // Ajout du DataContext pour la traduction
             LoadExtensions();
         }
-
-
 
         private void LoadExtensions()
         {
@@ -33,17 +33,17 @@ namespace EasySaveV2
             var extension = extensionTextBox.Text;
             if (string.IsNullOrEmpty(extension))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Extension false");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ExtensionErrorEmpty);
                 return;
             }
             else if (extension[0] != '.')
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "L'extension start with dot");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ExtensionErrorDot);
                 return;
             }
             else if (manager.ExtensionsToEncrypt.Contains(extension))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Extension exist");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ExtensionErrorExists);
                 return;
             }
 
@@ -62,7 +62,7 @@ namespace EasySaveV2
             var extension = extensionTextBox.Text;
             if (string.IsNullOrEmpty(extension) || !manager.ExtensionsToEncrypt.Contains(extension))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Extension false");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ExtensionErrorNotFound);
                 return;
             }
 
@@ -85,6 +85,5 @@ namespace EasySaveV2
                 extensionTextBox.Text = extensionsListBox.SelectedItem.ToString();
             }
         }
-
     }
 }

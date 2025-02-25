@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddExtension" xml:space="preserve">
+    <value>AddExtension</value>
+  </data>
   <data name="AddNewBackup" xml:space="preserve">
     <value>Add new backup</value>
   </data>
@@ -141,26 +144,35 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="CompleteBackup" xml:space="preserve">
-    <value>Complete backup</value>
-  </data>
   <data name="Copyright" xml:space="preserve">
     <value>EasySave 2025 ALL rights reserved</value>
   </data>
   <data name="DarkMode" xml:space="preserve">
     <value>Dark mode</value>
   </data>
-  <data name="DifferentialBackup" xml:space="preserve">
-    <value>Differential backup</value>
-  </data>
   <data name="Encryption" xml:space="preserve">
     <value>Encryption</value>
+  </data>
+  <data name="EncryptionExtensions" xml:space="preserve">
+    <value>Extensions list to encrypt</value>
   </data>
   <data name="EnterBackupNumbers" xml:space="preserve">
     <value>Enter the number of backups to execute</value>
   </data>
+  <data name="EnterExtensionPlaceholder" xml:space="preserve">
+    <value>Enter extension (Ex: .txt)</value>
+  </data>
   <data name="ExecuteBackup" xml:space="preserve">
     <value>Execute backup</value>
+  </data>
+  <data name="ExtensionErrorExists" xml:space="preserve">
+    <value>This extension already exists</value>
+  </data>
+  <data name="ExtensionErrorDot" xml:space="preserve">
+    <value>Extension must start with a dot (.)</value>
+  </data>
+  <data name="ExtensionErrorEmpty" xml:space="preserve">
+    <value>Extension cannot be empty</value>
   </data>
   <data name="JobName" xml:space="preserve">
     <value>Job name</value>
@@ -176,6 +188,9 @@
   </data>
   <data name="RemoveBackup" xml:space="preserve">
     <value>Remove backup</value>
+  </data>
+  <data name="RemoveExtention" xml:space="preserve">
+    <value>Delete extension</value>
   </data>
   <data name="RestoreBackup" xml:space="preserve">
     <value>Restore backup</value>
@@ -198,6 +213,9 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SourceDirectory" xml:space="preserve">
+    <value>Source directory</value>
+  </data>
   <data name="StartBackup" xml:space="preserve">
     <value>Start backup</value>
   </data>
@@ -206,6 +224,9 @@
   </data>
   <data name="StopBackup" xml:space="preserve">
     <value>Stop backup</value>
+  </data>
+  <data name="TargetDirectory" xml:space="preserve">
+    <value>Target directory</value>
   </data>
   <data name="TotalBackupTime" xml:space="preserve">
     <value>Total backup time</value>
@@ -221,5 +242,8 @@
   </data>
   <data name="ViewLogs" xml:space="preserve">
     <value>View Logs</value>
+  </data>
+  <data name="ExtensionErrorNotFound" xml:space="preserve">
+    <value>Extension not found</value>
   </data>
 </root>
