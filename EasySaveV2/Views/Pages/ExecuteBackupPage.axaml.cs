@@ -6,16 +6,19 @@ using EasySaveV1;
 using EasySaveV2.Services;
 using EasySaveV2.Localization;
 using System.Threading.Tasks;
+using EasySaveV2.ViewModels;
 
 namespace EasySaveV2.Views
 {
     public partial class ExecuteBackupPage : UserControl
     {
+        
         public ExecuteBackupPage()
         {
             InitializeComponent();
-            DataContext = TranslationManager.Instance;
+            DataContext = new ExecuteBackupPageViewModel();
         }
+
 
         private List<BackupJob> GetSelectedBackups(string input)
         {
@@ -50,20 +53,33 @@ namespace EasySaveV2.Views
 
         private async void OnExecuteBackupClick(object? sender, RoutedEventArgs e)
         {
-            if (BackupNumbersTextBox == null || ExecutionOutputTextBlock == null)
+            if (BackupNumbersTextBox == null)
                 return;
+
+            var viewModel = DataContext as ExecuteBackupPageViewModel; // Récupère le ViewModel
+            if (viewModel == null) return;
+
+            // check if no backup job exist
+            if (EasySaveApp.GetInstance().BackupJobs.Count == 0)
+            {
+                viewModel.Backup.Status = BackupStatus.Error.ToString();
+                return;
+            }
 
             string input = BackupNumbersTextBox.Text;
             var selectedJobs = GetSelectedBackups(input);
 
-            if (selectedJobs.Count == 0)
+            // check if user entered invalid value 
+            if (selectedJobs.Count == 0 || input.Contains("0"))
             {
-                ExecutionOutputTextBlock.Text = "No valid backups selected.";
+                viewModel.Backup.Status = BackupStatus.Error.ToString();
                 return;
             }
 
+            // launch backups if good
             await ExecuteBackups(selectedJobs);
-            ExecutionOutputTextBlock.Text = "Backup(s) executed successfully.";
+            viewModel.Backup.Status = BackupStatus.Completed.ToString();
         }
+
     }
 }
