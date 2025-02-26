@@ -16,13 +16,6 @@ namespace EasySaveV2.Views
         private readonly LanguageManager languageManager;
         private readonly EasySaveApp manager;
 
-        public AddBackupPage()
-        {
-            InitializeComponent();
-            DataContext = TranslationManager.Instance;
-            messageService = new MessageService();
-        }
-
         public AddBackupPage(BackupJobFactory backupJobFactory, StateManager stateManager, EasySaveApp manager)
         {
             InitializeComponent();
