@@ -65,6 +65,14 @@ namespace EasySaveV2.Localization
         public string EnterBackupNumbers2 => this["EnterBackupNumbers"];
         public string BackupError => this["BackupError"];
         public string BackupCompleted => this["BackupCompleted"];
+        public string ProcessList => this["ProcessList"];
+        public string EnterProcess => this["EnterProcess"];
+        public string AddProcess => this["AddProcess"];
+        public string DeleteProcess => this["DeleteProcess"];
+        public string TextBoxNotFound => this["TextBoxNotFound"];
+        public string ProcessInvalid => this["ProcessInvalid"];
+        public string ProcessExists => this["ProcessExists"];
+
 
 
 

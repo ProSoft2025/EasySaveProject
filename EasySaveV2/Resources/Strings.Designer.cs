@@ -79,6 +79,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add process.
+        /// </summary>
+        public static string AddProcess {
+            get {
+                return ResourceManager.GetString("AddProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à EasySaveV2.
         /// </summary>
         public static string AppTitle {
@@ -178,6 +187,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete process.
+        /// </summary>
+        public static string DeleteProcess {
+            get {
+                return ResourceManager.GetString("DeleteProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Encryption.
         /// </summary>
         public static string Encryption {
@@ -219,6 +237,15 @@ namespace EasySaveV2.Resources {
         public static string EnterExtensionPlaceholder {
             get {
                 return ResourceManager.GetString("EnterExtensionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter a process (Ex: .exe).
+        /// </summary>
+        public static string EnterProcess {
+            get {
+                return ResourceManager.GetString("EnterProcess", resourceCulture);
             }
         }
         
@@ -309,6 +336,33 @@ namespace EasySaveV2.Resources {
         public static string OutputPlaceholder {
             get {
                 return ResourceManager.GetString("OutputPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The process already exists.
+        /// </summary>
+        public static string ProcessExists {
+            get {
+                return ResourceManager.GetString("ProcessExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid process.
+        /// </summary>
+        public static string ProcessInvalid {
+            get {
+                return ResourceManager.GetString("ProcessInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Process list.
+        /// </summary>
+        public static string ProcessList {
+            get {
+                return ResourceManager.GetString("ProcessList", resourceCulture);
             }
         }
         
@@ -435,6 +489,15 @@ namespace EasySaveV2.Resources {
         public static string TargetDirectory {
             get {
                 return ResourceManager.GetString("TargetDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Textbox not found.
+        /// </summary>
+        public static string TextBoxNotFound {
+            get {
+                return ResourceManager.GetString("TextBoxNotFound", resourceCulture);
             }
         }
         

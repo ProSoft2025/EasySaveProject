@@ -1,14 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using EasySaveV1;
 using EasySaveV2.Services;
+using EasySaveV2.Localization;
 
-namespace EasySaveV2
+namespace EasySaveV2.Views
 {
     public partial class JobProcess : UserControl
     {
@@ -29,18 +27,18 @@ namespace EasySaveV2
             var processTextBox = this.FindControl<TextBox>("ProcessTextBox");
             if (processTextBox == null)
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "TextBox not find");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.TextBoxNotFound);
                 return;
             }
             var process = processTextBox.Text;
             if (string.IsNullOrEmpty(process))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Process invalid");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ProcessInvalid);
                 return;
             }
             else if (manager.ProcessesToMonitor.Contains(process))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Process exist");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ProcessExists);
                 return;
             }
 
@@ -58,20 +56,18 @@ namespace EasySaveV2
             }
         }
 
-       
-
         private async void OnRemoveProcessClick(object sender, RoutedEventArgs e)
         {
             var processTextBox = this.FindControl<TextBox>("ProcessTextBox");
             if (processTextBox == null)
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "TextBox non trouvé");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.TextBoxNotFound);
                 return;
             }
             var process = processTextBox.Text;
             if (string.IsNullOrEmpty(process) || !manager.ProcessesToMonitor.Contains(process))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Process invalid");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ProcessInvalid);
                 return;
             }
 
@@ -90,7 +86,5 @@ namespace EasySaveV2
                 processTextBox.Text = processListBox.SelectedItem.ToString();
             }
         }
-
-    
     }
 }

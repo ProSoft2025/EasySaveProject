@@ -258,4 +258,25 @@
   <data name="EnterBackupNumbers2" xml:space="preserve">
     <value>Entrez les numéros de sauvegarde</value>
   </data>
+  <data name="ProcessList" xml:space="preserve">
+    <value>Liste des processus</value>
+  </data>
+  <data name="EnterProcess" xml:space="preserve">
+    <value>Entrez un processus (Ex: .exe)</value>
+  </data>
+  <data name="AddProcess" xml:space="preserve">
+    <value>Ajouter un processus</value>
+  </data>
+  <data name="DeleteProcess" xml:space="preserve">
+    <value>Supprimer un processus</value>
+  </data>
+  <data name="TextBoxNotFound" xml:space="preserve">
+    <value>Champ de texte non trouvé</value>
+  </data>
+  <data name="ProcessInvalid" xml:space="preserve">
+    <value>Processus invalide</value>
+  </data>
+  <data name="ProcessExists" xml:space="preserve">
+    <value>Le processus existe déjà</value>
+  </data>
 </root>
