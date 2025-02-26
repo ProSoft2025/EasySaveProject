@@ -448,6 +448,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Restore backup.
+        /// </summary>
+        public static string RestoreBackupTitle {
+            get {
+                return ResourceManager.GetString("RestoreBackupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Return.
         /// </summary>
         public static string Return {

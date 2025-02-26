@@ -12,7 +12,7 @@
 		</Grid.RowDefinitions>
 
 		<StackPanel Grid.Row="0" Margin="0 0 0 40">
-			<TextBlock Text="{Binding AddNewBackup}" FontSize="24" Margin="0 0 0 40"/>
+			<TextBlock Text="{Binding AddNewBackup}" FontSize="24" FontWeight="Bold" Margin="0 0 0 40"/>
 			<TextBlock Text="{Binding JobName}" Margin="0 0 0 5"/>
 			<TextBox Name="JobNameTextBox" Margin="0 0 0 15"/>
 

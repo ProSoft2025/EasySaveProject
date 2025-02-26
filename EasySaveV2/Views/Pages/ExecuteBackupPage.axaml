@@ -8,7 +8,7 @@
     <StackPanel Margin="20">
         <!-- Titre -->
         <TextBlock Text="{Binding Translation.ExecuteBackup2, Source={x:Static trans:TranslationManager.Instance}}" 
-                   FontSize="24" Margin="0 0 0 20"/>
+                   FontSize="24" FontWeight="Bold" Margin="0 0 0 20"/>
         
         <!-- Zone de saisie du numéro de backup -->
         <TextBlock Text="{Binding Translation.EnterBackupNumbers2, Source={x:Static trans:TranslationManager.Instance}}"/>

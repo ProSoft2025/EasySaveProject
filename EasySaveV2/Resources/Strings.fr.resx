@@ -297,4 +297,7 @@
   <data name="BackupRestored" xml:space="preserve">
     <value>Sauvegarde restaurée avec succès</value>
   </data>
+  <data name="RestoreBackupTitle" xml:space="preserve">
+    <value>Restaurer une sauvegarde</value>
+  </data>
 </root>
