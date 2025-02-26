@@ -19,17 +19,7 @@ namespace EasySaveV1 {
     }
         public void DisplayMenu()
         {
-            Console.WriteLine(languageManager.GetTranslation("menu_title"));
-            Console.WriteLine("1. " + languageManager.GetTranslation("view_backups"));
-            Console.WriteLine("2. " + languageManager.GetTranslation("add_backup"));
-            Console.WriteLine("3. " + languageManager.GetTranslation("delete_backup"));
-            Console.WriteLine("4. " + languageManager.GetTranslation("restore_backup"));
-            Console.WriteLine("5. " + languageManager.GetTranslation("execute_backups"));
-            Console.WriteLine("6. " + languageManager.GetTranslation("view_logs"));
-            Console.WriteLine("7. " + languageManager.GetTranslation("change_language"));
-            Console.WriteLine("8. " + languageManager.GetTranslation("Chiffrement"));
-            Console.WriteLine("9. " + languageManager.GetTranslation("exit"));
-            Console.Write(languageManager.GetTranslation("your_choice") + " : ");
+    
         }
 
         public string GetUserInput()
@@ -119,14 +109,6 @@ namespace EasySaveV1 {
 
             private void LogSubMenu()
             {
-                Console.WriteLine(languageManager.GetTranslation("menu_log"));
-                Console.WriteLine("1. " + languageManager.GetTranslation("daily_logs"));
-                Console.WriteLine("2. " + languageManager.GetTranslation("real_time"));
-                Console.WriteLine("3. " + languageManager.GetTranslation("logs_format"));
-                Console.WriteLine("4. " + languageManager.GetTranslation("press_any_key"));
-                Console.WriteLine("============================");
-                Console.Write(languageManager.GetTranslation("your_choice"));
-
                 ConsoleKeyInfo choixLog = Console.ReadKey();
                 Console.Clear();
 
@@ -140,7 +122,7 @@ namespace EasySaveV1 {
                     case '2':
                         // Implémentation pour afficher l'état en temps réel
                         Console.WriteLine(languageManager.GetTranslation("real_time2"));
-                        DisplayBackupState();
+                        ;
                         break;
                     case '3':
                         Console.Clear();
@@ -329,33 +311,24 @@ namespace EasySaveV1 {
                 {
                     if (backupIndex >= 0 && backupIndex < manager.BackupJobs.Count)
                     {
-                        Console.WriteLine((languageManager.GetTranslation("execute_backup")) + $"{backupIndex + 1}: {manager.BackupJobs[backupIndex].Name}");
-                        manager.BackupJobs[backupIndex].Execute(loggerStrategy);
+                        var backupjob = manager.BackupJobs[backupIndex];
+                        if (backupjob.BackupStrategy is DifferentialBackup)
+                        {
+                            
+                            string lastFullBackupDir = ui.GetUserInput();
+                            ((DifferentialBackup)backupjob.BackupStrategy).ExecuteBackup(backupjob, loggerStrategy, lastFullBackupDir);
+                        }
+                        else
+                        {
+                            backupjob.Execute(loggerStrategy);
+                        }
                     }
                 }
-                Console.WriteLine(languageManager.GetTranslation("execute_backup_finished"));
+                
+               
             }
 
-            private void DisplayBackupState()
-            {
-                StateEntry state = stateManager.GetState();
-                if (state == null)
-                {
-                    Console.WriteLine(languageManager.GetTranslation("backup_state_availability"));
-                    return;
-                }
-
-                Console.WriteLine((languageManager.GetTranslation("backup_task")) + $"{state.TaskName}");
-                Console.WriteLine((languageManager.GetTranslation("time_stamp")) + $"{state.Timestamp}");
-                Console.WriteLine((languageManager.GetTranslation("status")) + $" {state.Status}");
-                Console.WriteLine((languageManager.GetTranslation("progress")) + $" {state.Progress}%");
-                Console.WriteLine((languageManager.GetTranslation("total_files")) + $" {state.TotalFiles}");
-                Console.WriteLine((languageManager.GetTranslation("remaining_files")) + $" {state.RemainingFiles}");
-                Console.WriteLine((languageManager.GetTranslation("total_size")) + $" {state.TotalSize} " + (languageManager.GetTranslation("bytes")));
-                Console.WriteLine((languageManager.GetTranslation("remaining_size")) + $" {state.RemainingSize} " + (languageManager.GetTranslation("bytes")));
-                Console.WriteLine((languageManager.GetTranslation("current_source")) + $" {state.CurrentSource}");
-                Console.WriteLine((languageManager.GetTranslation("current_target")) + $"{state.CurrentTarget}");
-            }
+     
 
             private void SetLogFormat()
             {

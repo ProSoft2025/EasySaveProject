@@ -19,11 +19,10 @@ namespace EasySaveV1
         /// </summary>
         /// <param name="jobBackup"></param>
         /// <param name="loggerStrategy"></param>
-        public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
+        public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy, string lastFullBackupDir)
         {
-            Console.WriteLine(languageManager.GetTranslation("start_diff_backup"));
-            Console.WriteLine(languageManager.GetTranslation("input_complete_backup_path"));
-            string lastFullBackupDir = Console.ReadLine();
+            
+            
 
             if (!Directory.Exists(jobBackup.TargetDirectory))
             {
@@ -114,12 +113,8 @@ namespace EasySaveV1
 
 
 
-        public void Restore(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
+        public void Restore(BackupJob jobBackup, ILoggerStrategy loggerStrategy, string lastFullBackupDir)
         {
-            Console.WriteLine(languageManager.GetTranslation("start_backup_restore"));
-            Console.WriteLine(languageManager.GetTranslation("input_complete_backup_path"));
-            string lastFullBackupDir = Console.ReadLine();
-
             var tempBackupJob = new BackupJob(jobBackup.Name, lastFullBackupDir, jobBackup.SourceDirectory, jobBackup.BackupStrategy);
 
             try
