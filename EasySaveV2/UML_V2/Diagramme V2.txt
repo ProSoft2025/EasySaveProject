@@ -1,0 +1,206 @@
+classDiagram
+    namespace EasySave {
+        class BackupJob {
+            +string name
+            +string sourceDirectory
+            +string targetDirectory
+            +StateManager StateManager
+            +IBackupStrategy BackupStrategy
+            +List<string> extensionsToEncrypt
+            +Execute(ILoggerStrategy logger)
+            +Restore(ILoggerStrategy logger)
+            +displayAttributs()
+            +updateExtensionsToEncrypt(List<string> extensions)
+        }
+
+        class BackupJobFactory {
+            +createBackupJob(string name, string source, string target, IBackupStrategy strategy, StateManager stateManager, List<string> extensions) : BackupJob
+        }
+
+        class BackupObserver {
+            +update(string message)
+        }
+
+        class CompleteBackup {
+            +ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
+            +Restore(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
+        }
+
+        class DifferentialBackup {
+            +ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
+            +Restore(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
+        }
+
+        class EasySaveApp {
+            -_instance : EasySaveApp
+            -_lock : object
+            +BackupJobs : List~BackupJob~
+            + List <string> extensionsToEncrypt
+            -EasySaveApp()
+            +GetInstance() : EasySaveApp
+            +AddBackup(job : BackupJob) : void
+            +RemoveBackup(name : string) : void
+            +AddExtension(string extension)
+            +RemoveExtension(string extension)
+            +isProcessRunning(string processName) : bool
+        }
+
+        class FileManager {
+            +ListDirectories(string source)
+            +CopyDirectory(string sourceDir, string destinationDir)
+            +encryptFile(string source, string target)
+        }
+
+        class IBackupStrategy {
+            <<interface>>
+            +ExecuteBackup(BackupJob jobBackup, ILoggerStrategy serviceLogger)
+            +Restore(BackupJob jobBackup, ILoggerStrategy serviceLogger)
+        }
+
+        class LanguageManager {
+            +string currentLanguage
+            +SetLanguage(string language)
+            +GetTranslation(string key)
+        }
+
+        class MenuManager {
+            -UserInterface ui
+            -EasySaveApp manager
+            -LoggerService loggerService
+            -BackupJobFactory backupJobFactory
+            -LanguageManager languageManager
+            -StateManager stateManager
+            +Run()
+            -LogSubMenu()
+            -DisplayBackup()
+            -ChangeLanguageMenu()
+            -AddBackupMenu()
+            -RemoveBackupMenu()
+            -RestoreBackup(EasySaveApp manager)
+            +ReadBackupExecute(List<BackupJob> backupJobs)
+            -BackupExecute()
+            -DisplayBackupState()
+            -SetLogFormat()
+            +ChiffrementMenu()
+        }
+
+        class StateEntry {
+            +string taskName
+            +string timestamp
+            +string status
+            +int totalFiles
+            +int totalSize
+            +int progress
+            +int remainingFiles
+            +int remainingSize
+            +string currentSource
+            +string currentTarget
+        }
+
+        class StateManager {
+            +string stateFilePath
+            +EnsureFileExists()
+            +UpdateState(StateEntry entry)
+            +GetState() : string
+        }
+
+        class UserInterface {
+            -LanguageManager languageManager
+            +displayMenu()
+            +getUserInput() : string
+           
+        }
+    }
+
+    namespace BackupLogger {
+        
+        class ILoggerStrategy {
+            +string timestamp
+            +string taskName
+            +string sourcePath
+            +string targetPath
+            +long fileSize
+            +long transferTime
+            +int encryptionTime
+            +Update(string taskName, string sourcePath, string targetPath, long fileSize, long transferTime, int encryptionTime)
+            +DisplayLogFileContent()
+        }
+
+        class JSONLog {
+            +IConfigManager configManager
+            +Update(string taskName, string sourcePath, string targetPath, long fileSize, long transferTime, int encryptionTime)
+            +DisplayLogFileContent()
+        }
+
+        class XMLLog {
+            +IConfigManager configManager
+            +Update(string taskName, string sourcePath, string targetPath, long fileSize, long transferTime, int encryptionTime)
+            +DisplayLogFileContent()
+        }
+
+        class IConfigManager {
+            +string LogDirectory
+            +string LogFormat
+            SaveConfig()
+            SetLogFormat(string format)
+            SetLogDirectory(string directory)
+                       
+        }
+
+        class ConfigManager {
+            +IConfigManager configManager
+            +string ConfigFilePath
+            +string LogDirectory
+            +string LogFormat
+            LoadConfig()
+            SetDefaults()
+            SaveConfig()
+            SetLogDirectory(string directory)
+            SetLogFormat(string format)                       
+        }
+    }
+
+    namespace CryptoSoftApp {
+        class FileManager {
+            -string Path
+            -string key
+            -CheckFile() : bool
+            +TransformFile() : int
+            -ConvertToByte(string Text) : Byte[]
+            -XorMethod(List<byte> fileBytes, List<byte> keyBytes) : byte[]
+        }
+    }
+
+    %% Relations principales
+    EasySaveApp "1" *-- "0..*" BackupJob : contains
+    EasySaveApp "1" --> "1" StateManager : uses
+    EasySaveApp "1" --> "1" LanguageManager : uses
+    EasySaveApp "1" --> "1" BackupJobFactory : uses
+    EasySaveApp "1" --> "1..*" BackupObserver : notifies
+    BackupJob "1" --> "1" FileManager : uses
+    BackupJob "1" --> "1" IBackupStrategy : uses
+    DifferentialBackup "1" --> "0..1" FileManager : uses
+    CompleteBackup "1" --> "0..1" FileManager : uses
+
+
+    UserInterface "1" <-- "1" MenuManager : uses
+    MenuManager "1" --> "1" EasySaveApp : interacts with
+    MenuManager "1" --> "1" ILoggerStrategy : interacts with
+    MenuManager "1" --> "1" IConfigManager : uses
+    MenuManager "1" --> "1" BackupJobFactory : uses
+
+    BackupJobFactory "1" --> "1" BackupJob : creates
+    IBackupStrategy <|-- CompleteBackup : implements
+    IBackupStrategy <|-- DifferentialBackup : implements
+    BackupObserver <.. EasySaveApp : observes
+    LanguageManager "1" --> "0..*" BackupObserver : updates
+
+    %% Relations BackupLogger
+    IConfigManager <|-- ConfigManager : implements
+    ILoggerStrategy "1" --* "1" JSONLog : implements 
+    ILoggerStrategy "1" --* "1" XMLLog : implements
+    JSONLog "1" --> "1" IConfigManager : uses
+    XMLLog "1" --> "1" IConfigManager : uses
+    StateManager "1" --> "1..*" StateEntry : updates
+
+direction LR
