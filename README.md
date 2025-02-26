@@ -103,6 +103,8 @@ Then refer to the usage section and you will be ready to go !
 
 ## Start the application
 * Version 1 : [Documentation User] named UserDoc V1.md
+* Version 2 : [Documentation User] named UserDoc V2.md
+* Version 3 : [Documentation User] named UserDoc V3.md
 
 # Authors
 - BUTEZ Clément
