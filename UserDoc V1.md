@@ -1,6 +1,6 @@
 # Documentation User
 
-## Start the application
+### Start the application
 
 Once you have installed our program, you will have multiple choices.
 
