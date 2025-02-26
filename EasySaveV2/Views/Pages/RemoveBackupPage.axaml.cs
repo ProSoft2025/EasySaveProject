@@ -2,16 +2,14 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using EasySaveV1;
 using EasySaveV2.Services;
+using EasySaveV2.Localization;
 
-namespace EasySaveV2
+namespace EasySaveV2.Views
 {
     public partial class RemoveBackupPage : UserControl
     {
-        private readonly BackupJobFactory backupJobFactory;
-        private readonly StateManager stateManager;
         private readonly EasySaveApp manager;
         private readonly MessageService messageService;
-        private readonly LanguageManager languageManager;
 
         public RemoveBackupPage()
         {
@@ -26,19 +24,18 @@ namespace EasySaveV2
 
             if (string.IsNullOrEmpty(name))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Please enter a valid backup name");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.BackupNameInvalid);
                 return;
             }
 
-            EasySaveApp appInstance = EasySaveApp.GetInstance();
-            bool isRemoved = appInstance.BackupJobs.RemoveAll(job => job.Name == name) > 0;
+            bool isRemoved = manager.BackupJobs.RemoveAll(job => job.Name == name) > 0;
             if (isRemoved)
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Backup deleted successfully");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.BackupDeleted);
             }
             else
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "No backup found with the specified name");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.BackupNotFound);
             }
         }
     }

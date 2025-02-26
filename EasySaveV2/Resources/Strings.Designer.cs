@@ -115,6 +115,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup deleted successfully.
+        /// </summary>
+        public static string BackupDeleted {
+            get {
+                return ResourceManager.GetString("BackupDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Backup error occured.
         /// </summary>
         public static string BackupError {
@@ -129,6 +138,33 @@ namespace EasySaveV2.Resources {
         public static string BackupManagement {
             get {
                 return ResourceManager.GetString("BackupManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup name.
+        /// </summary>
+        public static string BackupName {
+            get {
+                return ResourceManager.GetString("BackupName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please enter a valid backup name.
+        /// </summary>
+        public static string BackupNameInvalid {
+            get {
+                return ResourceManager.GetString("BackupNameInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No backup found with the specified name.
+        /// </summary>
+        public static string BackupNotFound {
+            get {
+                return ResourceManager.GetString("BackupNotFound", resourceCulture);
             }
         }
         
@@ -372,6 +408,15 @@ namespace EasySaveV2.Resources {
         public static string RemoveBackup {
             get {
                 return ResourceManager.GetString("RemoveBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remove a backup.
+        /// </summary>
+        public static string RemoveBackupTitle {
+            get {
+                return ResourceManager.GetString("RemoveBackupTitle", resourceCulture);
             }
         }
         

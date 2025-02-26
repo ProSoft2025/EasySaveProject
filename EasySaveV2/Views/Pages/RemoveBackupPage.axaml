@@ -1,14 +1,22 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EasySaveV2.RemoveBackupPage">
-	<StackPanel Margin="20">		
-		<TextBlock Text="Remove Backup" FontSize="24" Margin="0 0 0 20"/>
-		<TextBlock Text="Job Name"/>
-		<TextBox Name="JobNameTextBox" Margin="0 5 0 0"/>
-		
-		<Button Grid.Row="2" Content="Remove" Click="OnRemoveBackupClick" Classes="proButton" Margin="0 40 0 0"/>
+             xmlns:trans="using:EasySaveV2.Localization"
+             x:Class="EasySaveV2.Views.RemoveBackupPage">
+
+	<StackPanel Margin="20">
+		<!-- Titre -->
+		<TextBlock Text="{Binding Translation.RemoveBackupTitle, Source={x:Static trans:TranslationManager.Instance}}"
+                   FontSize="24" FontWeight="Bold" Margin="0 0 0 20"/>
+
+		<!-- Champ de texte pour entrer le nom du backup -->
+		<TextBlock Text="{Binding Translation.BackupName, Source={x:Static trans:TranslationManager.Instance}}" Margin="0 0 0 5"/>
+		<TextBox Name="JobNameTextBox" Margin="0 0 0 15"/>
+
+		<!-- Bouton pour supprimer un backup -->
+		<Button Grid.Row="2"
+                Content="{Binding Translation.RemoveBackup, Source={x:Static trans:TranslationManager.Instance}}"
+                Click="OnRemoveBackupClick"
+                Classes="proButton"
+                Margin="0 0 0 50"/>
 	</StackPanel>
 </UserControl>

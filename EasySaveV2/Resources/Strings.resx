@@ -279,4 +279,19 @@
   <data name="ProcessExists" xml:space="preserve">
     <value>The process already exists</value>
   </data>
+  <data name="RemoveBackupTitle" xml:space="preserve">
+    <value>Remove a backup</value>
+  </data>
+  <data name="BackupName" xml:space="preserve">
+    <value>Backup name</value>
+  </data>
+  <data name="BackupNameInvalid" xml:space="preserve">
+    <value>Please enter a valid backup name</value>
+  </data>
+  <data name="BackupDeleted" xml:space="preserve">
+    <value>Backup deleted successfully</value>
+  </data>
+  <data name="BackupNotFound" xml:space="preserve">
+    <value>No backup found with the specified name</value>
+  </data>
 </root>

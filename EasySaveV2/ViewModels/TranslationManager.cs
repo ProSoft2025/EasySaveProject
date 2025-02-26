@@ -72,6 +72,12 @@ namespace EasySaveV2.Localization
         public string TextBoxNotFound => this["TextBoxNotFound"];
         public string ProcessInvalid => this["ProcessInvalid"];
         public string ProcessExists => this["ProcessExists"];
+        public string RemoveBackupTitle => this["RemoveBackupTitle"];
+        public string BackupName => this["BackupName"];
+        public string BackupNameInvalid => this["BackupNameInvalid"];
+        public string BackupDeleted => this["BackupDeleted"];
+        public string BackupNotFound => this["BackupNotFound"];
+
 
 
 
