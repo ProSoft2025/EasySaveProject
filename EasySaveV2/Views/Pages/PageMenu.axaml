@@ -72,6 +72,13 @@
 				</StackPanel>
 			</ListBoxItem>
 			
+			<ListBoxItem Tag="PriorityExtensions" FontSize="18">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/extension.png" Width="22" Height="20" Margin="0,0,5,0" />  
+					<TextBlock Text="Priority Extensions" />
+				</StackPanel>
+			</ListBoxItem>
+			
 			<ListBoxItem Tag="ViewLogs" FontSize="18">
 				<StackPanel Orientation="Horizontal">
 					<Image Source="/Assets/view.png" Width="22" Height="20" Margin="0,0,5,0" />  

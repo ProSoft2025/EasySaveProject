@@ -3,8 +3,6 @@
 /// <summary>
 /// Represents a configuration manager that loads and saves the application configuration
 /// </summary>
-/// 
-
 namespace BackupLogger
 {
     public class ConfigManager : IConfigManager
@@ -13,7 +11,6 @@ namespace BackupLogger
 
         public string LogDirectory { get; set; }
         public string LogFormat { get; set; }
-
         public ConfigManager()
         {
             LoadConfig();
@@ -21,7 +18,6 @@ namespace BackupLogger
 
         private void LoadConfig()
         {
-
             if (File.Exists(ConfigFilePath))
             {
                 try
@@ -57,11 +53,10 @@ namespace BackupLogger
         private void SetDefaults()
         {
             LogDirectory = "C:\\EasySave\\logs"; // default log directory value
-            LogFormat = "JSON";     // default log format value
+            LogFormat = "JSON"; // default log format value
 
             Directory.CreateDirectory("C:\\EasySave\\Config");
             Directory.CreateDirectory("C:\\EasySave\\logs");
-
         }
 
         public void SaveConfig()

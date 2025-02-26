@@ -6,6 +6,7 @@ using EasySaveV2.Views;
 using EasySaveV2.Services;
 using static EasySaveV1.UserInterface;
 using System.Linq;
+using EasySaveV2.Views.Pages;
 
 namespace EasySaveV2
 {
@@ -74,6 +75,10 @@ namespace EasySaveV2
 
                     case "Encryption":
                         ContentArea.Content = new EncryptionPage(menuManager.GetEasySaveApp(), messageService);
+                        break;
+
+                    case "PriorityExtensions":
+                        ContentArea.Content = new PriorityExtensionsPage(menuManager.GetEasySaveApp(), messageService);
                         break;
                 }
             }

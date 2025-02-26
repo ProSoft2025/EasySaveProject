@@ -36,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Pages\PriorityExtensionPage.axaml.cs">
+      <DependentUpon>PriorityExtensionPage.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Pages\ViewLogs.axaml.cs">
       <DependentUpon>ViewLogs.axaml</DependentUpon>
     </Compile>

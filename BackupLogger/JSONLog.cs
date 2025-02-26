@@ -1,7 +1,6 @@
 ﻿/// <summary>
 /// Represent a log strategy that writes logs in JSON format
 /// </summary>
-/// 
 namespace BackupLogger
 {
     public class JSONLog : ILoggerStrategy
@@ -12,19 +11,20 @@ namespace BackupLogger
         {
             this.configManager = configManager;
         }
+
         public override void Update(string taskName, string sourcePath, string targetPath, long fileSize, long transferTime, int EncryptionTime)
         {
             string logFileName = Path.Combine(configManager.LogDirectory, $"{DateTime.Now:yyyy-MM-dd}.json");
 
             string logEntry = "{\n" +
-                      $"  \"Timestamp\": \"{DateTime.Now:HH:mm:ss}\",\n" +
-                      $"  \"TaskName\": \"{taskName}\",\n" +
-                      $"  \"SourcePath\": \"{sourcePath}\",\n" +
-                      $"  \"TargetPath\": \"{targetPath}\",\n" +
-                      $"  \"FileSize\": {fileSize},\n" +
-                      $"  \"TransferTime\": {transferTime},\n" +
-                      $"  \"EncryptionTIme\": {EncryptionTime},\n" +
-                      "}\n";
+                              $"  \"Timestamp\": \"{DateTime.Now:HH:mm:ss}\",\n" +
+                              $"  \"TaskName\": \"{taskName}\",\n" +
+                              $"  \"SourcePath\": \"{sourcePath}\",\n" +
+                              $"  \"TargetPath\": \"{targetPath}\",\n" +
+                              $"  \"FileSize\": {fileSize},\n" +
+                              $"  \"TransferTime\": {transferTime},\n" +
+                              $"  \"EncryptionTime\": {EncryptionTime}\n" +
+                              "}\n";
 
             using (StreamWriter writer = new StreamWriter(logFileName, append: true))
             {
