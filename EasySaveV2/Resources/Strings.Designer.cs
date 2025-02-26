@@ -178,6 +178,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup restored successfully.
+        /// </summary>
+        public static string BackupRestored {
+            get {
+                return ResourceManager.GetString("BackupRestored", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Backup type.
         /// </summary>
         public static string BackupType {

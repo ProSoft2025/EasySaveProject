@@ -77,6 +77,9 @@ namespace EasySaveV2.Localization
         public string BackupNameInvalid => this["BackupNameInvalid"];
         public string BackupDeleted => this["BackupDeleted"];
         public string BackupNotFound => this["BackupNotFound"];
+        public string RestoreBackupTitle => this["RestoreBackupTitle"];
+        public string BackupRestored => this["BackupRestored"];
+
 
 
 

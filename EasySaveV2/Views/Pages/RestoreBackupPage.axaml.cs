@@ -1,67 +1,58 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
-using BackupLogger;
 using EasySaveV1;
 using EasySaveV2.Services;
+using EasySaveV2.Localization;
+using BackupLogger;
 
-namespace EasySaveV2;
-
-public partial class RestoreBackupPage : UserControl
+namespace EasySaveV2.Views
 {
-    private readonly BackupJobFactory backupJobFactory;
-    private readonly StateManager stateManager;
-    private readonly EasySaveApp manager;
-    private readonly MessageService messageService;
-    private readonly LanguageManager languageManager;
-
-
-    public RestoreBackupPage()
+    public partial class RestoreBackupPage : UserControl
     {
-        this.manager = EasySaveApp.GetInstance();
-        this.messageService = new MessageService();
-        InitializeComponent();
-    }
+        private readonly EasySaveApp manager;
+        private readonly MessageService messageService;
 
-    private async void OnRestoreBackupClick(object sender, RoutedEventArgs e)
-    {
-        string name = JobNameTextBox.Text;
-
-        if (string.IsNullOrEmpty(name))
+        public RestoreBackupPage()
         {
-            await messageService.ShowMessage((Window)this.VisualRoot, "Please enter a valid backup name");
-            return;
+            this.manager = EasySaveApp.GetInstance();
+            this.messageService = new MessageService();
+            InitializeComponent();
         }
 
-        EasySaveApp appInstance = EasySaveApp.GetInstance();
-
-        var configManager = new ConfigManager();
-        var logger = new JSONLog(configManager);
-
-        bool isRestore = false;
-
-        foreach (var job in appInstance.BackupJobs)
+        private async void OnRestoreBackupClick(object sender, RoutedEventArgs e)
         {
-            if (job.Name == name)
+            string name = JobNameTextBox.Text;
+
+            if (string.IsNullOrEmpty(name))
             {
-                job.Restore(logger);
-                isRestore = true;
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.BackupNameInvalid);
+                return;
             }
-        }
 
-        if (isRestore)
-        {
-            await messageService.ShowMessage((Window)this.VisualRoot, "Backup restored successfully");
-        }
-        else
-        {
-            await messageService.ShowMessage((Window)this.VisualRoot, "No backup found with the specified name");
+            EasySaveApp appInstance = EasySaveApp.GetInstance();
+            var configManager = new ConfigManager();
+            var logger = new JSONLog(configManager);
+
+            bool isRestore = false;
+
+            foreach (var job in appInstance.BackupJobs)
+            {
+                if (job.Name == name)
+                {
+                    job.Restore(logger);
+                    isRestore = true;
+                }
+            }
+
+            if (isRestore)
+            {
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.BackupRestored);
+            }
+            else
+            {
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.BackupNotFound);
+            }
         }
     }
 }
-
-
- 
-
-       

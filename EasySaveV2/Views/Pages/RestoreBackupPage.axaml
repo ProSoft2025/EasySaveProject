@@ -1,14 +1,22 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EasySaveV2.RestoreBackupPage">
-	<StackPanel Margin="20">		
-		<TextBlock Text="Restore Backup" FontSize="24" Margin="0 0 0 20"/>
-		<TextBlock Text="Job Name"/>
+             xmlns:trans="using:EasySaveV2.Localization"
+             x:Class="EasySaveV2.Views.RestoreBackupPage">
+
+	<StackPanel Margin="20">
+		<!-- Titre -->
+		<TextBlock Text="{Binding Translation.RestoreBackupTitle, Source={x:Static trans:TranslationManager.Instance}}"
+                   FontSize="24" FontWeight="Bold" Margin="0 0 0 20"/>
+
+		<!-- Champ de texte pour entrer le nom du backup -->
+		<TextBlock Text="{Binding Translation.BackupName, Source={x:Static trans:TranslationManager.Instance}}" Margin="0 0 0 5"/>
 		<TextBox Name="JobNameTextBox" Margin="0 5 0 0"/>
 
-		<Button Grid.Row="2" Content="Restore" Click="OnRestoreBackupClick" Classes="proButton" Margin="0 40 0 0"/>
+		<!-- Bouton pour restaurer un backup -->
+		<Button Grid.Row="2"
+                Content="{Binding Translation.RestoreBackup, Source={x:Static trans:TranslationManager.Instance}}"
+                Click="OnRestoreBackupClick"
+                Classes="proButton"
+                Margin="0 40 0 0"/>
 	</StackPanel>
 </UserControl>

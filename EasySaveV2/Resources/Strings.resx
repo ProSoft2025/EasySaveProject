@@ -294,4 +294,7 @@
   <data name="BackupNotFound" xml:space="preserve">
     <value>No backup found with the specified name</value>
   </data>
+  <data name="BackupRestored" xml:space="preserve">
+    <value>Backup restored successfully</value>
+  </data>
 </root>
