@@ -1,18 +1,35 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:EasySaveV2.ViewModels"
+             xmlns:trans="using:EasySaveV2.Localization"
              x:Class="EasySaveV2.Views.ExecuteBackupPage"
              x:DataType="local:ExecuteBackupPageViewModel">
 
+    <StackPanel Margin="20">
+        <!-- Titre -->
+        <TextBlock Text="{Binding Translation.ExecuteBackup2, Source={x:Static trans:TranslationManager.Instance}}" 
+                   FontSize="24" Margin="0 0 0 20"/>
+        
+        <!-- Zone de saisie du numéro de backup -->
+        <TextBlock Text="{Binding Translation.EnterBackupNumbers2, Source={x:Static trans:TranslationManager.Instance}}"/>
+        <TextBox Name="BackupNumbersTextBox"/>
+        
+        <!-- Bouton d'exécution des backups -->
+        <Button Grid.Row="2" 
+                Content="{Binding Translation.ExecuteBackup2, Source={x:Static trans:TranslationManager.Instance}}" 
+                Click="OnExecuteBackupClick" 
+                Classes="proButton" 
+                Margin="0 40 0 50"/>
 
-	<StackPanel Margin="20">
-		<TextBlock Text="{Binding Translation.ExecuteBackup}" FontSize="24" Margin="0 0 0 20"/>
-		<TextBlock Text="{Binding Translation.EnterBackupNumbers}"/>
-		<TextBox Name="BackupNumbersTextBox"/>
-		<Button Grid.Row="2" Content="{Binding Translation.ExecuteBackup}" Click="OnExecuteBackupClick" Classes="proButton" Margin="0 40 0 50"/>
-
-		<ProgressBar Name="BackupProgressBar" Minimum="0" Maximum="100" Value="{Binding Backup.Progress}" Width="200" Height="30" ShowProgressText="True" Margin="0 0 0 10"/>
-		<TextBlock Text="{Binding Backup.Status}" HorizontalAlignment="Center"/>
-
-	</StackPanel>
+        <!-- Barre de progression du backup -->
+        <ProgressBar Name="BackupProgressBar" 
+                     Minimum="0" Maximum="100" 
+                     Value="{Binding Backup.Progress}" 
+                     Width="200" Height="30" 
+                     ShowProgressText="True" 
+                     Margin="0 0 0 10"/>
+        
+        <!-- Statut du backup -->
+        <TextBlock Text="{Binding Backup.Status}" HorizontalAlignment="Center"/>
+    </StackPanel>
 </UserControl>

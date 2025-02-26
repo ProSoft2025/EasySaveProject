@@ -61,6 +61,11 @@ namespace EasySaveV2.Localization
         public string ExtensionErrorDot => this["ExtensionErrorDot"];
         public string ExtensionErrorExists => this["ExtensionErrorExists"];
         public string ExtensionErrorNotFound => this["ExtensionErrorNotFound"];
+        public string ExecuteBackup2 => this["ExecuteBackup"];
+        public string EnterBackupNumbers2 => this["EnterBackupNumbers"];
+        public string BackupError => this["BackupError"];
+        public string BackupCompleted => this["BackupCompleted"];
+
 
 
         public string this[string key] => ResourceManager.GetString(key, _currentCulture) ?? key;

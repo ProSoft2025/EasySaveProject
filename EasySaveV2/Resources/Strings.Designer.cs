@@ -97,6 +97,24 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup completed successfully.
+        /// </summary>
+        public static string BackupCompleted {
+            get {
+                return ResourceManager.GetString("BackupCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup error occured.
+        /// </summary>
+        public static string BackupError {
+            get {
+                return ResourceManager.GetString("BackupError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Backup management.
         /// </summary>
         public static string BackupManagement {
@@ -187,6 +205,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the backup numbers.
+        /// </summary>
+        public static string EnterBackupNumbers2 {
+            get {
+                return ResourceManager.GetString("EnterBackupNumbers2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Enter extension (Ex: .txt).
         /// </summary>
         public static string EnterExtensionPlaceholder {
@@ -201,6 +228,15 @@ namespace EasySaveV2.Resources {
         public static string ExecuteBackup {
             get {
                 return ResourceManager.GetString("ExecuteBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Execute backup.
+        /// </summary>
+        public static string ExecuteBackup2 {
+            get {
+                return ResourceManager.GetString("ExecuteBackup2", resourceCulture);
             }
         }
         

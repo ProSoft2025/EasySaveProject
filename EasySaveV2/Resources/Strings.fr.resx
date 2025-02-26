@@ -246,4 +246,16 @@
   <data name="ExtensionErrorNotFound" xml:space="preserve">
     <value>Extension introuvable</value>
   </data>
+  <data name="BackupError" xml:space="preserve">
+    <value>Erreur lors du backup</value>
+  </data>
+  <data name="BackupCompleted" xml:space="preserve">
+    <value>Sauvegarde terminée</value>
+  </data>
+  <data name="ExecuteBackup2" xml:space="preserve">
+    <value>Exécuter la sauvegarde</value>
+  </data>
+  <data name="EnterBackupNumbers2" xml:space="preserve">
+    <value>Entrez les numéros de sauvegarde</value>
+  </data>
 </root>

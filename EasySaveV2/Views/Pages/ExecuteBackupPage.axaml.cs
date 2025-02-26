@@ -12,13 +12,11 @@ namespace EasySaveV2.Views
 {
     public partial class ExecuteBackupPage : UserControl
     {
-        
         public ExecuteBackupPage()
         {
             InitializeComponent();
             DataContext = new ExecuteBackupPageViewModel();
         }
-
 
         private List<BackupJob> GetSelectedBackups(string input)
         {
@@ -59,27 +57,26 @@ namespace EasySaveV2.Views
             var viewModel = DataContext as ExecuteBackupPageViewModel; // Récupère le ViewModel
             if (viewModel == null) return;
 
-            // check if no backup job exist
+            // Vérification : aucun backup existant
             if (EasySaveApp.GetInstance().BackupJobs.Count == 0)
             {
-                viewModel.Backup.Status = BackupStatus.Error.ToString();
+                viewModel.Backup.Status = TranslationManager.Instance.BackupError; // Utilisation de la traduction
                 return;
             }
 
             string input = BackupNumbersTextBox.Text;
             var selectedJobs = GetSelectedBackups(input);
 
-            // check if user entered invalid value 
+            // Vérification : entrée utilisateur invalide
             if (selectedJobs.Count == 0 || input.Contains("0"))
             {
-                viewModel.Backup.Status = BackupStatus.Error.ToString();
+                viewModel.Backup.Status = TranslationManager.Instance.BackupError; // Traduction de l'erreur
                 return;
             }
 
-            // launch backups if good
+            // Lancement des backups
             await ExecuteBackups(selectedJobs);
-            viewModel.Backup.Status = BackupStatus.Completed.ToString();
+            viewModel.Backup.Status = TranslationManager.Instance.BackupCompleted; // Traduction du message de succès
         }
-
     }
 }
