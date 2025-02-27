@@ -10,7 +10,6 @@
 	<PublishSingleFile>true</PublishSingleFile>
 	<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	<ApplicationIcon>Assets\logo.ico</ApplicationIcon>
-	<OutputPath>./Publish</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
