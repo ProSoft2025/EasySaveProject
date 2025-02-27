@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 using EasySaveV1;
 using System.Linq;
 using EasySaveV2.Services;
+using EasySaveV2.Localization;
 
 namespace EasySaveV2.Views.Pages
 {
@@ -16,6 +17,7 @@ namespace EasySaveV2.Views.Pages
             this.manager = manager;
             this.messageService = messageService;
             InitializeComponent();
+            DataContext = TranslationManager.Instance; // Associe la page au gestionnaire de traduction
             LoadExtensions();
         }
 
@@ -31,17 +33,17 @@ namespace EasySaveV2.Views.Pages
             var extension = extensionTextBox.Text;
             if (string.IsNullOrEmpty(extension))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Extension invalide");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ExtensionErrorEmpty);
                 return;
             }
             else if (extension[0] != '.')
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "L'extension doit commencer par un point");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ExtensionErrorDot);
                 return;
             }
             else if (manager.PriorityExtensions.Contains(extension))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Extension déjà présente");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ExtensionErrorExists);
                 return;
             }
 
@@ -51,7 +53,7 @@ namespace EasySaveV2.Views.Pages
                 job.UpdatePriorityExtensions(manager.PriorityExtensions);
             }
             LoadExtensions();
-            await messageService.ShowMessage((Window)this.VisualRoot, "Extension ajoutée avec succès");
+            await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ExtensionAdded);
             extensionTextBox.Clear();
         }
 
@@ -61,7 +63,7 @@ namespace EasySaveV2.Views.Pages
             var extension = extensionTextBox.Text;
             if (string.IsNullOrEmpty(extension) || !manager.PriorityExtensions.Contains(extension))
             {
-                await messageService.ShowMessage((Window)this.VisualRoot, "Extension invalide");
+                await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ExtensionErrorNotFound);
                 return;
             }
 
@@ -71,7 +73,7 @@ namespace EasySaveV2.Views.Pages
                 job.UpdatePriorityExtensions(manager.PriorityExtensions);
             }
             LoadExtensions();
-            await messageService.ShowMessage((Window)this.VisualRoot, "Extension supprimée avec succès");
+            await messageService.ShowMessage((Window)this.VisualRoot, TranslationManager.Instance.ExtensionRemoved);
             extensionTextBox.Clear();
         }
 

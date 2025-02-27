@@ -79,6 +79,14 @@ namespace EasySaveV2.Localization
         public string BackupNotFound => this["BackupNotFound"];
         public string RestoreBackupTitle => this["RestoreBackupTitle"];
         public string BackupRestored => this["BackupRestored"];
+        public string PriorityExtensionsTitle => this["PriorityExtensionsTitle"];
+        public string PriorityExtensionsPlaceholder => this["PriorityExtensionsPlaceholder"];
+        public string ExtensionAdded => this["ExtensionAdded"];
+        public string ExtensionRemoved => this["ExtensionRemoved"];
+        public string ViewBackupTitle => this["ViewBackupTitle"];
+
+
+
 
 
 

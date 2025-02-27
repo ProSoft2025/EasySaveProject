@@ -1,20 +1,19 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EasySaveV2.Views.Pages.PriorityExtensionsPage">
-	
-    <StackPanel Margin="20">		
-        <TextBlock Text="Priority Extensions List :" FontWeight="Bold" Margin="0 0 0 20"
-		FontSize="24"/>
-		
+             xmlns:local="using:EasySaveV2.Localization"
+             x:Class="EasySaveV2.Views.Pages.PriorityExtensionsPage"
+             x:DataType="local:TranslationManager">
+
+	<StackPanel Margin="20">
+		<TextBlock Text="{Binding PriorityExtensionsTitle}" FontWeight="Bold" Margin="0 0 0 20" FontSize="24"/>
+
 		<ListBox x:Name="ExtensionsListBox" Height="400" Margin="0,0,0,20" SelectionChanged="ExtensionsListBox_SelectionChanged"/>
-        <TextBox x:Name="ExtensionTextBox" Watermark="Enter the priority extension (Ex: .txt)" Margin="0,0,0,10"/>
-		
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-			<Button Grid.Row="2" Content="Add Extension" Click="OnAddExtensionClick" Classes="proButton" Margin="0 0 10 10"/>
-			<Button Grid.Row="2" Content="Delete Extension" Click="OnRemoveExtensionClick" Classes="proButton" Margin="0 0 10 10"/>
-        </StackPanel>
-    </StackPanel>
+		<TextBox x:Name="ExtensionTextBox" Watermark="{Binding PriorityExtensionsPlaceholder}" Margin="0,0,0,10"/>
+
+
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+			<Button Grid.Row="2" Content="{Binding AddExtension}" Click="OnAddExtensionClick" Classes="proButton" Margin="0 0 10 10"/>
+			<Button Grid.Row="2" Content="{Binding RemoveExtension}" Click="OnRemoveExtensionClick" Classes="proButton" Margin="0 0 10 10"/>
+		</StackPanel>
+	</StackPanel>
 </UserControl>

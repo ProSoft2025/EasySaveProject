@@ -313,6 +313,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Extension added successfully.
+        /// </summary>
+        public static string ExtensionAdded {
+            get {
+                return ResourceManager.GetString("ExtensionAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Extension must start with a dot (.).
         /// </summary>
         public static string ExtensionErrorDot {
@@ -349,6 +358,15 @@ namespace EasySaveV2.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Extension removed successfully.
+        /// </summary>
+        public static string ExtensionRemoved {
+            get {
+                return ResourceManager.GetString("ExtensionRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Job name.
         /// </summary>
         public static string JobName {
@@ -381,6 +399,24 @@ namespace EasySaveV2.Resources {
         public static string OutputPlaceholder {
             get {
                 return ResourceManager.GetString("OutputPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the priority extension (Ex: .txt).
+        /// </summary>
+        public static string PriorityExtensionsPlaceholder_ {
+            get {
+                return ResourceManager.GetString("PriorityExtensionsPlaceholder ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Priority extensions list :.
+        /// </summary>
+        public static string PriorityExtensionsTitle {
+            get {
+                return ResourceManager.GetString("PriorityExtensionsTitle", resourceCulture);
             }
         }
         
@@ -432,9 +468,9 @@ namespace EasySaveV2.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Delete extension.
         /// </summary>
-        public static string RemoveExtention {
+        public static string RemoveExtension {
             get {
-                return ResourceManager.GetString("RemoveExtention", resourceCulture);
+                return ResourceManager.GetString("RemoveExtension", resourceCulture);
             }
         }
         
@@ -597,6 +633,15 @@ namespace EasySaveV2.Resources {
         public static string ViewBackup {
             get {
                 return ResourceManager.GetString("ViewBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup list.
+        /// </summary>
+        public static string ViewBackupTitle {
+            get {
+                return ResourceManager.GetString("ViewBackupTitle", resourceCulture);
             }
         }
         

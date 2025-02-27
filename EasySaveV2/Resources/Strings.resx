@@ -189,9 +189,6 @@
   <data name="RemoveBackup" xml:space="preserve">
     <value>Remove backup</value>
   </data>
-  <data name="RemoveExtention" xml:space="preserve">
-    <value>Delete extension</value>
-  </data>
   <data name="RestoreBackup" xml:space="preserve">
     <value>Restore backup</value>
   </data>
@@ -299,5 +296,23 @@
   </data>
   <data name="RestoreBackupTitle" xml:space="preserve">
     <value>Restore backup</value>
+  </data>
+  <data name="PriorityExtensionsTitle" xml:space="preserve">
+    <value>Priority extensions list :</value>
+  </data>
+  <data name="PriorityExtensionsPlaceholder " xml:space="preserve">
+    <value>Enter the priority extension (Ex: .txt)</value>
+  </data>
+  <data name="RemoveExtension" xml:space="preserve">
+    <value>Delete extension</value>
+  </data>
+  <data name="ExtensionAdded" xml:space="preserve">
+    <value>Extension added successfully</value>
+  </data>
+  <data name="ExtensionRemoved" xml:space="preserve">
+    <value>Extension removed successfully</value>
+  </data>
+  <data name="ViewBackupTitle" xml:space="preserve">
+    <value>Backup list</value>
   </data>
 </root>
