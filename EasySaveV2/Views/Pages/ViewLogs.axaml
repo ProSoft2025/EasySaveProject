@@ -7,7 +7,7 @@
 
 	<Grid>
 		<TabControl Margin="5">
-			<TabItem Header="Daily Logs" Cursor="Hand">
+			<TabItem Header="Daily Logs" Cursor="Hand" FontWeight="Bold" Margin="0 0 0 20" FontSize="24">
 				<StackPanel>
 					<ScrollViewer Height="330" VerticalScrollBarVisibility="Auto">
 						<TextBox Name="LogsContentTextBox" AcceptsReturn="True" IsReadOnly="True"/>
@@ -16,7 +16,7 @@
 				</StackPanel>
 			</TabItem>
 
-			<TabItem Header="Current State" Cursor="Hand">
+			<TabItem Header="Current State" Cursor="Hand" FontWeight="Bold" Margin="0 0 0 20" FontSize="24">
 				<StackPanel>
 					<ScrollViewer Height="220" VerticalScrollBarVisibility="Auto">
 						<TextBox Name="StateContentTextBox" AcceptsReturn="True"/>

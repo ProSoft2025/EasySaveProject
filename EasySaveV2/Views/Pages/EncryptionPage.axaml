@@ -5,7 +5,9 @@
              x:DataType="local:TranslationManager">
 
 	<StackPanel Margin="20">
-		<TextBlock Text="{Binding EncryptionExtensions}" Width="115" FontWeight="Bold" Margin="0,0,0,10"/>
+		<TextBlock Text="{Binding EncryptionExtensions}" FontWeight="Bold" Margin="0 0 0 20"
+		FontSize="24"/>
+		
 		<ListBox x:Name="ExtensionsListBox" Height="400" Margin="0,0,0,20" SelectionChanged="ExtensionsListBox_SelectionChanged"/>
 		<TextBox x:Name="ExtensionTextBox" Watermark="{Binding EnterExtensionPlaceholder}" Margin="0,0,0,10"/>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

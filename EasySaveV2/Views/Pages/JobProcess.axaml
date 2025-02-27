@@ -6,7 +6,7 @@
 	<StackPanel Margin="20">
 		<!-- Titre -->
 		<TextBlock Text="{Binding Translation.ProcessList, Source={x:Static trans:TranslationManager.Instance}}"
-                   Width="115" FontWeight="Bold" Margin="0,0,0,10"/>
+                   FontWeight="Bold" Margin="0 0 0 20" FontSize="24"/>
 
 		<!-- Liste des processus surveillés -->
 		<ListBox x:Name="ProcessListBox" Height="400" Margin="0,0,0,20" SelectionChanged="ProcessListBox_SelectionChanged"/>

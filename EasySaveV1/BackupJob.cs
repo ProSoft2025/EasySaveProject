@@ -34,7 +34,6 @@ namespace EasySaveV1
             SourceDirectory = sourceDirectory;
             TargetDirectory = targetDirectory;
             BackupStrategy = backupStrategy;
-            StateManager = stateManager;
         }
 
 
