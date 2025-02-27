@@ -194,7 +194,7 @@ namespace EasySaveV1 {
                         strategy = new CompleteBackup(languageManager, stateManager);
                         break;
                     case "2":
-                        strategy = new DifferentialBackup(languageManager, stateManager);
+                        strategy = new DifferentialBackup(languageManager, stateManager, null);
                         break;
                     default:
                         Console.WriteLine(languageManager.GetTranslation(("incorrect_choice_try_again")));
@@ -316,7 +316,7 @@ namespace EasySaveV1 {
                         {
                             
                             string lastFullBackupDir = ui.GetUserInput();
-                            ((DifferentialBackup)backupjob.BackupStrategy).ExecuteBackup(backupjob, loggerStrategy, lastFullBackupDir);
+                            ((DifferentialBackup)backupjob.BackupStrategy).ExecuteBackup(backupjob, loggerStrategy);
                         }
                         else
                         {

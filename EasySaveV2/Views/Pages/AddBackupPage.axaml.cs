@@ -16,6 +16,8 @@ namespace EasySaveV2.Views
         private readonly LanguageManager languageManager;
         private readonly EasySaveApp manager;
 
+        public AddBackupPage() { }
+
         public AddBackupPage(BackupJobFactory backupJobFactory, StateManager stateManager, EasySaveApp manager)
         {
             InitializeComponent();
@@ -52,7 +54,7 @@ namespace EasySaveV2.Views
                     strategy = new CompleteBackup(languageManager, stateManager);
                     break;
                 case "Differential":
-                    strategy = new DifferentialBackup(languageManager, stateManager);
+                    strategy = new DifferentialBackup(languageManager, stateManager, lastFullBackupDir);
                     break;
                 default:
                     await messageService.ShowMessage((Window)this.VisualRoot, "Incorrect choice, please try again");

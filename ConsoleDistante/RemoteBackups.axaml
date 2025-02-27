@@ -1,0 +1,28 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ConsoleDistante.RemoteBackups"
+        xmlns:local="clr-namespace:ConsoleDistante"
+        x:DataType="local:RemoteBackups"
+        Background="#14172D">
+
+	<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+		<TextBlock Text="Liste des Backups de l'application distante" Padding="0 10 0 10"/>
+		<ListBox ItemsSource="{Binding BackupJobs}" Width="600" Height="400">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Vertical" Margin="10">
+						<TextBlock Text="{Binding [Name]}" FontWeight="Bold" />
+						<TextBlock Text="Source Directory: " FontWeight="Bold" />
+						<TextBlock Text="{Binding [SourceDirectory]}" FontStyle="Italic" Margin="10 0 0 0"/>
+						<TextBlock Text="Target Directory: " FontWeight="Bold" />
+						<TextBlock Text="{Binding [TargetDirectory]}" Margin="10 0 0 0"/>
+						<TextBlock Text="Strategy: " FontWeight="Bold" />
+						<TextBlock Text="{Binding [BackupStrategy]}" Margin="10 0 0 0"/>
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<Button Name="CloseButton" Content="Fermer" Click="OnCloseButtonClick" HorizontalAlignment="Center" Margin="10"/>
+	</StackPanel>
+</Window>

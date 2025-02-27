@@ -1,4 +1,5 @@
 ﻿using EasySaveV1;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -38,7 +39,24 @@ namespace EasySaveV2.Server
 
         private void SendDataToClient(Socket clienSocket)
         {
-            string BackupJobsListJson = JsonSerializer.Serialize(EasySaveApp.GetInstance().BackupJobs);
+            // Create a List to simplify the sending information.
+
+            var tempBackupList = new List<Dictionary<string, string>>();
+
+            foreach (var job in EasySaveApp.GetInstance().BackupJobs)
+            {
+                var item = new Dictionary<string, string>()
+                {
+                    { "Name", job.Name },
+                    { "SourceDirectory", job.SourceDirectory} ,
+                    { "TargetDirectory", job.TargetDirectory},
+                    { "BackupStrategy", job.BackupStrategy.ToString().Replace("EasySaveV1.", "")}                
+                };
+
+                tempBackupList.Add(item);
+            }
+
+            string BackupJobsListJson = JsonSerializer.Serialize(tempBackupList);
             byte[] data = Encoding.UTF8.GetBytes(BackupJobsListJson);
             clienSocket.Send(data);
         }
