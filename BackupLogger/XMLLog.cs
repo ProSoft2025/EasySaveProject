@@ -3,7 +3,6 @@
 /// <summary>
 /// Represents a log strategy that writes logs to an XML file
 /// </summary>
-/// 
 namespace BackupLogger
 {
     public class XMLLog : ILoggerStrategy
@@ -20,7 +19,7 @@ namespace BackupLogger
             }
         }
 
-        public override void Update(string taskName, string sourcePath, string targetPath, long fileSize, long transferTime, int EncryptionTIme)
+        public override void Update(string taskName, string sourcePath, string targetPath, long fileSize, long transferTime, int EncryptionTime)
         {
             string logFileName = Path.Combine(configManager.LogDirectory, $"{DateTime.Now:yyyy-MM-dd}.xml");
 
@@ -68,15 +67,14 @@ namespace BackupLogger
             EncryptionTimeElement.InnerText = EncryptionTime.ToString();
             logEntry.AppendChild(EncryptionTimeElement);
 
-            // Ajouter l'élément logEntry au fichier XML
+            // Add the logEntry element to the XML file
             doc.DocumentElement.AppendChild(logEntry);
 
-            // Sauvegarder le fichier XML avec les nouvelles données
+            // Save the XML file with the new data
             doc.Save(logFileName);
 
             Console.WriteLine($"[LOG UPDATED] Log entry added to {logFileName}");
         }
-
 
         public override void DisplayLogFileContent()
         {
@@ -92,5 +90,4 @@ namespace BackupLogger
             }
         }
     }
-
 }

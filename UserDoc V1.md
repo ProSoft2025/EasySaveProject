@@ -1,6 +1,6 @@
 # Documentation User
 
-## Start the application
+### Start the application
 
 Once you have installed our program, you will have multiple choices.
 
@@ -21,4 +21,4 @@ Once you have installed our program, you will have multiple choices.
 
 ### Log and state file
 
-For any action on a backup a creation or update of the log and state file will be performed 
+For any action on a backup a creation or update of the log and state file will be performed.

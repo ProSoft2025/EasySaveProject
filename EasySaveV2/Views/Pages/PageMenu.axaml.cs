@@ -6,6 +6,8 @@ using EasySaveV2.Services;
 using BackupLogger;
 using EasySaveV1;
 using static EasySaveV1.UserInterface;
+using System.Linq;
+using EasySaveV2.Views.Pages;
 
 namespace EasySaveV2.Views
 {
@@ -76,6 +78,9 @@ namespace EasySaveV2.Views
                             break;
                         case "Processus":
                             ContentArea.Content = new JobProcess(menuManager.GetEasySaveApp(), messageService);
+                            break;
+                        case "PriorityExtensions":
+                            ContentArea.Content = new PriorityExtensionsPage(menuManager.GetEasySaveApp(), messageService);
                             break;
                     }
                 }

@@ -14,6 +14,7 @@ namespace EasySaveV1
             this.languageManager = languageManager;
             this.stateManager = stateManager;
         }
+
         /// <summary>
         /// Used to do a full copy of a directory including logs, encryption, state
         /// </summary>
@@ -21,23 +22,27 @@ namespace EasySaveV1
         /// <param name="loggerStrategy">Instance of the logger used to write in log</param>
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy)
         {
-            jobBackup.Status = BackupStatus.Running; // Définir l’état comme en cours d’exécution
-
             try
             {
+                jobBackup.Status = BackupStatus.Running; // Définir l’état comme en cours d’exécution
+
                 var sourceFiles = Directory.GetFiles(jobBackup.SourceDirectory, "*", SearchOption.AllDirectories)
                                            .Select(f => f.Substring(jobBackup.SourceDirectory.Length + 1))
                                            .ToList();
+
+                // Separate priority files from non-priority files
+                var priorityFiles = sourceFiles.Where(f => jobBackup.PriorityExtensions.Contains(Path.GetExtension(f))).ToList();
+                var nonPriorityFiles = sourceFiles.Except(priorityFiles).ToList();
+
+                // Combine priority files first, then non-priority files
+                var orderedFiles = priorityFiles.Concat(nonPriorityFiles).ToList();
 
                 int totalFiles = sourceFiles.Count;
                 long totalSize = sourceFiles.Sum(file => new FileInfo(Path.Combine(jobBackup.SourceDirectory, file)).Length);
                 int filesProcessed = 0;
                 long sizeProcessed = 0;
 
-                stateManager.UpdateState(new StateEntry {TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Running", TotalFiles = totalFiles,
-                    TotalSize = totalSize, Progress = 0, RemainingFiles = totalFiles - filesProcessed, RemainingSize = totalSize - sizeProcessed});
-
-                foreach (var file in sourceFiles)
+                foreach (var file in orderedFiles)
                 {
                     var sourceFilePath = Path.Combine(jobBackup.SourceDirectory, file);
                     var targetFilePath = Path.Combine(jobBackup.TargetDirectory, file);
@@ -50,7 +55,7 @@ namespace EasySaveV1
                     filesProcessed++;
                     sizeProcessed += new FileInfo(sourceFilePath).Length;
 
-                    // Update the state after each file copied
+                    // Mise à jour de l’état après chaque fichier copié
                     StateEntry state = new StateEntry
                     {
                         TaskName = jobBackup.Name,
@@ -75,7 +80,6 @@ namespace EasySaveV1
                         var fileManager = new CryptoSoft.FileManager(targetFilePath, "EasySave");
                         int ElapsedTime = fileManager.TransformFile();
                         loggerStrategy.Update(jobBackup.Name, sourceFilePath, targetFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, ElapsedTime);
-
                     }
                     else
                     {
@@ -134,7 +138,9 @@ namespace EasySaveV1
                 ExecuteBackup(tempBackupJob, loggerStrategy);
             }
             catch (Exception ex)
-            { }
+            {
+                // Gestion des erreurs
+            }
         }
     }
 }

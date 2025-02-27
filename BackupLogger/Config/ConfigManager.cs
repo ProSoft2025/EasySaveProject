@@ -2,7 +2,6 @@
 
 ///<summary>
 /// Represents a configuration manager that loads and saves the application configuration
-
 namespace BackupLogger
 {
     public class ConfigManager : IConfigManager
@@ -11,7 +10,6 @@ namespace BackupLogger
 
         public string LogDirectory { get; set; }
         public string LogFormat { get; set; }
-
         public ConfigManager()
         {
             LoadConfig(); // Load configuration when the manager is created

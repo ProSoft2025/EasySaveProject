@@ -119,5 +119,17 @@ namespace EasySaveV1
                 ExtensionsToEncrypt.Remove(extension);
             else throw new Exception("Extension not found");
         }
+        public List<string> PriorityExtensions { get; private set; } = new List<string>();
+        public List<BackupJob> BackupJob { get; private set; } = new List<BackupJob>();
+
+        public void AddPriorityExtension(string extension)
+        {
+            PriorityExtensions.Add(extension);
+        }
+
+        public void RemovePriorityExtension(string extension)
+        {
+            PriorityExtensions.Remove(extension);
+        }
     }
 }

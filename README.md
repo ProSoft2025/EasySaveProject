@@ -69,7 +69,7 @@ Following a customer survey, the management decided to create a version 2 with t
 
 * Graphic Interface 
 
-Abandoning Console mode. The application must now be developed in WPF under .Net Core. 
+Abandoning Console mode. The application must now be developed in Avalonia. 
 
  * Unlimited number of jobs 
 
@@ -89,6 +89,28 @@ If the presence of business software is detected, the software must prohibit the
 #Getting Started
 To get a local copy up and running follow these simple example steps. But before anything else you should be sure to have Visual Studio 2019 in order to run the program.
 
+### Version 3
+
+EasySave version 2 has been distributed to many customers.  
+
+Following a customer survey, the management decided to create a version 3 with the following improvements:
+
+* Backup in parallel
+
+The backup work will be done in parallel (no more sequential mode ).
+
+* Management of priority files
+
+No backup of a non-priority file can be done as long as there are priority extensions pending on at least one job. Extensions are declared by the user in a predefined list (present in general settings).
+
+* Remote console
+
+To allow real-time monitoring of the progress of backups on a remote workstation, we developed an HMI allowing a user to monitor the evolution of backup jobs on a remote workstation.
+
+* Log file
+
+For the logs it is possible to view them with a JSON and XML extension.
+
 Once you will have set up your computer You will have to clone this project.
 
 You can do it in HTTPS with this link: 
@@ -103,6 +125,8 @@ Then refer to the usage section and you will be ready to go !
 
 ## Start the application
 * Version 1 : [Documentation User] named UserDoc V1.md
+* Version 2 : [Documentation User] named UserDoc V2.md
+* Version 3 : [Documentation User] named UserDoc V3.md
 
 # Authors
 - BUTEZ Clément

@@ -1,4 +1,5 @@
 ﻿using BackupLogger;
+using CryptoSoft;
 using System.Diagnostics;
 
 namespace EasySaveV1
@@ -29,86 +30,81 @@ namespace EasySaveV1
             jobBackup.Status = BackupStatus.Running;
             stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Running" });
 
-            try
+            var lastFullBackupFiles = Directory.GetFiles(lastFullBackupDir, "*", SearchOption.AllDirectories)
+                                               .Select(f => f.Substring(lastFullBackupDir.Length + 1))
+                                               .ToList();
+
+            var currentFiles = Directory.GetFiles(jobBackup.SourceDirectory, "*", SearchOption.AllDirectories)
+                                        .Select(f => f.Substring(jobBackup.SourceDirectory.Length + 1))
+                                        .ToList();
+
+            // Separate priority files from non-priority files
+            var priorityFiles = currentFiles.Where(f => jobBackup.PriorityExtensions.Contains(Path.GetExtension(f))).ToList();
+            var nonPriorityFiles = currentFiles.Except(priorityFiles).ToList();
+
+            // Combine priority files first, then non-priority files
+            var orderedFiles = priorityFiles.Concat(nonPriorityFiles).ToList();
+
+            int totalFiles = currentFiles.Count;
+            long totalSize = currentFiles.Sum(file => new FileInfo(Path.Combine(jobBackup.SourceDirectory, file)).Length);
+            int filesProcessed = 0;
+            long sizeProcessed = 0;
+
+            foreach (var file in orderedFiles)
             {
-                var lastFullBackupFiles = Directory.GetFiles(lastFullBackupDir, "*", SearchOption.AllDirectories)
-                                                   .Select(f => f.Substring(lastFullBackupDir.Length + 1))
-                                                   .ToList();
+                var sourceFilePath = Path.Combine(jobBackup.SourceDirectory, file);
+                var differentialBackupFilePath = Path.Combine(jobBackup.TargetDirectory, file);
+                var lastFullBackupFilePath = Path.Combine(lastFullBackupDir, file);
 
-                var currentFiles = Directory.GetFiles(jobBackup.SourceDirectory, "*", SearchOption.AllDirectories)
-                                            .Select(f => f.Substring(jobBackup.SourceDirectory.Length + 1))
-                                            .ToList();
-
-                int totalFiles = currentFiles.Count;
-                long totalSize = currentFiles.Sum(file => new FileInfo(Path.Combine(jobBackup.SourceDirectory, file)).Length);
-                int filesProcessed = 0;
-                long sizeProcessed = 0;
-
-                foreach (var file in currentFiles)
+                if (!File.Exists(lastFullBackupFilePath) || File.GetLastWriteTime(sourceFilePath) > File.GetLastWriteTime(lastFullBackupFilePath))
                 {
-                    var sourceFilePath = Path.Combine(jobBackup.SourceDirectory, file);
-                    var differentialBackupFilePath = Path.Combine(jobBackup.TargetDirectory, file);
-                    var lastFullBackupFilePath = Path.Combine(lastFullBackupDir, file);
+                    Directory.CreateDirectory(Path.GetDirectoryName(differentialBackupFilePath));
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    File.Copy(sourceFilePath, differentialBackupFilePath, true);
+                    stopwatch.Stop();
 
-                    if (!File.Exists(lastFullBackupFilePath) || File.GetLastWriteTime(sourceFilePath) > File.GetLastWriteTime(lastFullBackupFilePath))
+                    filesProcessed++;
+                    sizeProcessed += new FileInfo(sourceFilePath).Length;
+
+                    // Mise à jour de l'état après chaque fichier copié
+                    StateEntry state = new StateEntry
                     {
-                        Directory.CreateDirectory(Path.GetDirectoryName(differentialBackupFilePath));
-                        Stopwatch stopwatch = new Stopwatch();
-                        stopwatch.Start();
-                        File.Copy(sourceFilePath, differentialBackupFilePath, true);
-                        stopwatch.Stop();
+                        TaskName = jobBackup.Name,
+                        Timestamp = DateTime.Now,
+                        Status = "Running",
+                        TotalFiles = totalFiles,
+                        TotalSize = totalSize,
+                        Progress = (int)((double)filesProcessed / totalFiles * 100),
+                        RemainingFiles = totalFiles - filesProcessed,
+                        RemainingSize = totalSize - sizeProcessed,
+                        CurrentSource = sourceFilePath,
+                        CurrentTarget = differentialBackupFilePath
+                    };
+                    stateManager.UpdateState(state);
 
-                        filesProcessed++;
-                        sizeProcessed += new FileInfo(sourceFilePath).Length;
-
-                        // 🔹 Mise à jour de l'état après chaque fichier copié
-                        StateEntry state = new StateEntry
-                        {
-                            TaskName = jobBackup.Name,
-                            Timestamp = DateTime.Now,
-                            Status = "Running",
-                            TotalFiles = totalFiles,
-                            TotalSize = totalSize,
-                            Progress = (int)((double)filesProcessed / totalFiles * 100),
-                            RemainingFiles = totalFiles - filesProcessed,
-                            RemainingSize = totalSize - sizeProcessed,
-                            CurrentSource = sourceFilePath,
-                            CurrentTarget = differentialBackupFilePath
-                        };
-                        stateManager.UpdateState(state);
-
-                        var fileExtension = Path.GetExtension(sourceFilePath);
-                        if (jobBackup.ExtensionsToEncrypt.Contains(fileExtension))
-                        {
-                            var fileManager = new CryptoSoft.FileManager(differentialBackupFilePath, "EasySave");
-                            int elapsedTime = fileManager.TransformFile();
-                            loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, elapsedTime);
-                            Console.WriteLine(differentialBackupFilePath + languageManager.GetTranslation("encrypted"));
-                        }
-                        else
-                        {
-                            loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, 0);
-                            Console.WriteLine(languageManager.GetTranslation("copied") + $" : {sourceFilePath}" + languageManager.GetTranslation("to") + $"{differentialBackupFilePath}");
-                        }
+                    var fileExtension = Path.GetExtension(sourceFilePath);
+                    if (jobBackup.ExtensionsToEncrypt.Contains(fileExtension))
+                    {
+                        var fileManager = new CryptoSoft.FileManager(differentialBackupFilePath, "EasySave");
+                        int elapsedTime = fileManager.TransformFile();
+                        loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, elapsedTime);
+                        Console.WriteLine(differentialBackupFilePath + languageManager.GetTranslation("encrypted"));
+                    }
+                    else
+                    {
+                        loggerStrategy.Update(jobBackup.Name, sourceFilePath, differentialBackupFilePath, new FileInfo(sourceFilePath).Length, stopwatch.ElapsedMilliseconds, 0);
+                        Console.WriteLine(languageManager.GetTranslation("copied") + $" : {sourceFilePath}" + languageManager.GetTranslation("to") + $"{differentialBackupFilePath}");
                     }
                 }
-
-                jobBackup.Status = BackupStatus.Completed;
-                stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Completed" });
-
-                loggerStrategy.DisplayLogFileContent();
-                Console.WriteLine(languageManager.GetTranslation("diff_backup_finished"));
             }
-            catch (Exception ex)
-            {
-                jobBackup.Status = BackupStatus.Error;
-                stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Error" });
-                Console.WriteLine(languageManager.GetTranslation("error_diff_backup") + $"{ex.Message}");
-            }
+
+            jobBackup.Status = BackupStatus.Completed;
+            stateManager.UpdateState(new StateEntry { TaskName = jobBackup.Name, Timestamp = DateTime.Now, Status = "Completed" });
+
+            loggerStrategy.DisplayLogFileContent();
+            Console.WriteLine(languageManager.GetTranslation("diff_backup_finished"));
         }
-    
-
-
 
         public void Restore(BackupJob jobBackup, ILoggerStrategy loggerStrategy, string lastFullBackupDir)
         {
@@ -129,9 +125,8 @@ namespace EasySaveV1
             }
             catch (Exception ex)
             {
-                Console.WriteLine((languageManager.GetTranslation("restore_error")) + $"{ex.Message}");
+                Console.WriteLine(languageManager.GetTranslation("restore_error") + $"{ex.Message}");
             }
         }
     }
 }
-

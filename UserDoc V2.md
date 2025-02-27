@@ -1,6 +1,6 @@
 # Documentation User V2
 
-## Start the application
+### Start the application
 
 Once you have installed our program, you will have several choices like version 1 but in the form of graphical interface
 
