@@ -4,26 +4,6 @@
              x:Class="EasySaveV2.Views.HomePage"
              x:DataType="local:TranslationManager">
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
 
-		<StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center" Margin="10">
-			<Border Background="#6C757D" Padding="10" CornerRadius="5">
-				<StackPanel>
-					<TextBlock Text="{Binding TotalDataBackedUp}" FontSize="16"/>
-				</StackPanel>
-			</Border>
-			<Border Background="#17A2B8" Padding="10" CornerRadius="5">
-				<StackPanel>
-					<TextBlock Text="{Binding TotalBackupTime}" FontSize="16"/>
-				</StackPanel>
-			</Border>
-		</StackPanel>
-
-		<Button Content="{Binding BackToHomePage}" HorizontalAlignment="Right" Click="OnReturnToMainClick"/>
-	</Grid>
+		<Button Content="{Binding BackToHomePage}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OnReturnToMainClick"/>
 </UserControl>
