@@ -21,9 +21,6 @@ namespace EasySaveV1
         /// <param name="loggerStrategy"></param>
         public void ExecuteBackup(BackupJob jobBackup, ILoggerStrategy loggerStrategy, string lastFullBackupDir)
         {
-            
-            
-
             if (!Directory.Exists(jobBackup.TargetDirectory))
             {
                 Directory.CreateDirectory(jobBackup.TargetDirectory);
